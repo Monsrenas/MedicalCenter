@@ -17,7 +17,7 @@
     
     <div class="row" id="work">
       <div class="col-2 col-md-2" id="left_wind" style="margin-left: 5px;"></div>
-      <div class="col-8 col-md-8" id="center_wind" style="background: #A4D3E0; min-height: 600px; max-height: 600px; margin-right: -16px; text-align: center;"></div>
+      <div class="col-8 col-md-8" id="center_wind" style="background: #E2E2E2; min-height: 600px; max-height: 600px; margin-right: -16px; text-align: center;  overflow: auto scroll;"></div>
       <div class="col-2 col-md-2" id="right_wind" style="margin-right: 5px; margin-left: 6px; padding-left: 30px;"></div>
     </div>
 	

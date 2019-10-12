@@ -12,7 +12,7 @@ $menuItem = [
   				['Substance Use','welcome'],
   				['Physical Examination','welcome'],
   				['Physicians Note','www.monsrenas.com']			],
-  'Consultation' => ['pagina que muestra historial de consultas por fechas','consultation'],
+  'Consultation' => ['consultation.list','consultation'],
   'Notes' => ['','Notas medicas por especialidades'],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
   'Reports' => ['History','Service by dates','Exams'],

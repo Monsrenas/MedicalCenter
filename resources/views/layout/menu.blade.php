@@ -71,15 +71,16 @@ nav.navbar ul.nav li a{
            if (typeof(elemento)=='object') {
 
               AddMenuItem(elemento);
-           } else {   
-                     (indice==0) ? $ventana='#left_wind' : $ventana='#center_wind';
-                                                $('#enlace').val(elemento);
-                                                var data=$('#llave').serialize();
-                                                    $.post('renderView', data, function(subpage){
-                                                    $($ventana).empty().append(subpage);
-                                                })                       
+           } else {
+                        $('#enlace').val(elemento);
+                        var data=$('#llave').serialize();
+
+                        $.post('renderView', data, function(subpage){
+                            $ventana=((indice=="0") ? "#left_wind":"#center_wind");
+                            $($ventana).empty().append(subpage);
+                        })                       
                      
-                     }
+                  }
   }
 
 
@@ -104,10 +105,21 @@ $.post(vista, data, function(subpage){
 
 }
 
+function SaveDataNoRefreshView(forma,vista) {
+
+var data=$('#'+forma).serialize();
+alert(data);
+var $ventana='#center_wind';
+$.post(vista, data, function(subpage){
+  alert('Operacion Exitosa'); })
+
+}
+
 function PreLoadDataInView(ventana, xdata, control) {
     var data=$('#llave').serialize();
     data=data+xdata;
-    $.post(control, data, function(subpage){ 
+    $.post(control, data, function(subpage){
+
       $(ventana).empty().append(subpage); })
 }
 

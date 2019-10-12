@@ -15,7 +15,8 @@
     
 
     @if (isset($patient))
-           <?php $identification=$patient->identification; 
+           <?php    $patient=$patient[0];
+                    $identification=$patient->identification; 
                     $patientActive=true;
            ?>
     @else              

@@ -5,8 +5,7 @@
 	if(!isset($_SESSION)){
     session_start();
 	}
-	$_SESSION['opcion']='bott2';
-
+	
 ?>
 
 @if (isset($_SESSION['identification']))
@@ -17,7 +16,10 @@
 
 
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $patient=$patient[0];
+           	if($patient->identification) {$identification=$patient->identification;} else {
+           	if (isset($_SESSION['identification'])) {$identification=($_SESSION['identification']);}
+           }  ?>
  @else         
            <?php                     
             $patient=new Interrogation;
@@ -25,14 +27,22 @@
              $patientActive=false;
             ?>  
 @endif
-
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
+<style type="text/css">
+	.form-group textarea { 	-webkit-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
+							-moz-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
+							box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
+							font-size: small;
+							background: #A7D3E0;
+	}
+</style>
+<div style="padding: 1%;   align: center;  ">
+<form  action="javascript:SaveDataNoRefreshView('MyInterrogation','store')" method="post" style="width: 100%; text-align: center;" id="MyInterrogation">
 	@csrf 	
-
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
-	<input type="hidden" name="url"  value='history.Interrogation'>
-	<input type="hidden" name="dtt"  value='Interrogation'>
+
+    <input type="hidden" name="modelo" id="modelo" value="Interrogation" />
+    <input type="hidden" name="url" id="url" value="consultation" />
+    <input type="hidden" name="_method" value="post">
 
 	<div class="form-group">
 	    <strong>Admission note:</strong><br>

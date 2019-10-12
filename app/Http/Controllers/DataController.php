@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use View;
 use App\Patient;
+use App\Interrogation;
 
 
 if(!isset($_SESSION)){
@@ -19,6 +20,9 @@ class DataController extends Controller
         switch ($ind) {
      case 'Patient':
          return $tmodelo= new Patient;
+        break;
+    case 'Interrogation':
+         return $tmodelo= new Interrogation;
         break;
     
         }
@@ -38,16 +42,18 @@ class DataController extends Controller
 
     	if ($ert==''){
     	        	if (isset($_SESSION['identification'])) {
-    	                    $ert=$_SESSION['identification'];}
+    	                   										 $ert=$_SESSION['identification'];
+    	                									}
     	}         
       
-        $patient = $classdata::where('identification','=', $ert)->first();  
+        $patient = $classdata::where('identification','=', $ert)->get();  
+
         if (!is_null($patient)) {return $patient;}        
          return $request;
     }
 
     public function Genstore(Request $request, $classdata)
-    {  
+    {  dd($request);
        $ert=strval($request->identification);
        if ( (is_null($ert)) or ($ert=='') ) { return $request; }
                        
@@ -81,7 +87,8 @@ class DataController extends Controller
 	}
 
     public function almacena(Request $request) 
-    {   $view=$this->indexView($request);
+    {   
+    	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
         $result=$this->Genstore($request, $classdata);
         return $view->with('patient',$result); 
