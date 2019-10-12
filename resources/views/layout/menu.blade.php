@@ -1,3 +1,5 @@
+<?php  if(!isset($_SESSION)){session_start();}?>
+
 <style type="text/css">
 
 
@@ -50,7 +52,7 @@ nav.navbar ul.nav li a{
   <div id="parrafo"></div>
 </nav>
 
-<form  id="llave" action="{{url('/wil')}}" method="get" >
+<form  id="llave" action="{{url('renderView')}}" method="get" >
   @csrf
   <input type="hidden" name="_method" value="GET">
   <input type="hidden" id="enlace" name="enlace" value="">
@@ -60,7 +62,7 @@ nav.navbar ul.nav li a{
 
   function ShowOp($arreglo){
           $('#left_wind').empty();
-          $('#right_wind').empty();
+          $('#center_wind').empty();
           $arreglo.forEach(BuildMenu);
       }
 
@@ -70,10 +72,10 @@ nav.navbar ul.nav li a{
 
               AddMenuItem(elemento);
            } else {   
-                     (indice==0) ? $ventana='#left_wind' : $ventana='#right_wind';
+                     (indice==0) ? $ventana='#left_wind' : $ventana='#center_wind';
                                                 $('#enlace').val(elemento);
                                                 var data=$('#llave').serialize();
-                                                    $.post('/wil', data, function(subpage){
+                                                    $.post('renderView', data, function(subpage){
                                                     $($ventana).empty().append(subpage);
                                                 })                       
                      
@@ -82,27 +84,48 @@ nav.navbar ul.nav li a{
 
 
     function AddMenuItem(elemento, indice){
+        if (elemento[2]) {
+            var xdata=elemento[2]+'&url='+elemento[1];
+           $("#left_wind").append( "<a  onclick= 'PreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\" )' class='btn btn-default btn-lg btn-block' href='#' >"+elemento[0] + "</a>");
+        }else{
 
         $("#left_wind").append( "<a  onclick= 'BuildMenu(\" "+elemento[1] + " \",1)' class='btn btn-default btn-lg btn-block' href='#' >"+elemento[0] + "</a>");
+        }
   }
 
-  function ajaxRenderSection(url) {
-        $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'json',
-            success: function (data) {
-                $('#right_wind').empty().append($(data)); 
-            },
-            error: function (data) {
-                var errors = data.responseJSON;
-                if (errors) {
-                    $.each(errors, function (i) {
-                        console.log(errors[i]);
-                    });
-                }
-            }
-        });
-    }
 
+
+function LoadDataInView(forma,vista) {
+
+var data=$('#'+forma).serialize();
+var $ventana='#center_wind';
+$.post(vista, data, function(subpage){
+  $($ventana).empty().append(subpage); })
+
+}
+
+function PreLoadDataInView(ventana, xdata, control) {
+    var data=$('#llave').serialize();
+    data=data+xdata;
+    $.post(control, data, function(subpage){ 
+      $(ventana).empty().append(subpage); })
+}
+
+function elimina(forma, linea) {
+  var data=$('#'+forma).serialize();
+  a=confirm('Desea borrar la informacion del cliente '+forma); 
+  if (a) {
+        $.post('delete', data, function(subpage){ 
+          $('#'+linea).remove(); }); }
+}
+
+function cambiaPaciente(forma)
+{
+  var data=$('#'+forma).serialize();
+  
+    $.post('patientcng', data, function(subpage){  
+      PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); })
+}
+
+   
 </script>

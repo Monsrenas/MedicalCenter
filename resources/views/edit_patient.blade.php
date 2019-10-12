@@ -1,16 +1,6 @@
    <?php use App\Patient; ?>
 
-    <style type="text/css">
-        .form-inline { font-family: arial, helvetica, sans-serif; 
-                 margin-top: 10px;
-                 margin-bottom: 0px;
-                }
 
-        .form-group { font-family: arial, helvetica, sans-serif; 
-                 margin-right: 40px;
-                 margin-left: 0px;
-                }
-    </style>
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -25,6 +15,7 @@
                     $patientActive=true;
            ?>
     @else         
+        
            <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
@@ -33,31 +24,48 @@
             ?>           
     @endif         
 
+    <style type="text/css">
 
-    <div class="row">
+        .edicion .form-inline { font-family: arial, helvetica, sans-serif; 
+                 margin-top: 10px;
+                 margin-bottom: 0px;
+                }
+
+        .edicion .form-group { font-family: arial, helvetica, sans-serif; 
+                 margin-right: 40px;
+                 margin-left: 0px;
+                }
+    </style>
+
+    <div class="row edicion">
         
-        <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient">
+        <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient" style="text-align: left;">
     
             
             <!--{{url('pfind')}}-->
-            <form  action="{{url('pfind')}}" method="post">
+            <form  action="javascript:LoadDataInView('formabase','find')" method="post" id="formabase" name="formabase">
                 @csrf
-                <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+                <input type="hidden" name="modelo" id="modelo" value="Patient" />
+                <input type="hidden" name="url" id="url" value="edit_patient" />
+                 <input type="hidden" name="_method" value="get">
+
                 <input type="text" name="edition"  value="edition" hidden="true">
 
                 <div class="form-inline">
                     <div class="form-group">
 
                         <strong> Identification: </strong>
-                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" onkeypress="return NoSpace(event);" id="identification" onBlur=' this.form.submit();'  required>
+                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" onkeypress="return NoSpace(event);" id="identification" onBlur=' this.form.submit();' required> 
                     </div>    
                 </div>
-            </form>
-       
-
-            <form  action="javascript:alert()" method="post">
+            </form>      
+            <br>
+            <form  action="javascript:LoadDataInView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data">
             @csrf
                 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
+                <input type="hidden" name="modelo" id="modelo" value="Patient" />
+                <input type="hidden" name="url" id="url" value="edit_patient" />
+                 <input type="hidden" name="_method" value="post">
                 <div class="form-inline">    
                             <div class="form-group">
                                 <strong> Nationality: </strong>
@@ -65,11 +73,11 @@
                                 {{ paises() }}
                                 <script type="text/javascript"> var nation="<?php  echo  $patient->nationality; ?>"; </script>
                             </div>
-
+                            <!--
                              <div class="form-group">
                                 <strong>Picture:</strong>
-                                <input type="file" name="picture" class="form-inline" placeholder="Patien picture" value="{{ $patient->picture }}" accept="image/*">
-                            </div>
+                                <input type="file" name="pictur" id="picture" class="form-inline" placeholder="Patien picture" value="{{ $patient->picture }}" accept="image/*">
+                            </div>-->
                 </div>
 
                 <div class="form-inline">
@@ -126,7 +134,7 @@
                                     <option value="AB-" >AB-</option>
                                     <option value="AB+" >AB+</option>
                                 </select>
-                                <script type="text/javascript"> var strelation="<?php  echo  $patient->blood; ?>"; </script>
+                                <script type="text/javascript"> var bloodtype="<?php  echo  $patient->blood; ?>"; </script>
                             </div>
                 </div>
 
@@ -180,6 +188,7 @@
                                 <input type="text" name="contact" value="{{ $patient->contact }}" class="form-inline" placeholder="Contac Infotmation"  maxlength="70" size="70" required>
                             </div>
                 </div>
+                <br>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Save</button>
                     <br>
@@ -192,7 +201,7 @@
     </div> <!-- Fin del <div class="row ">  -->
           
     <script>
- 
+        
         /**
          * Función que solo permite la entrada de numeros, un signo negativo y
          * un punto para separar los decimales
@@ -228,6 +237,7 @@
             }
         }
 
+
         function NoSpace(e)
 
         {
@@ -261,14 +271,12 @@
             alert("Prueba");
         }
 
-        Marca('bott1');
-
-        function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr;}
+        function iniSelect(elm, vlr){   document.getElementById(elm).value=vlr;}
 
         iniSelect("nation",nation);
         iniSelect("myrelation",srelation);
         iniSelect("marital",marital);
-
+        iniSelect("myblood",bloodtype);
 
         if(document.forms[1].length > 0) {
                                         
@@ -277,7 +285,7 @@
                                                                                   }
                                         for (i = 3; i < document.forms[1].elements.length; i++) {
                                                                                
-                                                                            document.forms[1].elements[i].disabled =true; 
+                                                                            document.forms[1].elements[i].disabled =false; 
                                                                            
                                                                          };
                                        }

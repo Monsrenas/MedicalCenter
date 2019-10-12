@@ -16,11 +16,15 @@ Route::get('/', function () {
 });
 
 Route::get('/prueba', function () {
-    return view('edit_patient');
+    return view('consultation');
 });
 
 Route::get('edit', function () {return view('edit_patient');});
 
 
-Route::get('/wil', 'ScreenSeccion@index');
-
+Route::get('renderView', 'ScreenSeccion@index');
+Route::get('find', 'DataController@busca');
+Route::get('list', 'DataController@multifind');
+Route::post('store', 'DataController@almacena');
+Route::post('delete', 'DataController@borra');
+Route::get('patientcng', 'DataController@ChangePatient');
