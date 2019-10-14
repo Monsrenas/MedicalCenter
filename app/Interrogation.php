@@ -12,7 +12,6 @@ class Interrogation extends Eloquent
     
     protected $fillable = [	'id',
     						'identification',
-    						'doctorId',
     						'adm', 
 							'cc',
 							'hpi',

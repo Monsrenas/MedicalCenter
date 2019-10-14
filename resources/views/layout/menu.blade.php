@@ -1,4 +1,6 @@
-<?php  if(!isset($_SESSION)){session_start();}?>
+<?php  if(!isset($_SESSION)){session_start();}
+        $_SESSION['user']='44240514037';
+?>
 
 <style type="text/css">
 
@@ -151,7 +153,8 @@ $.post('renderView', data, function(subpage){
 }
 
 function AbreConsulta(ventana, vista){ 
-  $('#nuevaconsulta').attr("href",'#');
+   
+  $('#botonNewconsulta').empty();
   CrearVista(ventana, vista);
 
 }

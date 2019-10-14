@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/prueba', function () {
-    return view('consultation');
+    return view('consultation.interrogation');
 });
 
 Route::get('edit', function () {return view('edit_patient');});

@@ -28,9 +28,11 @@
       $hoy= date("Y-m-d"); ?>
 
                             @if (!($hoy==$fecha))
+                              <div id="botonNewconsulta">
                                 <a href="javascript:AbreConsulta('#Interrogation','consultation.interrogation')" class="list-group-item" style="background: #9DF3AF;" id="nuevaconsulta">
                                   <div>(New) {{$hoy}}</div>  
                                 </a>
+                              </div>
                             @endif
 
 <div class="row" style="margin: 0px auto;">
