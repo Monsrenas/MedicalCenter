@@ -19,7 +19,9 @@ box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);}
 </style>
 
 <div class="container-fluid">
-    
+ <div id="consultationHeader">
+   <span>Consultation: </span><span id="fechaconsult"></span>
+ </div>   
 <div id="faq" role="tablist" aria-multiselectable="true">
 
 <div class="panel panel-default">
@@ -48,7 +50,7 @@ box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);}
 </div>
 <div id="answerOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionOne">
 <div class="panel-body" id="Physical">
-  Empty...
+  <?php echo VIEW::make("consultation.PhysicalExamination") ?>
 </div>
 </div>
 </div>

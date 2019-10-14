@@ -10,7 +10,7 @@ $menuItem = [
   				['Family History','welcome'],
   				['Surgical History','welcome'],
   				['Substance Use','welcome'],
-  				['Physical Examination','welcome'],
+  				['Physical Examination','consultation.PhysicalExamination'],
   				['Physicians Note','www.monsrenas.com']			],
   'Consultation' => ['consultation.list','consultation'],
   'Notes' => ['','Notas medicas por especialidades'],

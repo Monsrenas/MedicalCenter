@@ -63,6 +63,23 @@ class DataController extends Controller
         return $patient; 
     }
 
+     public function IDstore(Request $request)
+    { 
+      $view=$this->indexView($request);
+       $classdata=$this->modelo($request->modelo);
+      
+      
+
+       $ert=strval($request->id);
+       if ( (is_null($ert)) or ($ert=='') ) { return $request; }
+                       
+       $patient = $classdata::where('id','=', $ert)->first();
+        if (!is_null($patient)){ $patient->update($request->all()); }                
+            else { if (!$request->id='') $patient = $classdata::create($request->all()); }                      
+         
+        return $view->with('patient',$patient);
+    }
+
     public function multifind(Request $request)
     {   /*se esta actualizando*/
     	  $view=$this->indexView($request);

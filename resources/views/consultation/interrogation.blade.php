@@ -4,7 +4,7 @@
 	
 	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
-    $hoy=date("Y-m-d");  $hoy=str_replace("-", "", $hoy);
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 	
 ?>
 
@@ -40,9 +40,10 @@
 	}
 </style>
 <div style="padding: 1%;   align: center;  ">
-<form  action="javascript:SaveDataNoRefreshView('MyInterrogation','store')" method="post" style="width: 100%; text-align: center;" id="MyInterrogation">
+<form  action="javascript:SaveDataNoRefreshView('MyInterrogation','IDstore')" method="post" style="width: 100%; text-align: center;" id="MyInterrogation">
 	@csrf
-	<input type="hidden" name="id"  placeholder="Interrogation Id" value='{{ $id }}'> 	
+	<input type="hidden" name="id" id="id" placeholder="Interrogation Id" value='{{ $id }}'>
+	<input type="hidden" name="cdate" id="cdate" placeholder="Interrogation Id" value='{{ $cdate }}'> 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
     <input type="hidden" name="modelo" id="modelo" value="Interrogation" />
@@ -73,3 +74,13 @@
     </div>
 </form>
 </div>
+<script type="text/javascript">
+function fijafecha(dia, mes, year){
+		var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+		$('#fechaconsult').append(dia+' '+monthNames[mes]+' '+year);
+	}
+
+fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}');
+	
+	
+</script>

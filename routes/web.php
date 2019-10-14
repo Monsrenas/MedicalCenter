@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/prueba', function () {
-    return view('consultation.interrogation');
+    return view('consultation.PhysicalExamination');
 });
 
 Route::get('edit', function () {return view('edit_patient');});
@@ -27,5 +27,6 @@ Route::get('find', 'DataController@busca');
 Route::get('list', 'DataController@multifind');
 Route::get('flexlist', 'DataController@fleXmultifind');
 Route::post('store', 'DataController@almacena');
+Route::post('IDstore', 'DataController@IDstore');
 Route::post('delete', 'DataController@borra');
 Route::get('patientcng', 'DataController@ChangePatient');

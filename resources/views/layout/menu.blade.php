@@ -25,6 +25,7 @@ nav.navbar ul.nav li a{
  }
 </style>
 
+
 <?php include(app_path().'/Includes/menu_data.php');?>
 
 
@@ -111,7 +112,7 @@ $.post(vista, data, function(subpage){
 function SaveDataNoRefreshView(forma,vista) {
 
 var data=$('#'+forma).serialize();
-var $ventana='#center_wind';
+alert(data);
 $.post(vista, data, function(subpage){
   alert('Operacion Exitosa'); })
 
