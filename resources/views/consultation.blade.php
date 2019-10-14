@@ -83,5 +83,5 @@ $(function () {
   $('[data-toggle="popover"]').popover()
 })
 
-  PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'find');
+  /*PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'flexlist');*/
 </script>

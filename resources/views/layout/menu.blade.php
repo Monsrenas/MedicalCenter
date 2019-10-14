@@ -100,6 +100,7 @@ function LoadDataInView(forma,vista) {
 
 var data=$('#'+forma).serialize();
 var $ventana='#center_wind';
+
 $.post(vista, data, function(subpage){
   $($ventana).empty().append(subpage); })
 
@@ -108,7 +109,6 @@ $.post(vista, data, function(subpage){
 function SaveDataNoRefreshView(forma,vista) {
 
 var data=$('#'+forma).serialize();
-alert(data);
 var $ventana='#center_wind';
 $.post(vista, data, function(subpage){
   alert('Operacion Exitosa'); })
@@ -118,6 +118,7 @@ $.post(vista, data, function(subpage){
 function PreLoadDataInView(ventana, xdata, control) {
     var data=$('#llave').serialize();
     data=data+xdata;
+        
     $.post(control, data, function(subpage){
 
       $(ventana).empty().append(subpage); })
@@ -139,5 +140,21 @@ function cambiaPaciente(forma)
       PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); })
 }
 
+function CrearVista(ventana, vista) {
+$('#enlace').val(vista);
+var data=$('#llave').serialize();
+$.post('renderView', data, function(subpage){
+                             
+                            $(ventana).empty().append(subpage);
+                        })  
+
+}
+
+function AbreConsulta(ventana, vista){ 
+  $('#nuevaconsulta').attr("href",'#');
+  CrearVista(ventana, vista);
+
+}
    
 </script>
+

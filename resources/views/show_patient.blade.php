@@ -15,7 +15,7 @@
     
 
     @if (isset($patient))
-           <?php    $patient=$patient[0];
+           <?php    
                     $identification=$patient->identification; 
                     $patientActive=true;
            ?>
@@ -26,7 +26,7 @@
              $patientActive=false;
             ?>           
     @endif
-
+   
    <style type="text/css">
          .verde {background: #E3F8CD;
                     border-style:solid; border-color:#C5F596;

@@ -44,16 +44,16 @@ class DataController extends Controller
     	        	if (isset($_SESSION['identification'])) {
     	                   										 $ert=$_SESSION['identification'];
     	                									}
-    	}         
-      
-        $patient = $classdata::where('identification','=', $ert)->get();  
+    	}          
+        $patient = $classdata::where('identification','=', $ert)->first();  
+        
+        if (!(count($patient)<=0)) {return $patient;} 
 
-        if (!is_null($patient)) {return $patient;}        
-         return $request;
+        return $request;
     }
 
     public function Genstore(Request $request, $classdata)
-    {  dd($request);
+    {  
        $ert=strval($request->identification);
        if ( (is_null($ert)) or ($ert=='') ) { return $request; }
                        
@@ -63,9 +63,9 @@ class DataController extends Controller
         return $patient; 
     }
 
-     public function multifind(Request $request)
+    public function multifind(Request $request)
     {   /*se esta actualizando*/
-    	$view=$this->indexView($request);
+    	  $view=$this->indexView($request);
         $ert=strval($request->findit);
         if ($request->findit<>''){
                 $patient = Patient::where('identification', 'like', "%{$request->findit}%")->
@@ -79,6 +79,24 @@ class DataController extends Controller
         else { return 'identification'; }   
     }
 
+    public function fleXmultifind(Request $request)
+    {   
+        $view=$this->indexView($request);
+        $classdata=$this->modelo($request->modelo);
+
+        $ert=strval($request->findit);
+        if ($request->findit<>''){
+                $patient = ($classdata)::where('identification', '=', "{$request->findit}")->
+                                          orWhere('name', 'like', "%{$request->findit}%")->
+                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                 } else { $patient = ($classdata)::get();}
+
+        if (!is_null($patient)) { return $view->with('patient',$patient);}
+
+        return $view->with('patient',$request); 
+    }
+
+
    public function destroy(Request $request){ 
      $patient=Patient::where('identification','=', $request->identification)->first();
      $patient->delete();
@@ -90,29 +108,29 @@ class DataController extends Controller
     {   
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
-        $result=$this->Genstore($request, $classdata);
-        return $view->with('patient',$result); 
+      $result=$this->Genstore($request, $classdata);
+      return $view->with('patient',$result); 
     }
 
     public function busca(Request $request) 
     {   
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
-        $result=$this->Genfind($request, $classdata);
-        return $view->with('patient',$result); 
+      $result=$this->Genfind($request, $classdata);
+      return $view->with('patient',$result); 
     }
 
     public function borra(Request $request) 
     {   
     	$classdata=$this->modelo($request->modelo);
-        $result=$this->destroy($request, $classdata);
-        return $result; 
+      $result=$this->destroy($request, $classdata);
+      return $result; 
     }
 
     public function ChangePatient(Request $request)
     {
     	if(!isset($_SESSION)){session_start();}
-        $_SESSION['identification'] = $request->identification;
-        return $request;
+      $_SESSION['identification'] = $request->identification;
+      return $request;
     }
 }

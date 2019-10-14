@@ -11,13 +11,11 @@
     </div>
 
     @if (isset($patient))
-           <?php $patient=$patient[0];
-                        $identification=$patient->identification; 
-
+           <?php 
+                    $identification=$patient->identification; 
                     $patientActive=true;
            ?>
     @else         
-        
            <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
