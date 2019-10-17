@@ -36,7 +36,7 @@
 							-moz-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							font-size: small;
-							background: #A7D3E0;
+							background: #AFC4E8;
 	}
 </style>
 <div style="padding: 1%;   align: center;  ">
@@ -77,7 +77,7 @@
 <script type="text/javascript">
 function fijafecha(dia, mes, year){
 		var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-		$('#fechaconsult').append(dia+' '+monthNames[mes]+' '+year);
+		$('#fechaconsult').empty().append(dia+' '+monthNames[mes]+' '+year);
 	}
 
 fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}');

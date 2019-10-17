@@ -45,15 +45,14 @@ class DataController extends Controller
     	                   										 $ert=$_SESSION['identification'];
     	                									}
     	}          
-        $patient = $classdata::where('identification','=', $ert)->first();  
-        
-        if (!(count($patient)<=0)) {return $patient;} 
+        $patient = $classdata::where('identification','=', $ert)->first();         
+         if (!(count($patient)<=0)) {return $patient;} 
 
         return $request;
     }
 
     public function Genstore(Request $request, $classdata)
-    {  
+    { 
        $ert=strval($request->identification);
        if ( (is_null($ert)) or ($ert=='') ) { return $request; }
                        
@@ -103,8 +102,8 @@ class DataController extends Controller
 
         $ert=strval($request->findit);
         if ($request->findit<>''){
-                $patient = ($classdata)::where('identification', '=', "{$request->findit}")->
-                                          orWhere('name', 'like', "%{$request->findit}%")->
+                $patient = ($classdata)::where('id', '=', "{$request->findit}")->
+                                          orWhere('identification', 'like', "%{$request->findit}%")->
                                           orWhere('surname', 'like', "%{$request->findit}%")->get();
                                  } else { $patient = ($classdata)::get();}
 
@@ -130,10 +129,11 @@ class DataController extends Controller
     }
 
     public function busca(Request $request) 
-    {   
+    {  
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
+
       return $view->with('patient',$result); 
     }
 
@@ -151,3 +151,4 @@ class DataController extends Controller
       return $request;
     }
 }
+

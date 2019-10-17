@@ -13,15 +13,16 @@
            <?php    
 
             $patient[]=new Interrogation;
-            if (!isset($identification)) {$identification="";}
+            if (!isset($id)) {$id="";}
              $patientActive=false;
              
              
             ?>
-
+          @if (!($idAct==''))  
             <script type="text/javascript">
-    PreLoadDataInView('#left_wind', '&findit={{$idAct}}&modelo=Interrogation&url=consultation.list', 'flexlist');
+                PreLoadDataInView('#left_wind', '&findit={{$idAct}}&modelo=Interrogation&url=consultation.list', 'flexlist');
             </script>  
+          @endif
 @endif
 
 <?php $fecha=substr($patient[0]->created_at,0, 10); 
@@ -43,13 +44,14 @@
    @foreach($patient as $patmt)
                           <?php    
                               $idt=$patmt->identification;
+                              $idC=$patmt->id;
                               $fecha=substr($patmt->created_at,0, 10); 
                               $i=$i+1; 
                               ?>
                               
 
-                             <a href="javascript:PreLoadDataInView('#Interrogation', '&modelo=Interrogation&findit={{$idt}}&url=consultation.interrogation', 'flexlist');" class="list-group-item"  id="linea{{$idt}}">
-                                  <div>{{$fecha}}</div>  
+                             <a href="javascript:PreLoadDataInView('#Interrogation', '&modelo=Interrogation&findit={{$idC}}&url=consultation.interrogation', 'flexlist');" class="list-group-item"  id="linea{{$idC}}" style=" background: #738CC3; color: #C4D5F3;">
+                                  <div style="background: #738CC3;">{{$fecha}}</div>  
                             </a>
                            
               @endforeach

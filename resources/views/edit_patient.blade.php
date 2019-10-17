@@ -13,6 +13,7 @@
     @if (isset($patient))
            <?php 
                     $identification=$patient->identification; 
+                    
                     $patientActive=true;
            ?>
     @else         
@@ -43,7 +44,7 @@
     
             
             <!--{{url('pfind')}}-->
-            <form  action="javascript:LoadDataInView('formabase','find')" method="post" id="formabase" name="formabase">
+            <form  action="javascript:LoadDataInView('edit_patient','formabase','find')" method="post" id="formabase" name="formabase">
                 @csrf
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />
                 <input type="hidden" name="url" id="url" value="edit_patient" />
@@ -60,7 +61,7 @@
                 </div>
             </form>      
             <br>
-            <form  action="javascript:LoadDataInView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data">
+            <form  action="javascript:SaveDataNoRefreshView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data">
             @csrf
                 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />

@@ -3,7 +3,7 @@
 <?php 
 
 $menuItem = [
-  'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list'],['New','edit_patient'],['Search','']],
+  'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list'],['New','edit_patient']],
   'History' => [['Last medical History','edit_patient'],
   				['Current Medication','welcome'],
   				['Social History','welcome'],

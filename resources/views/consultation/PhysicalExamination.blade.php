@@ -190,7 +190,7 @@
 				  }
 </style>
 
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:black; background: #A8D1DD; align: center; height: auto; margin-bottom: 20px;">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:black; background: #B1C3E8; align: center; height: auto; margin-bottom: 20px;">
 <form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
 	@csrf 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>

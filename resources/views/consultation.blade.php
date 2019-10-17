@@ -8,27 +8,32 @@
 
   .panel-body { max-height: 440px; 
                 overflow: auto scroll; 
-                background: #ABC1C8;
-              -webkit-box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);
--moz-box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);
-box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);} 
+                background: #7190C6;
+             -webkit-box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);
+-moz-box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);
+box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);} 
 .collapsed {
   outline: none;
+
+}
+
+.barra {
+    background: #768AC2;
 
 }
 </style>
 
 <div class="container-fluid">
  <div id="consultationHeader">
-   <span>Consultation: </span><span id="fechaconsult"></span>
+   <span class="consultationHeader">Consultation: </span><span id="fechaconsult"></span>
  </div>   
 <div id="faq" role="tablist" aria-multiselectable="true">
 
 <div class="panel panel-default">
-<div class="panel-heading" role="tab" id="questionThree">
+<div class="panel-heading" role="tab" id="questionThree" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
 <a class="collapsed" data-toggle="collapse" data-parent="#faq" href="#answerThree" aria-expanded="false" aria-controls="answerThree">
-    <div>Interrogation</div> 
+    <div class="">Interrogation</div> 
 </a>
 </h5>
 </div>
@@ -41,7 +46,7 @@ box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);}
 
 
 <div class="panel panel-default">
-<div class="panel-heading" role="tab" id="questionOne">
+<div class="panel-heading" role="tab" id="questionOne" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
 <a data-toggle="collapse" data-parent="#faq" href="#answerOne" aria-expanded="true" aria-controls="answerOne">
     <div>Physical exam</div>
@@ -56,7 +61,7 @@ box-shadow: inset 0px -2px 18px -6px rgba(47,61,77,1);}
 </div>
 
 <div class="panel panel-default">
-<div class="panel-heading" role="tab" id="questionTwo">
+<div class="panel-heading" role="tab" id="questionTwo" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
 <a class="collapsed" data-toggle="collapse" data-parent="#faq" href="#answerTwo" aria-expanded="false" aria-controls="answerTwo" target='_blank'>
         <div>Laboratory exams</div> 
