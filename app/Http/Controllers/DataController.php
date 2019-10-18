@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use View;
 use App\Patient;
 use App\Interrogation;
+use App\Physical;
+use App\Lastmedical;
 
 
 if(!isset($_SESSION)){
@@ -24,13 +26,19 @@ class DataController extends Controller
     case 'Interrogation':
          return $tmodelo= new Interrogation;
         break;
+    case 'Physical':
+         return $tmodelo= new Physical;
+        break;
+     case 'Lastmedical':
+         return $tmodelo= new Lastmedical;
+        break;    
     
         }
     }
 
      public function indexView(Request $request){
-	        $view = View::make($request->url);
-	         
+
+	        $view = View::make($request->url); 
 	        if($request->ajax()){
 	            return $view; 
 	        }else return $view;
@@ -64,12 +72,12 @@ class DataController extends Controller
 
      public function IDstore(Request $request)
     { 
-      $view=$this->indexView($request);
+       $view=$this->indexView($request);
        $classdata=$this->modelo($request->modelo);
-      
-      
-
+        
        $ert=strval($request->id);
+
+
        if ( (is_null($ert)) or ($ert=='') ) { return $request; }
                        
        $patient = $classdata::where('id','=', $ert)->first();
@@ -85,8 +93,8 @@ class DataController extends Controller
         $ert=strval($request->findit);
         if ($request->findit<>''){
                 $patient = Patient::where('identification', 'like', "%{$request->findit}%")->
-                                          orWhere('name', 'like', "%{$request->findit}%")->
-                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                          orWhere('id', 'like', "%{$request->findit}%")->
+                                          orWhere('surname', 'like', "%{$request->findit}%")-get();
                                  } else { $patient = Patient::get();}
 
         if (!is_null($patient)) { 
@@ -95,22 +103,29 @@ class DataController extends Controller
         else { return 'identification'; }   
     }
 
+
     public function fleXmultifind(Request $request)
     {   
         $view=$this->indexView($request);
+
         $classdata=$this->modelo($request->modelo);
 
+        
         $ert=strval($request->findit);
+        
         if ($request->findit<>''){
                 $patient = ($classdata)::where('id', '=', "{$request->findit}")->
-                                          orWhere('identification', 'like', "%{$request->findit}%")->
-                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                          orWhere('identification', '=', "{$request->findit}")->get();
+
                                  } else { $patient = ($classdata)::get();}
 
-        if (!is_null($patient)) { return $view->with('patient',$patient);}
+        if (count($patient)>0) {  return $view->with('patient',$patient);}
+
+
 
         return $view->with('patient',$request); 
     }
+
 
 
    public function destroy(Request $request){ 

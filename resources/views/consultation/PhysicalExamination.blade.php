@@ -1,12 +1,18 @@
 <?php use App\Physical; 
 
 	if(!isset($_SESSION)){session_start();}
+
+	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 	
 ?>
 
 		
 @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $patient=$patient[0];
+           		 $identification=$patient->identification;  
+           		$id=$patient->id;	
+           ?>
  @else         
            <?php                     
             $patient=new Physical;
@@ -16,9 +22,10 @@
 @endif
 
 @if (isset($_SESSION['identification']))
-           <?php 
-           		$identification=($_SESSION['identification']);  
-			?>
+           		<?php 
+	           		$identification=($_SESSION['identification']);  
+	           		$id=str_replace(" ", "",$hoy.$identification.$user);
+				?>
 @endif
 
 <?php global $patient1;
@@ -191,12 +198,14 @@
 </style>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:black; background: #B1C3E8; align: center; height: auto; margin-bottom: 20px;">
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
+<form  action="javascript:SaveDataNoRefreshView('MyPhysical','IDstore')" method="post" style="width: 100%; text-align: center;" id="MyPhysical">
 	@csrf 	
+	<input type="hidden" name="id" id="id" placeholder="Interrogation Id" value='{{ $id }}'>
+	<input type="hidden" name="_method" value="post">
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
+	 <input type="hidden" name="modelo" id="modelo" value="Physical" />
 
-	<input type="hidden" name="url"  value='history.PhysicalExamination'>
-	<input type="hidden" name="dtt"  value='PhysicalExamination'>
+	<input type="hidden" name="url"  value='consultation.PhysicalExamination'>
 
 	<table class="align-middle" style="margin-bottom: 20px;">
 		<tr>
@@ -268,13 +277,11 @@
 		<tr><td>L</td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td><td><?php echo decifra("...",15);?></td><td><?php echo decifra("...");?></td></tr>	
 	</table>
 
-	<div  style="position: fixed; height: 40x; bottom:0; right:1; width: 100%; margin-left: -63%;">
+	<div  style="position: fixed; height: 40x; bottom:0; right:1; width: 100%; margin-left: -40%;">
        	<strong>N=Normal</strong>  |  <strong>AN=Abnormal</strong>  |  <strong>NE=No Examined</strong>
     </div>
 
-	<div  style="position: fixed; height: 40x; bottom:0; right:1; width: 85%;">
-       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save" > Save</button>
-    </div>
+	<?php include(app_path().'/Includes/SaveButton.html') ?>
 
 </form>
 </div>

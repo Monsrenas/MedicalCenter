@@ -4,7 +4,7 @@
 
 $menuItem = [
   'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list'],['New','edit_patient']],
-  'History' => [['Last medical History','edit_patient'],
+  'History' => [['Last medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
   				['Current Medication','welcome'],
   				['Social History','welcome'],
   				['Family History','welcome'],

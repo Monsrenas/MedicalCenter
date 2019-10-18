@@ -1,0 +1,22 @@
+<div  style="position: fixed; height: 10; bottom:0; right:2; width: 95%;">
+       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save" id="salvar"> Save</button>
+</div>
+
+
+<script type="text/javascript">
+$("input").change(function(){
+
+  rec = $(this).attr("name");
+  $("#salvar").css("color", "#F32525");
+});
+
+$("textarea").change(function(){
+
+  rec = $(this).attr("name");
+  $("#salvar").css("color", "#F32525");
+});
+
+$( "#salvar" ).click(function() {
+  $("#salvar").css("color", "#FFFFFF");
+});
+</script>

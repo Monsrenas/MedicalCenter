@@ -55,7 +55,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 </div>
 <div id="answerOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionOne">
 <div class="panel-body" id="Physical">
-  <?php echo VIEW::make("consultation.PhysicalExamination") ?>
+  
 </div>
 </div>
 </div>
@@ -89,6 +89,6 @@ $(function () {
 $(function () {
   $('[data-toggle="popover"]').popover()
 })
-
-  /*PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'flexlist');*/
+  /*PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'flexlist');
+   echo VIEW::make("consultation.PhysicalExamination")*/
 </script>

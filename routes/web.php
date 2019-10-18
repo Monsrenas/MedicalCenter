@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/prueba', function () {
-    return view('consultation.PhysicalExamination');
+    return view('history.LastMedicalHistory');
 });
 
 Route::get('edit', function () {return view('edit_patient');});

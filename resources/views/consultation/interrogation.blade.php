@@ -69,9 +69,7 @@
 	    </textarea>
 	    </div>
 
-	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
-       	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
-    </div>
+    <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>
 </div>
 <script type="text/javascript">
