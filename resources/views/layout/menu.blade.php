@@ -130,6 +130,7 @@ function ShoWindow(elemento, ventana, subpage){
 function LoadDataInView(elemento, forma,vista) {
     var data=$('#'+forma).serialize();
     var previo="#fr"+elemento.trim()
+    alert("     Elemento:"+elemento+"Form:"+forma+"      View:"+vista);
     if ($(previo).length) {$(previo).remove()}
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,"#center_wind",subpage);

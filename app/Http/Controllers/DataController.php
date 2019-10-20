@@ -94,8 +94,8 @@ class DataController extends Controller
         if ($request->findit<>''){
                 $patient = Patient::where('identification', 'like', "%{$request->findit}%")->
                                           orWhere('id', 'like', "%{$request->findit}%")->
-                                          orWhere('surname', 'like', "%{$request->findit}%")-get();
-                                 } else { $patient = Patient::get();}
+                                          orWhere('surname', 'like', "%{$request->findit}%")->get();
+                                 } else { $patient = Patient::orderBy('surname', 'asc')->get();}
 
         if (!is_null($patient)) { 
                                 return $view->with('patient',$patient);
@@ -115,7 +115,7 @@ class DataController extends Controller
         
         if ($request->findit<>''){
                 $patient = ($classdata)::where('id', '=', "{$request->findit}")->
-                                          orWhere('identification', '=', "{$request->findit}")->get();
+                                          orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
 
                                  } else { $patient = ($classdata)::get();}
 
