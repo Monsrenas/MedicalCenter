@@ -4,22 +4,7 @@
 
 	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
-	
 ?>
-
-		
-@if (isset($patient))
-           <?php $patient=$patient[0];
-           		 $identification=$patient->identification;  
-           		$id=$patient->id;	
-           ?>
- @else         
-           <?php                     
-            $patient=new Physical;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>  
-@endif
 
 @if (isset($_SESSION['identification']))
            		<?php 
@@ -28,8 +13,26 @@
 				?>
 @endif
 
+@if (isset($patient))
+           <?php $patient=$patient[0]; ?>
+           @if ($patient->id)
+           		<?php 
+           		 $identification=$patient->identification;  
+           		 $id=$patient->id; 
+           		?>
+           @endif	
+           
+ @else         
+           <?php                     
+            $patient=new Physical;
+            if (!isset($id)) {	$id="";
+            					$identification="";
+            				 }
+            ?>  
+@endif
+
 <?php global $patient1;
-			$patient1=$patient; 	
+			 $patient1=$patient; 	
 
    include(app_path().'/Includes/categorys.php');
 

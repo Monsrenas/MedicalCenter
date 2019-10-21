@@ -8,6 +8,8 @@ use App\Patient;
 use App\Interrogation;
 use App\Physical;
 use App\Lastmedical;
+use App\Exams;
+
 
 
 if(!isset($_SESSION)){
@@ -32,7 +34,9 @@ class DataController extends Controller
      case 'Lastmedical':
          return $tmodelo= new Lastmedical;
         break;    
-    
+    case 'Exams':
+         return $tmodelo= new Exams;
+        break;        
         }
     }
 
@@ -117,13 +121,14 @@ class DataController extends Controller
                 $patient = ($classdata)::where('id', '=', "{$request->findit}")->
                                           orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
 
-                                 } else { $patient = ($classdata)::get();}
+                                 } else { $patient = ($classdata)::orderBy('created_at', 'desc')->get();}
 
         if (count($patient)>0) {  return $view->with('patient',$patient);}
 
+        $patient->id=$request->id;
+        $patient->identification=$request->identification;
 
-
-        return $view->with('patient',$request); 
+        return $view; 
     }
 
 

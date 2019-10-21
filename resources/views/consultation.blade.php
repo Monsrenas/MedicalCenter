@@ -39,7 +39,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 </div>
 <div id="answerThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="questionThree">
 <div class="panel-body" id="Interrogation">
-  Empty...
+
 </div>
 </div>
 </div>
@@ -70,7 +70,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 </div>
 <div id="answerTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="questionTwo">
 <div class="panel-body" id="Laboratory"> 
-  Empty...
+  
 </div>
 </div>
 </div>

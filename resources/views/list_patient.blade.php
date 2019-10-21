@@ -39,7 +39,7 @@
                               $idt=$patmt->identification;
                               $i=$i+1; ?>
                               
-                             <a href="javascript:cambiaPaciente({{$idt}})" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
+                             <a href="javascript:cambiaPaciente('edl{{$idt}}')" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
                               
                                   <div class="form-inline" style="float:left; width:130px;">{{$patmt->identification}}</div> 
                                   <div class="form-inline" style="float: left;">{{$stringpat  }}</div>

@@ -130,7 +130,6 @@ function ShoWindow(elemento, ventana, subpage){
 function LoadDataInView(elemento, forma,vista) {
     var data=$('#'+forma).serialize();
     var previo="#fr"+elemento.trim()
-    alert("     Elemento:"+elemento+"Form:"+forma+"      View:"+vista);
     if ($(previo).length) {$(previo).remove()}
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,"#center_wind",subpage);
@@ -140,6 +139,7 @@ function LoadDataInView(elemento, forma,vista) {
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
+    alert(data);
     $.post(vista, data, function(subpage){ 
         alert('Successful operation'); 
     })
@@ -147,10 +147,12 @@ function SaveDataNoRefreshView(forma,vista) {
 
 function PreLoadDataInView(ventana, xdata, vista) { 
     var data=$('#llave').serialize();
-    data=data+xdata;    
+    data=data+xdata;  
     $.post(vista, data, function(subpage){ 
         $(ventana).empty().append(subpage); 
-    })
+    })  .fail(function(abc) {
+    alert( abc.error );
+  })
 }
 
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
@@ -202,8 +204,8 @@ function AbreConsulta(ventana, vista){
 
 
 function CargaConsulta(ventana, xdata, control){ 
+  PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'flexlist');
  PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'flexlist'); 
-
  PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
 }
 
