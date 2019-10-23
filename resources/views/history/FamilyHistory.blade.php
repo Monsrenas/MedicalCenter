@@ -25,7 +25,7 @@ if(!isset($_SESSION)){session_start();} ?>
 <style type="text/css">
 	table {	font-size: small;
   			 
-  			background: rgba(128, 255, 0, 0.3); 
+  			background: #AFC4E8; 
   			 
   			width: 100%;
 		  }

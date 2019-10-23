@@ -22,7 +22,7 @@ if(!isset($_SESSION)){
              $patientActive=false;
             ?>  
 @endif
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
 <form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;margin: 20px;">
 	@csrf 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>

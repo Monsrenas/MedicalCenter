@@ -207,13 +207,13 @@
 	table {	font-size: x-small;
   			border-collapse: collapse;
   			
-  			border: 1px solid rgba(100, 200, 0, 0.3); 
+  			border: 1px inset #5183E8; 
   			width: 100%;
   			
 		  }
 
 	table, th, td {
-					  border: 2px solid white;
+					  border: 1px solid #5183E8;
 					  text-align: center;
 					  padding-bottom: 6px;
 				  }
