@@ -205,8 +205,8 @@ function AbreConsulta(ventana, vista){
 
 function CargaConsulta(ventana, xdata, control){ 
   PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'flexlist');
- PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'flexlist'); 
- PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
+  PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'flexlist'); 
+  PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}

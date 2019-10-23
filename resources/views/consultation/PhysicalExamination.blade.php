@@ -13,8 +13,27 @@
 				?>
 @endif
 
+@if (isset($xpatient))
+	<?php 
+	$patient=new Physical;
+	$patient->id=$xpatient[0]->id;
+    $patient->identification=$xpatient[0]->identification;
+    $patient->N=(isset($xpatient[0]->N))? $xpatient[0]->N: null;
+	$patient->DAF=(isset($xpatient[0]->DAF))? $xpatient[0]->DAF: null;
+/*	$patient->DAD=(isset($xpatient[0]->DAD))? $xpatient[0]->DAD: null;
+	$patient->Weight=(isset($xpatient[0]->Weight))? $xpatient[0]->Weight: null;
+	$patient->Height=(isset($xpatient[0]->Height))? $xpatient[0]->Height: null;
+	$patient->BMI=(isset($xpatient[0]->BMI))?$xpatient[0]->BMI: null; */
+	$patient->Respiratoryrate=(isset($xpatient[0]->Respiratoryrate))?$xpatient[0]->Respiratoryrate: null;
+	$patient->Centralheartrate=(isset($xpatient[0]->Centralheartrate))?$xpatient[0]->Centralheartrate: null;
+	$patient->Upperextrem=(isset($xpatient[0]->Upperextrem))?$xpatient[0]->Upperextrem: null;
+	$patient->Lowerextrem=(isset($xpatient[0]->Lowerextrem))?$xpatient[0]->Lowerextrem: null; 
+	?>
+ @endif	
+
+
 @if (isset($patient))
-           <?php $patient=$patient[0]; ?>
+           <?php  ?>
            @if ($patient->id)
            		<?php 
            		 $identification=$patient->identification;  

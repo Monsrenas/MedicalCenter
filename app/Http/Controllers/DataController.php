@@ -9,8 +9,11 @@ use App\Interrogation;
 use App\Physical;
 use App\Lastmedical;
 use App\Exams;
-
-
+use App\Currentmedication;
+use App\Socialhistory;
+use App\Familyhistory;
+use App\Surgicalhistory;
+use App\Sustanceuse;
 
 if(!isset($_SESSION)){
     session_start();
@@ -22,26 +25,21 @@ class DataController extends Controller
 	public function modelo($ind)
     {
         switch ($ind) {
-     case 'Patient':
-         return $tmodelo= new Patient;
-        break;
-    case 'Interrogation':
-         return $tmodelo= new Interrogation;
-        break;
-    case 'Physical':
-         return $tmodelo= new Physical;
-        break;
-     case 'Lastmedical':
-         return $tmodelo= new Lastmedical;
-        break;    
-    case 'Exams':
-         return $tmodelo= new Exams;
-        break;        
+          case 'Patient': return $tmodelo= new Patient; break;
+          case 'Interrogation': return $tmodelo= new Interrogation;break;
+          case 'Physical': return $tmodelo= new Physical; break;
+          case 'Lastmedical': return $tmodelo= new Lastmedical; break;    
+          case 'Exams': return $tmodelo= new Exams; break;    
+          case 'Currentmedication':return $tmodelo= new Currentmedication; break;
+          case 'Socialhistory': return $tmodelo= new Socialhistory; break;
+          case 'Familyhistory': return $tmodelo= new Familyhistory; break;
+          case 'Surgicalhistory': return $tmodelo= new Surgicalhistory; break;
+          case 'Sustanceuse': return $tmodelo= new Sustanceuse; break; 
+             
         }
     }
 
      public function indexView(Request $request){
-
 	        $view = View::make($request->url); 
 	        if($request->ajax()){
 	            return $view; 
@@ -110,25 +108,25 @@ class DataController extends Controller
 
     public function fleXmultifind(Request $request)
     {   
-        $view=$this->indexView($request);
+        $viewx=$this->indexView($request);
 
         $classdata=$this->modelo($request->modelo);
 
         
         $ert=strval($request->findit);
         
-        if ($request->findit<>''){
+        if ($ert<>''){
                 $patient = ($classdata)::where('id', '=', "{$request->findit}")->
                                           orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
 
-                                 } else { $patient = ($classdata)::orderBy('created_at', 'desc')->get();}
+                                 } else {$patient = ($classdata)::orderBy('created_at', 'desc')->get(); }
 
-        if (count($patient)>0) {  return $view->with('patient',$patient);}
+        if (count($patient)>0) { if ($request->url=='consultation.PhysicalExamination') {return $viewx->with('xpatient',$patient);} return $viewx->with('patient',$patient);}
 
         $patient->id=$request->id;
         $patient->identification=$request->identification;
 
-        return $view; 
+        return $viewx; 
     }
 
 

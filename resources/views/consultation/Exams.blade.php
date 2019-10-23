@@ -41,9 +41,9 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 	<input type="hidden" name="url"  value='consultation.Exams'>
 	<input type="hidden" name="modelo"  value='Exams'>
 
-	<div class="form-group">
+	<div class="form-group" id="examenes">
         <strong>Exam(s) :</strong>
-        <table >
+        <table>
         	<tr>
         		<td class="exam">
 		         	<strong>Exam title</strong>
@@ -63,9 +63,9 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
         </table>
 
 
-        <div id="medications"></div>
+        <div id="exmsList"></div>
     </div>
-    <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Medication</a>
+    <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
     
     <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
         <button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
@@ -75,7 +75,7 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 
 <script type="text/javascript">
 		
-		var $med=0;
+		var $xmed=0;
         function delelm($xeme){ 
        
         $('#'+$xeme).remove();
@@ -83,15 +83,16 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
         }
 
 	function addMedition($title, $Descrptn, $image){ 
-        $titlet="<input type='text' class='form-inline' name='exams[][0]'  value='"+$title+"' maxlength='35' size='35'>";
-        $descrt="<input type='text' class='form-inline' name='exams[][1]'  value='"+$Descrptn+"'>";
-		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"med"+$med+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'></span> Add image</a>";
-        $bottDel="<a href='javascript:delelm(\"med"+$med+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>";
-		$others="<tr><td> <div id='med"+$med+"'> "+$titlet+"</td><td>"+$descrt+"</td><td>"+$imgdrv+"</td><td>"+$bottDel+"</div></td></tr>";
+        $titlet="<input type='text' class='form-inline exam' name='exams[][0]'  value='"+$title+"' style='width: 350px;'>";
+        $descrt="<input type='text' class='form-inline' name='exams[][1]'  value='"+$Descrptn+"' style='width: 310px;'>";
+		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"img"+$xmed+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'></span> Add image</a>";
+        $bottDel="<a href='javascript:delelm(\"exams"+$xmed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>";
+		$others="<div id=\"exams"+$xmed+"\">"+$titlet+$descrt+$imgdrv+$bottDel+"</div>";
 		
-		var txt = document.getElementById('medications');
+		var txt = document.getElementById('exmsList');
         txt.insertAdjacentHTML('beforeend', $others);
-        $med=$med+1;
+        
+        $xmed=$xmed+1;
        }
 </script>
 

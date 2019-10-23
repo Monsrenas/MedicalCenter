@@ -1,5 +1,4 @@
 <?php 
-
 	$preexistentes=[
 					"Diabetes","High blood presure","High cholesterol","Hypothyroidism","Hyperthyroidism","Cancer (type)","Systemic lupus erythematou (Lupus)","Congestive herat Failure","Angina","Colitis",
 					"Heart murmur","Pneumonia","Pulmonary embolism","Asthma","Emphysema/Bronchitis","Stroke","Eílesy (seizures)","Cataracts","Kidney disease","Kidney stones",
@@ -7,7 +6,6 @@
 					];	
 	
 	if(!isset($_SESSION)){session_start();}
-
 
  ?>
 
@@ -46,7 +44,7 @@
 
 	
 </script>
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: rgba(128, 255, 0, 0.3); ">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #5E77A5; ">
 <form  action="{{url('almacena')}}" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
