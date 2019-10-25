@@ -16,7 +16,7 @@
             
          ?>           
     @endif 
-
+ <?php dd($patient); ?>
 
    <style type="text/css">
          .verde {background: #E3F8CD;
