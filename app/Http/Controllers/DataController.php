@@ -55,8 +55,7 @@ class DataController extends Controller
     	                   										 $ert=$_SESSION['identification'];
     	                									}
     	}          
-        $patient = $classdata::where('identification','=', $ert)->first();
-         dd($patient);         
+        $patient = $classdata::where('identification','=', $ert)->first();         
          if (!is_null($patient)) { if (!(count($patient)<=0)) {return $patient;}
                                   } 
         return $request;
@@ -168,7 +167,7 @@ class DataController extends Controller
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
-
+      dd($result);
       return $view->with('patient',$result); 
     }
 
