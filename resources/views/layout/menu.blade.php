@@ -1,6 +1,5 @@
 <?php  if(!isset($_SESSION)){session_start();}
-        $_SESSION['user']='44240514037';
-        $_SESSION['identification']='123'; ?>
+        $_SESSION['user']='44240514037'; ?>
 
 @if (isset($_SESSION['identification']))
     <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";</script>
