@@ -9,16 +9,20 @@
     </div>
 
     @if (isset($patient))
-
            <?php 
-                    $identification=$patient->identification; 
-           ?>
-    @else         
-           <?php                     
+             
+            if (isset($patient->identification)){
+                                $identification=$patient->identification;
+            }  
+           ?>     
+    @endif   
+
+    @if (!(isset($patient->name)))
+        <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
-            ?>           
-    @endif         
+        ?>           
+    @endif      
 
     <style type="text/css">
 
