@@ -178,7 +178,6 @@ function cambiaPaciente(forma)
 {
     var data=$('#'+forma).serialize();
     $('#center_wind').empty();
-    alert(data);
     $.post('patientcng', data, function(subpage){  
                                   PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); 
                                 }
