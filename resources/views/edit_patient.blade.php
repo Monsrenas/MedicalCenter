@@ -10,7 +10,6 @@
 
     @if (isset($patient))
            <?php 
-            dd('Prueba');
             if (isset($patient->identification)){
                                 $identification=$patient->identification;
             }  
