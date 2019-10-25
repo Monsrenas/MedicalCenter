@@ -23,7 +23,7 @@
             if (!isset($identification)) {$identification="";}
         ?>           
     @endif      
-
+<?php dd($patient); ?>
 
     <style type="text/css">
 
