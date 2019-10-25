@@ -56,10 +56,10 @@ class DataController extends Controller
     	                									}
     	}          
         $patient = $classdata::where('identification','=', $ert)->first();
-                  
+         dd(!is_null($patient));         
          if (!is_null($patient)) { if (!(count($patient)<=0)) {return $patient;}
                                   } 
-         dd(count($request));
+         
         return $request;
     }
 
