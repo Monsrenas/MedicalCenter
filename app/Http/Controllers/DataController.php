@@ -143,8 +143,7 @@ class DataController extends Controller
 
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->first(); }                   
         if (is_null($patient)) {$abcd='{"id": "'.$request->id.'","identification": "'.$request->identification.'"}'; }
-
-        if (count($patient)>0) { $abcd=$patient->toJson();}
+            else { $abcd=$patient->toJson();}
         
         return $viewx->with('patient',$abcd);
     }
