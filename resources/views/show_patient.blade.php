@@ -1,6 +1,6 @@
 
 <?php use App\Patient;?>
-
+    <?php dd((isset($patient))); ?>
     @if (isset($patient))
            <?php 
             if (isset($patient->identification)){
@@ -8,7 +8,7 @@
             }  
            ?>     
     @endif   
- <?php dd($patient); ?>
+ 
     @if (!(isset($patient->name)))
         <?php                     
             $patient=new Patient;
