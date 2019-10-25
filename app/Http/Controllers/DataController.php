@@ -59,7 +59,6 @@ class DataController extends Controller
                   
          if (!is_null($patient)) { if (!(count($patient)<=0)) {return $patient;}
                                   } 
-         dd($request);
         return $request;
     }
 
