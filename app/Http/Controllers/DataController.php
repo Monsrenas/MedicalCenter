@@ -55,7 +55,8 @@ class DataController extends Controller
     	                   										 $ert=$_SESSION['identification'];
     	                									}
     	}          
-        $patient = $classdata::where('identification','=', $ert)->first();         
+        $patient = $classdata::where('identification','=', $ert)->first();
+         dd($patient);         
          if (!(count($patient)<=0)) {return $patient;} 
         return $request;
     }
