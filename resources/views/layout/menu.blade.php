@@ -1,5 +1,6 @@
 <?php  if(!isset($_SESSION)){session_start();}
-        $_SESSION['user']='44240514037'; ?>
+        $_SESSION['user']='44240514037';
+        $_SESSION['identification']='123'; ?>
 
 @if (isset($_SESSION['identification']))
     <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";</script>
@@ -139,7 +140,6 @@ function LoadDataInView(elemento, forma,vista) {
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
-    alert(data);
     $.post(vista, data, function(subpage){ 
         alert('Successful operation'); 
     })
@@ -150,8 +150,8 @@ function PreLoadDataInView(ventana, xdata, vista) {
     data=data+xdata;  
     $.post(vista, data, function(subpage){ 
         $(ventana).empty().append(subpage); 
-    })  .fail(function(abc) {
-    alert( abc.error );
+    })  .fail(function() {
+    $(ventana).empty().append("Error al cargar datos");
   })
 }
 
@@ -200,12 +200,14 @@ function AbreConsulta(ventana, vista){
   $('#botonNewconsulta').empty();
   CrearVista(ventana, vista);
   CrearVista('#Physical', 'consultation.PhysicalExamination');
+  CrearVista('#Laboratory', 'consultation.Exams');
 }
 
 
 function CargaConsulta(ventana, xdata, control){ 
-  PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'flexlist');
-  PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'flexlist'); 
+  PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'findbyId');
+  PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'findbyId');
+   
   PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
 }
 

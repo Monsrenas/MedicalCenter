@@ -1,24 +1,34 @@
 <?php 
 use App\Exams;
-$clasedat= new Exams;
-$id='';	
-
-if(!isset($_SESSION)){ session_start();}
-$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
-$cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    if(!isset($_SESSION)){ session_start(); }
+    $user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 ?>
 
- @if (isset($_SESSION['identification']))
+ 
+
+ @if (isset($patient))
+           <?php 
+            $abcd=json_decode($patient);
+            $patient=new Exams;  
+            
+           foreach ($abcd as $clave => $valor) {
+                if (isset($abcd->{$clave})) {$patient->{$clave}=$abcd->{$clave};}
+                }
+
+           $id=$patient->id;  
+           $identification=$patient->identification;?>
+@else
+    <?php                     
+            $patient=new Exams;
+            if (!isset($identification)) {$identification="";}
+            ?> 
+    @if (isset($_SESSION['identification']))
            <?php 
                 $identification=($_SESSION['identification']);  
                 $id=str_replace(" ", "",$hoy.$identification.$user);
             ?>
- @endif
-
- @if (isset($patient))
-           <?php $patient=$patient[0]; 
-           $id=$patient->id;  
-           $identification=$patient->identification; ?>
+    @endif
 @endif
 
 
@@ -83,8 +93,8 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
         }
 
 	function addMedition($title, $Descrptn, $image){ 
-        $titlet="<input type='text' class='form-inline exam' name='exams[][0]'  value='"+$title+"' style='width: 350px;'>";
-        $descrt="<input type='text' class='form-inline' name='exams[][1]'  value='"+$Descrptn+"' style='width: 310px;'>";
+        $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 350px;'>";
+        $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 310px;'>";
 		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"img"+$xmed+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'></span> Add image</a>";
         $bottDel="<a href='javascript:delelm(\"exams"+$xmed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>";
 		$others="<div id=\"exams"+$xmed+"\">"+$titlet+$descrt+$imgdrv+$bottDel+"</div>";
@@ -97,8 +107,16 @@ $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 </script>
 
     @if (isset($patient->exams))
-    	@for ($i = 0; $i < count($patient->exams); $i++)
-    		<script> addMedition('{{ $patient->exams[$i][0] }}','{{ $patient->exams[$i][1] }}' ,' {{ $patient->exams[$i][2] }} '); </script>
+        <?php $xyzabc=json_decode(json_encode($patient->exams), true); ?>
+    	@for ($i = 0; $i < count($xyzabc); $i++)
+            <?php 
+                
+                
+                $colExam=(isset($xyzabc[$i][0]))? $xyzabc[$i][0] : "";
+                $colResu=(isset($xyzabc[$i][1]))? $xyzabc[$i][1] : "";
+                $colImag=(isset($xyzabc[$i][2]))? $xyzabc[$i][2] : "";
+             ?>
+    		<script> addMedition('{{ $colExam }}','{{ $colResu }}' ,' {{ $colImag }} '); </script>
 		@endfor
     @endif 
 </div>

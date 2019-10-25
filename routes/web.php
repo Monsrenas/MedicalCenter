@@ -26,6 +26,7 @@ Route::get('renderView', 'ScreenSeccion@index');
 Route::get('find', 'DataController@busca');
 Route::get('list', 'DataController@multifind');
 Route::get('flexlist', 'DataController@fleXmultifind');
+Route::get('findbyId', 'DataController@findbyId');
 Route::post('store', 'DataController@almacena');
 Route::post('IDstore', 'DataController@IDstore');
 Route::post('delete', 'DataController@borra');

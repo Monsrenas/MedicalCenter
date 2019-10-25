@@ -1,34 +1,33 @@
 <?php use App\Interrogation;
   if(!isset($_SESSION)){session_start();}
+  if (!isset($_SESSION['listaConsulta'])) {$_SESSION['listaConsulta']='';}
   $idAct=(isset($_SESSION['identification'])) ?$_SESSION['identification'] : ""; 
+
 ?>
 
  @if (isset($patient))
-           <?php $identification="000";
-             
-
+           <?php  
+              $identification="000";
              ?>
  @else         
-           
-           <?php    
 
-            $patient[]=new Interrogation;
-            if (!isset($id)) {$id="";}
-             $patientActive=false;
-             
-             
+           <?php    
+              $patient[]=new Interrogation;
+              if (!isset($id)) {$id="";}           
             ?>
-          @if (!($idAct==''))  
+
+          @if ((!($idAct==''))and(!($_SESSION['listaConsulta']==$idAct)))
+            <?php $_SESSION['listaConsulta']=$idAct;  ?>  
             <script type="text/javascript">
                 PreLoadDataInView('#left_wind', '&findit={{$idAct}}&modelo=Interrogation&url=consultation.list', 'flexlist');
             </script>  
           @endif
 @endif
 
-<?php $fecha=substr($patient[0]->created_at,0, 10); 
+<?php $fecha=(isset($patient[0]->created_at))? substr($patient[0]->created_at,0, 10):''; 
       $hoy= date("Y-m-d"); ?>
-
                             @if (!($hoy==$fecha))
+                            
                               <div id="botonNewconsulta">
                                 <a href="javascript:AbreConsulta('#Interrogation','consultation.interrogation')" class="list-group-item" style="background: #9DF3AF;" id="nuevaconsulta">
                                   <div>(New) {{$hoy}}</div>  

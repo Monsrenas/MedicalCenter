@@ -1,7 +1,5 @@
    <?php use App\Patient; ?>
 
-
-
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -11,17 +9,14 @@
     </div>
 
     @if (isset($patient))
+
            <?php 
                     $identification=$patient->identification; 
-                    
-                    $patientActive=true;
            ?>
     @else         
            <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-           
             ?>           
     @endif         
 

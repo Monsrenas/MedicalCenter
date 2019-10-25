@@ -73,7 +73,7 @@ class DataController extends Controller
     }
 
      public function IDstore(Request $request)
-    { 
+    {  
        $view=$this->indexView($request);
        $classdata=$this->modelo($request->modelo);
         
@@ -85,7 +85,7 @@ class DataController extends Controller
        $patient = $classdata::where('id','=', $ert)->first();
         if (!is_null($patient)){ $patient->update($request->all()); }                
             else { if (!$request->id='') $patient = $classdata::create($request->all()); }                      
-         
+        return $request; 
         return $view->with('patient',$patient);
     }
 
@@ -120,16 +120,32 @@ class DataController extends Controller
                                           orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
 
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->get(); }
+        $jsonData = json_encode($patient);                         
+        if (count($patient)>0) { return $viewx->with('patient',$patient);}
 
-        if (count($patient)>0) { if ($request->url=='consultation.PhysicalExamination') {return $viewx->with('xpatient',$patient);} return $viewx->with('patient',$patient);}
-
-        $patient->id=$request->id;
-        $patient->identification=$request->identification;
-
-        return $viewx; 
+        return $viewx->with('patient',$patient); 
     }
 
 
+ public function findbyId(Request $request)
+    {   
+        $viewx=$this->indexView($request);
+
+        $classdata=$this->modelo($request->modelo);
+
+        $ert=strval($request->findit);
+        
+        if ($ert<>''){
+                $patient = ($classdata)::where('id', '=', "{$request->findit}")->
+                                          orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->first();
+
+                                 } else {$patient = ($classdata)::orderBy('created_at', 'desc')->first(); }                   
+        if (is_null($patient)) {$abcd='{"id": "'.$request->id.'","identification": "'.$request->identification.'"}'; }
+
+        if (count($patient)>0) { $abcd=$patient->toJson();}
+        
+        return $viewx->with('patient',$abcd);
+    }
 
    public function destroy(Request $request){ 
      $patient=Patient::where('identification','=', $request->identification)->first();

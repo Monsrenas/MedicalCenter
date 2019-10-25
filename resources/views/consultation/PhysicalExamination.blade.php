@@ -1,58 +1,44 @@
 <?php use App\Physical; 
-
-	if(!isset($_SESSION)){session_start();}
-
+	
+	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+	
 ?>
 
-@if (isset($_SESSION['identification']))
-           		<?php 
-	           		$identification=($_SESSION['identification']);  
-	           		$id=str_replace(" ", "",$hoy.$identification.$user);
-				?>
-@endif
-
-@if (isset($xpatient))
-	<?php 
-	$patient=new Physical;
-	$patient->id=$xpatient[0]->id;
-    $patient->identification=$xpatient[0]->identification;
-    $patient->N=(isset($xpatient[0]->N))? $xpatient[0]->N: null;
-	$patient->DAF=(isset($xpatient[0]->DAF))? $xpatient[0]->DAF: null;
-/*	$patient->DAD=(isset($xpatient[0]->DAD))? $xpatient[0]->DAD: null;
-	$patient->Weight=(isset($xpatient[0]->Weight))? $xpatient[0]->Weight: null;
-	$patient->Height=(isset($xpatient[0]->Height))? $xpatient[0]->Height: null;
-	$patient->BMI=(isset($xpatient[0]->BMI))?$xpatient[0]->BMI: null; */
-	$patient->Respiratoryrate=(isset($xpatient[0]->Respiratoryrate))?$xpatient[0]->Respiratoryrate: null;
-	$patient->Centralheartrate=(isset($xpatient[0]->Centralheartrate))?$xpatient[0]->Centralheartrate: null;
-	$patient->Upperextrem=(isset($xpatient[0]->Upperextrem))?$xpatient[0]->Upperextrem: null;
-	$patient->Lowerextrem=(isset($xpatient[0]->Lowerextrem))?$xpatient[0]->Lowerextrem: null; 
-	?>
- @endif	
-
-
-@if (isset($patient))
-           <?php  ?>
-           @if ($patient->id)
-           		<?php 
-           		 $identification=$patient->identification;  
-           		 $id=$patient->id; 
-           		?>
-           @endif	
-           
+ @if (isset($patient))
+           <?php
+           $abcd=json_decode($patient);
+        	$patient=new Physical;	
+         
+           foreach ($abcd as $clave => $valor) {
+   				if (isset($abcd->{$clave})) {$patient->{$clave}=$abcd->{$clave};}
+				}
+           	
+           if($patient->identification) {$identification=$patient->identification;} else {
+           	  $identification=(isset($_SESSION['identification']))? $_SESSION['identification']:"";}
+           	
+           $id=(isset($patient->id))? $patient->id : str_replace(" ", "",$hoy.$identification.$user);
+           ?>
  @else         
            <?php                     
             $patient=new Physical;
-            if (!isset($id)) {	$id="";
-            					$identification="";
-            				 }
+            if (!isset($identification)) {$identification="";}
             ?>  
+	@if (isset($_SESSION['identification']))
+	           <?php 
+	           		$identification=($_SESSION['identification']);  
+	           		$id=str_replace(" ", "",$hoy.$identification.$user);
+				?>
+	@endif
+
+
 @endif
 
-<?php global $patient1;
-			 $patient1=$patient; 	
-
+<?php 
+global  $patient1;
+global  $patient2;
+		$patient1=$patient;	
    include(app_path().'/Includes/categorys.php');
 
    global $indiceradio,$indicetext;
@@ -105,7 +91,7 @@
   	global $patient1;
   	$nom=str_replace(" ", "", substr($cdn, 2,-1));	
   	$unit='';
-  	$valor=$patient1->$nom;
+  	$valor=($patient1->$nom); 
 	switch ($nom) {
 	    case 'Weight':
 	    		$unit="<select name='Weight[1]' id='SLTWeight'>
@@ -129,54 +115,58 @@
 	    case 'BMI':
 	        
 	         return "<td colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($patient1->Weight,$patient1->Height)."</strong> <br> ".BMIClass(BMI($patient1->Weight,$patient1->Height))."</td>";
-	        break;
-	        }
+	        break; 
+	        } 
 	 
-	 if (!$nom=='') {      
-  						$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2)." <input type='text' name='".$nom."' size='5' value='".$valor."' onkeypress='return soloNumeros(event, this.value);'>".$unit." </td>";
-  						return $resu;
+	 $vlr=(count($valor)==1)?$valor:'';
+	 
+	 if ($nom) {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)'>";
+				$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2).$ctrlr.$unit." </td>";
+				return $resu;
   					}
   	return '';
 
   }					
-  				
+  		
+
   function decifra($cadena) {
 		global $patient1;	
  	
   		$resu="<td colspan='4'>".$cadena."</td>";
-  		if ($cadena=="***") { $i=indice(1);
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="N")) {$Nck="checked";} else {$Nck="";} 
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="AN")) {$ANck="checked";} else {$ANck="";}
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="NE")) {$NEck="checked";} else {$NEck="";}
+  		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
   			
-  			$resu=" <td width='10'> <input type='radio' name='N[$i]' id='N$i'  value='N' ".$Nck." > </td> 
-  					<td width='10'> <input type='radio' name='N[$i]' id='AN$i' value='AN' ".$ANck." ></td>
-  					<td width='10'> <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > </td> ";}
+  			$xyzabc=json_decode(json_encode($patient1->N), true);
+   			$Nck=""; $ANck=""; $NEck="";
+
+  			if ((count($xyzabc)>0) and (array_key_exists($i, $xyzabc))) {
+  				
+	  			if ($xyzabc[$i]=="N") {$Nck="checked";} 
+	  			if ($xyzabc[$i]=="AN") {$ANck="checked";}
+	  			if ($xyzabc[$i]=="NE") {$NEck="checked";}
+  			} 
+  			$cbz=($cadena=="***")? "<td width='10'>":" ";
+  			$cla=($cadena=="***")? "</td> ":" ";
+
+  			$resu=$cbz."<input type='radio' name='N[$i]' id='N$i'  value='N' ".$Nck." >".$cla." 
+  					".$cbz." <input type='radio' name='N[$i]' id='AN$i' value='AN' ".$ANck." >".$cla."
+  					".$cbz." <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > ".$cla ;
+  				}
 
   
-  		if (substr($cadena, 0,1)=="#") {$i=indice(2); 
-  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
-  					$valor=$patient1->$nomb;
-  					 $resu=unit_measurement($cadena);	
-		}
-  		
+  		if (substr($cadena, 0,1)=="#"){ $i=indice(2); 
+					  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
+					  					$valor=(isset($patient1->$nomb))? $patient1->$nomb:"";
+					  					$resu=unit_measurement($cadena);
+									  }
+ 		
   		if ($cadena=="DAF") { $resu="<td rowspan='60'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAF'>".((isset($patient1->DAF)) ? $patient1->DAF : "")."</textarea> </td>"; }
 
   		if ($cadena=="DAD") { $resu="<td rowspan='80'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAD'>".((isset($patient1->DAD)) ? $patient1->DAD : "")."</textarea> </td>"; }
 
-  		if ($cadena=="NNN") {
-  								$resu=" <td width='10'> <strong>N</strong> </td> 
+  		if ($cadena=="NNN") {    $resu="<td width='10'> <strong>N</strong>  </td> 
 					  					<td width='10'> <strong>AN</strong> </td>
-					  					<td width='10'> <strong>NE</strong> </td> ";}
-
-  		if ($cadena=="...") {$i=indice(1);
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="N")) {$Nck="checked";} else {$Nck="";} 
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="AN")) {$ANck="checked";} else {$ANck="";}
-  			if (isset($patient1->N[$i]) and ($patient1->N[$i]=="NE")) {$NEck="checked";} else {$NEck="";}	
-  			 $resu=" <input type='radio' name='N[$i]' id='N$i' value='N'".$Nck."> 
-  			 		 <input type='radio' name='N[$i]' id='AN$i' value='AN'".$ANck."> 
-  			 		 <input type='radio' name='N[$i]' id='NE$i' value='NE'".$NEck.">";}
-
+					  					<td width='10'> <strong>NE</strong> </td> ";
+					  		}
   		return $resu;
   }
 
@@ -193,13 +183,11 @@
 	 														else { $dato=$dato.decifra($value[$j],$i);		}
 	 																}												
 	$dato=$dato."<tr/>";	
-	 	
 								}			
  	return $dato;
  	}
 
  	?>
-
 
 
 <style type="text/css">
@@ -218,14 +206,13 @@
 					  padding-bottom: 6px;
 				  }
 </style>
-
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:black; background: #B1C3E8; align: center; height: auto; margin-bottom: 20px;">
 <form  action="javascript:SaveDataNoRefreshView('MyPhysical','IDstore')" method="post" style="width: 100%; text-align: center;" id="MyPhysical">
 	@csrf 	
-	<input type="hidden" name="id" id="id" placeholder="Interrogation Id" value='{{ $id }}'>
+	<input type="hidden" name="id" id="id"  value='{{ $id }}'>
 	<input type="hidden" name="_method" value="post">
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
-	 <input type="hidden" name="modelo" id="modelo" value="Physical" />
+	 <input type="hidden" name="modelo" id="modelo" value="Physical">
 
 	<input type="hidden" name="url"  value='consultation.PhysicalExamination'>
 
@@ -244,6 +231,7 @@
 			<th colspan="1">NE</th>
 			<th colspan="1">DESCRIBE ABNORMAL FINDINGS</th>
 		</tr>
+
 	
 		<?php echo Arbol($GENERAL);?>
 		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php echo decifra("***");?> </tr>
@@ -287,7 +275,7 @@
 		<tr> <td colspan="3">Percussion</td>	<?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">Ausculation</td>	<?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">DRE</td><?php echo decifra("***");?></tr>
-		<?php echo Arbol($HEMO); ?>
+		<?php echo Arbol($HEMO);?>
 		</table>
 		<table>
 		<tr><td colspan="7"><strong>CRANIAL NERVES</strong></td></tr>
