@@ -10,7 +10,7 @@
 
     @if (isset($patient))
            <?php 
-             
+            dd($patient);
             if (isset($patient->identification)){
                                 $identification=$patient->identification;
             }  
@@ -21,7 +21,7 @@
         <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
-            dd($patient);
+            
          ?>           
     @endif      
 
