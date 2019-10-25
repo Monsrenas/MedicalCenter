@@ -12,21 +12,23 @@
         </div>
     @endif
 
-    
-
     @if (isset($patient))
-           <?php    
-                    $identification=$patient->identification; 
-                    $patientActive=true;
-           ?>
-    @else              
-           <?php                     
+           <?php 
+            if (isset($patient->identification)){
+                                $identification=$patient->identification;
+            }  
+           ?>     
+    @endif   
+
+    @if (!(isset($patient->name)))
+        <?php                     
             $patient=new Patient;
             if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>           
-    @endif
-   
+            
+         ?>           
+    @endif 
+
+
    <style type="text/css">
          .verde {background: #E3F8CD;
                     border-style:solid; border-color:#C5F596;
