@@ -1,17 +1,6 @@
 
 <?php use App\Patient;?>
 
-   @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     @if (isset($patient))
            <?php 
             if (isset($patient->identification)){
@@ -43,7 +32,7 @@
                  margin-left: 0px;
                 }
     </style>
-<!--
+
 <div class="dropdown" style="margin-left: -6px;">
   <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #3149D5; color: #AFC4E8;">
     <strong>Patient Information</strong> <br>
@@ -164,7 +153,7 @@
         
     </div> <!-- Fin del <div class="row ">  -->
 </div>
-</div> -->
+</div> 
           
     <script>
  
