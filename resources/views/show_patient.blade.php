@@ -1,6 +1,6 @@
 
 <?php use App\Patient;?>
-    <?php dd("prueba"); ?>
+
     @if (isset($patient))
            <?php 
             if (isset($patient->identification)){
