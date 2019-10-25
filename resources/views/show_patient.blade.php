@@ -8,7 +8,7 @@
             }  
            ?>     
     @endif   
-
+ <?php dd($patient); ?>
     @if (!(isset($patient->name)))
         <?php                     
             $patient=new Patient;
@@ -16,7 +16,7 @@
             
          ?>           
     @endif 
- <?php dd($patient); ?>
+
 
    <style type="text/css">
          .verde {background: #E3F8CD;
