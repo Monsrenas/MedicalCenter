@@ -131,7 +131,7 @@ global  $patient1;
 		global $patient1;	
  	
   		$resu="<td colspan='4'>".$cadena."</td>";
-  /*		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
+  		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
   			
   			$xyzabc=json_decode(json_encode($patient1->N), true);
    			$Nck=""; $ANck=""; $NEck="";
@@ -150,7 +150,7 @@ global  $patient1;
   					".$cbz." <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > ".$cla ;
   				}
 
-  
+  /*
   		if (substr($cadena, 0,1)=="#"){ $i=indice(2); 
 					  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
 					  					$valor=(isset($patient1->$nomb))? $patient1->$nomb:"";
