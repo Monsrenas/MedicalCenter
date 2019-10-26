@@ -156,11 +156,11 @@ global  $patient1;
 					  					$valor=(isset($patient1->$nomb))? $patient1->$nomb:"";
 					  					$resu=unit_measurement($cadena);
 									  }
- 		
+ 		/*
   		if ($cadena=="DAF") { $resu="<td rowspan='60'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAF'>".((isset($patient1->DAF)) ? $patient1->DAF : "")."</textarea> </td>"; }
 
   		if ($cadena=="DAD") { $resu="<td rowspan='80'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAD'>".((isset($patient1->DAD)) ? $patient1->DAD : "")."</textarea> </td>"; }
-
+			*/
   		if ($cadena=="NNN") {    $resu="<td width='10'> <strong>N</strong>  </td> 
 					  					<td width='10'> <strong>AN</strong> </td>
 					  					<td width='10'> <strong>NE</strong> </td> ";
@@ -232,7 +232,7 @@ global  $patient1;
 
 		
 		<?php echo Arbol($GENERAL);?>
-		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php dd('Prueba');  echo decifra("***");?> </tr>
+		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">face</td>	<?php echo decifra("***");?> </tr>
 
 		<tr> <td rowspan="4">Neck</td>   <td colspan="3">Anterior</td> <?php echo decifra("***");?> </tr>
