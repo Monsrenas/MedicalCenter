@@ -131,7 +131,7 @@ global  $patient1;
 		global $patient1;	
  	
   		$resu="<td colspan='4'>".$cadena."</td>";
-  		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
+  /*		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
   			
   			$xyzabc=json_decode(json_encode($patient1->N), true);
    			$Nck=""; $ANck=""; $NEck="";
@@ -150,12 +150,12 @@ global  $patient1;
   					".$cbz." <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > ".$cla ;
   				}
 
-  /*
+  
   		if (substr($cadena, 0,1)=="#"){ $i=indice(2); 
 					  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
 					  					$valor=(isset($patient1->$nomb))? $patient1->$nomb:"";
 					  					$resu=unit_measurement($cadena);
-									  }*/
+									  }
  		
   		if ($cadena=="DAF") { $resu="<td rowspan='60'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAF'>".((isset($patient1->DAF)) ? $patient1->DAF : "")."</textarea> </td>"; }
 
@@ -164,7 +164,7 @@ global  $patient1;
   		if ($cadena=="NNN") {    $resu="<td width='10'> <strong>N</strong>  </td> 
 					  					<td width='10'> <strong>AN</strong> </td>
 					  					<td width='10'> <strong>NE</strong> </td> ";
-					  		}
+					  		}*/
   		return $resu;
   }
 
