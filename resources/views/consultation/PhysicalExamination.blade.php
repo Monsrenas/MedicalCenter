@@ -92,9 +92,10 @@ global  $patient1;
   	$valor=($patient1->$nom); 
 	switch ($nom) {
 	    case 'Weight':
+	    		$mWeight=(isset($patient1->Weight[1]))? $patient1->Weight[1]:'';
 	    		$unit="<select name='Weight[1]' id='SLTWeight'>
-                           <option ".(($patient1->Weight[1]=='kg') ? "selected":"")." value='kg' >Kilogram</option>
-                           <option ".(($patient1->Weight[1]=='lb') ? "selected":"")." value='lb' >Pound</option>
+                           <option ".(($mWeight=='kg') ? "selected":"")." value='kg' >Kilogram</option>
+                           <option ".(($mWeight=='lb') ? "selected":"")." value='lb' >Pound</option>
                        </select>";
 
                 
@@ -102,18 +103,20 @@ global  $patient1;
                 $nom=$nom."[0]";
 	        break;
 	    case 'Height':
+	    	$mHeight=(isset($patient1->Height[1]))? $patient1->Height[1]:'';
 	    	$unit="<select name='Height[1]' id='SLTHeight' value='m'>
-                               <option ".(($patient1->Height[1]=='ft') ? "selected":"")." value='ft' >Feet</option>
-                               <option ".(($patient1->Height[1]=='m') ? "selected":"")." value='m' >Meters</option>
+                               <option ".(($mHeight=='ft') ? "selected":"")." value='ft' >Feet</option>
+                               <option ".(($mHeight=='m') ? "selected":"")." value='m' >Meters</option>
                              </select>";
             
             if (isset($patient1->$nom[0])) {$valor=$patient1->$nom[0];}
 	        $nom=$nom."[0]";
 	        break;
 	    case 'BMI':
-	        
-	         return "<td colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($patient1->Weight,$patient1->Height)."</strong> <br> ".BMIClass(BMI($patient1->Weight,$patient1->Height))."</td>";
-	        break; 
+	        $nWeight=(isset($patient1->Weight))? $patient1->Weight:"";	
+	        $nHeight=(isset($patient1->Height))? $patient1->Height:"";
+	         return "<td colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($nWeight,$nHeight)."</strong> <br> ".BMIClass(BMI($nWeight,$nHeight))."</td>";
+	         break; 
 	        } 
 	 
 	 $vlr=(count($valor)==1)?$valor:'';
@@ -149,13 +152,13 @@ global  $patient1;
   					".$cbz." <input type='radio' name='N[$i]' id='NE$i' value='NE' ".$NEck." > ".$cla ;
   				}
 
-  /*
+  
   		if (substr($cadena, 0,1)=="#"){ $i=indice(2); 
 					  					$nomb=str_replace(" ", "", substr($cadena, 2,-1));
 					  					$valor=(isset($patient1->$nomb))? $patient1->$nomb:"";
 					  					$resu=unit_measurement($cadena);
 									  }
- 		
+ /*		
   		if ($cadena=="DAF") { $resu="<td rowspan='60'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAF'>".((isset($patient1->DAF)) ? $patient1->DAF : "")."</textarea> </td>"; }
 
   		if ($cadena=="DAD") { $resu="<td rowspan='80'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAD'>".((isset($patient1->DAD)) ? $patient1->DAD : "")."</textarea> </td>"; }
