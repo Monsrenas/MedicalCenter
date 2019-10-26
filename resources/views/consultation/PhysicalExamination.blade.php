@@ -34,7 +34,6 @@
 
 
 @endif
- <?php dd($patient); ?>
 <?php 
 global  $patient1;
 global  $patient2;
