@@ -36,8 +36,7 @@
 <?php 
 
 global  $patient1;
-		$patient1=new Physical;
-	/*	$patient1=$patient;	*/
+		$patient1=$patient;
    include(app_path().'/Includes/categorys.php');
 
    global $indiceradio,$indicetext;
