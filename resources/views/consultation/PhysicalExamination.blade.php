@@ -231,8 +231,8 @@ global  $patient1;
 		</tr>
 
 		
-		<?php dd('Prueba'); echo Arbol($GENERAL);?>
-		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php echo decifra("***");?> </tr>
+		<?php echo Arbol($GENERAL);?>
+		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php dd('Prueba');  echo decifra("***");?> </tr>
 		<tr> <td colspan="3">face</td>	<?php echo decifra("***");?> </tr>
 
 		<tr> <td rowspan="4">Neck</td>   <td colspan="3">Anterior</td> <?php echo decifra("***");?> </tr>
