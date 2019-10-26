@@ -133,11 +133,10 @@ global  $patient1;
   		$resu="<td colspan='4'>".$cadena."</td>";
   		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
   			
-  			$xyzabc=(isset($patient1->N))? json_decode(json_encode($patient1->N), true):'';
+  			$xyzabc=(isset($patient1->N))? json_decode(json_encode($patient1->N), true):null;
    			$Nck=""; $ANck=""; $NEck="";
-   			dd($xyzabc);
-  			if ((count($xyzabc)>0) and (array_key_exists($i, $xyzabc))) {
-  				
+
+  			if ($xyzabc) and (array_key_exists($i, $xyzabc))) {
 	  			if ($xyzabc[$i]=="N") {$Nck="checked";} 
 	  			if ($xyzabc[$i]=="AN") {$ANck="checked";}
 	  			if ($xyzabc[$i]=="NE") {$NEck="checked";}
