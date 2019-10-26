@@ -2,7 +2,6 @@
 	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
-	dd('Prueba');
 ?>
 
  @if (isset($patient))
@@ -46,7 +45,7 @@ global  $patient1;
    $indiceradio=0;
    $indicetext=0;
    
-
+   dd('Prueba');
   function indice($x) { global $indiceradio,$indicetext;
   						if ($x==1) { $i=$indiceradio;
   									$indiceradio=$indiceradio+1;
