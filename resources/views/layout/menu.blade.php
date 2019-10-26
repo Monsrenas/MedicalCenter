@@ -43,7 +43,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 <?php include(app_path().'/Includes/menu_data.php');?>
 
 
-<nav class="navbar navbar-default" style="margin-bottom: 0px;">
+<nav class="navbar navbar-default fixed-top" style="margin-bottom: 0px;">
   <div class="container-fluid">
     <div class="navbar-header" style="text-align: center; padding-right: 20px;">
       <a class="" href="#" style=" color:#C3F836; font-size: x-large; ">
