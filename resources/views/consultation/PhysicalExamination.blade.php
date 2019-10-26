@@ -135,7 +135,7 @@ global  $patient1;
   			
   			$xyzabc=(isset($patient1->N))? json_decode(json_encode($patient1->N), true):'';
    			$Nck=""; $ANck=""; $NEck="";
-
+   			dd($xyzabc);
   			if ((count($xyzabc)>0) and (array_key_exists($i, $xyzabc))) {
   				
 	  			if ($xyzabc[$i]=="N") {$Nck="checked";} 
