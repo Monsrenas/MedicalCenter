@@ -44,7 +44,7 @@ global  $patient1;
    $indiceradio=0;
    $indicetext=0;
    
-   dd('Prueba');
+   
   function indice($x) { global $indiceradio,$indicetext;
   						if ($x==1) { $i=$indiceradio;
   									$indiceradio=$indiceradio+1;
@@ -230,8 +230,8 @@ global  $patient1;
 			<th colspan="1">DESCRIBE ABNORMAL FINDINGS</th>
 		</tr>
 
-	
-		<?php echo Arbol($GENERAL);?>
+		
+		<?php dd('Prueba'); echo Arbol($GENERAL);?>
 		<tr> <td rowspan="2">Head</td>  <td colspan="3">Cranium</td> <?php echo decifra("***");?> </tr>
 		<tr> <td colspan="3">face</td>	<?php echo decifra("***");?> </tr>
 
