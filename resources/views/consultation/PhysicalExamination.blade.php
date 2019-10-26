@@ -119,8 +119,8 @@ global  $patient1;
 	         break; 
 	        } 
 	 
-	 $vlr=(count($valor)==1)?$valor:'';
-	 dd('Aqui');
+	 $vlr=(isset($valor[1]))? "":$valor;
+	
 	 if ($nom) {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)'>";
 				$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2).$ctrlr.$unit." </td>";
 				return $resu;
