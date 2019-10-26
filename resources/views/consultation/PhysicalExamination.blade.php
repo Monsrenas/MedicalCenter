@@ -1,9 +1,8 @@
 <?php use App\Physical; 
-	echo "Llego aqui";
 	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
-	
+	dd('Prueba');
 ?>
 
  @if (isset($patient))
