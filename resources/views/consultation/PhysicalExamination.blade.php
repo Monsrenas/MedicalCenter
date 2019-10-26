@@ -133,7 +133,7 @@ global  $patient1;
   		$resu="<td colspan='4'>".$cadena."</td>";
   		if (($cadena=="***")or($cadena=="...")) { $i=indice(1); 
   			
-  			$xyzabc=json_decode(json_encode($patient1->N), true);
+  			$xyzabc=(isset($patient1->N))? json_decode(json_encode($patient1->N), true):'';
    			$Nck=""; $ANck=""; $NEck="";
 
   			if ((count($xyzabc)>0) and (array_key_exists($i, $xyzabc))) {
