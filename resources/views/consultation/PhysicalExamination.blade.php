@@ -118,9 +118,9 @@ global  $patient1;
 	         return "<td colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($nWeight,$nHeight)."</strong> <br> ".BMIClass(BMI($nWeight,$nHeight))."</td>";
 	         break; 
 	        } 
-	 dd('Aqui');
-	 $vlr=(count($valor)==1)?$valor:'';
 	 
+	 $vlr=(count($valor)==1)?$valor:'';
+	 dd('Aqui');
 	 if ($nom) {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)'>";
 				$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2).$ctrlr.$unit." </td>";
 				return $resu;
