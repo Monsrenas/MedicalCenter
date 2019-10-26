@@ -12,7 +12,7 @@ $menuItem = [
   				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
   				['Physical Examination','consultation.PhysicalExamination'],
   				['Physicians Note','www.monsrenas.com']			],
-  'Consultation' => ['consultation.list','consultation'],
+  'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['','Notas medicas por especialidades'],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
   'Reports' => ['History','Service by dates','Exams'],

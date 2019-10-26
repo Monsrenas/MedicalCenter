@@ -196,7 +196,7 @@ function CrearVista(ventana, vista) {
 
 function AbreConsulta(ventana, vista){ 
    
-  $('#botonNewconsulta').empty();
+  /*$('#botonNewconsulta').empty();*/
   CrearVista(ventana, vista);
   CrearVista('#Physical', 'consultation.PhysicalExamination');
   CrearVista('#Laboratory', 'consultation.Exams');

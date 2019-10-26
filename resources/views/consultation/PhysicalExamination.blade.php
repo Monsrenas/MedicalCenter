@@ -8,7 +8,7 @@
 
  @if (isset($patient))
            <?php
-           $abcd=json_decode($patient);
+            $abcd=json_decode($patient);
         	$patient=new Physical;	
          
            foreach ($abcd as $clave => $valor) {
@@ -34,7 +34,7 @@
 
 
 @endif
-
+ <?php dd($patient); ?>
 <?php 
 global  $patient1;
 global  $patient2;

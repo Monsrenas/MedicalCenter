@@ -1,6 +1,5 @@
 <?php use App\Interrogation;
   if(!isset($_SESSION)){session_start();}
-  if (!isset($_SESSION['listaConsulta'])) {$_SESSION['listaConsulta']='';}
   $idAct=(isset($_SESSION['identification'])) ?$_SESSION['identification'] : ""; 
 
 ?>
@@ -15,13 +14,6 @@
               $patient[]=new Interrogation;
               if (!isset($id)) {$id="";}           
             ?>
-
-          @if ((!($idAct==''))and(!($_SESSION['listaConsulta']==$idAct)))
-            <?php $_SESSION['listaConsulta']=$idAct;  ?>  
-            <script type="text/javascript">
-                PreLoadDataInView('#left_wind', '&findit={{$idAct}}&modelo=Interrogation&url=consultation.list', 'flexlist');
-            </script>  
-          @endif
 @endif
 
 <?php $fecha=(isset($patient[0]->created_at))? substr($patient[0]->created_at,0, 10):''; 
