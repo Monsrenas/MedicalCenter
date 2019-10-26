@@ -162,11 +162,11 @@ global  $patient1;
   		if ($cadena=="DAF") { $resu="<td rowspan='60'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAF'>".((isset($patient1->DAF)) ? $patient1->DAF : "")."</textarea> </td>"; }
 
   		if ($cadena=="DAD") { $resu="<td rowspan='80'> <textarea style='resize: none;' rows = '100%' cols = '100%' name = 'DAD'>".((isset($patient1->DAD)) ? $patient1->DAD : "")."</textarea> </td>"; }
-/*				
+				
   		if ($cadena=="NNN") {    $resu="<td width='10'> <strong>N</strong>  </td> 
 					  					<td width='10'> <strong>AN</strong> </td>
 					  					<td width='10'> <strong>NE</strong> </td> ";
-					  		}*/
+					  		}
   		return $resu;
   }
 
