@@ -1,5 +1,14 @@
 <?php use App\Familyhistory; 
-if(!isset($_SESSION)){session_start();} ?>
+if(!isset($_SESSION)){session_start();} 
+$identification='';
+?>
+
+
+@if (isset($patient))
+           <?php $identification=$patient->identification;  
+           ?>
+@endif
+
 
 @if (isset($_SESSION['identification']))
            <?php 
@@ -7,16 +16,6 @@ if(!isset($_SESSION)){session_start();} ?>
 			?>
 @endif
 
-
- @if (isset($patient))
-           <?php $identification=(isset($patient->identification))?$patient->identification:"";  ?>
- @else         
-           <?php                     
-            $patient=new Familyhistory;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>  
-@endif
 
 <?php 
 	$family=["Father","Mother","Siblings","Children"];
@@ -42,7 +41,7 @@ if(!isset($_SESSION)){session_start();} ?>
 
 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 <input type="hidden" name="url"  value='history.FamilyHistory'>
-<input type="hidden" name="modelo"  value='FamilyHistory'>
+<input type="hidden" name="modelo"  value='Familyhistory'>
  <input type="hidden" name="_method" value="post"/>
 
 <div class="form-group">
@@ -65,12 +64,14 @@ if(!isset($_SESSION)){session_start();} ?>
 	         	<strong>Cause</strong>
 	         </td>		     
 	     </tr>
+
+
 	     @for ($i = 0; $i<4; $i++)
 			<tr><td style="padding: 5px;">{{$family[$i]}}</td>
-				<td><input type='text' class='form-control' name='livingage[]'  value="{{$patient->livingage[$i]}}" maxlength='10' size='10'onkeypress="return soloNumeros(event);"></td>
-				<td><input type='text' class='form-control' name='health[]'  value='{{ $patient->health[$i] }}' maxlength='50' size='50'></td>
-				<td><input type='text' class='form-control' name='deceasedage[]'  value="{{$patient->deceasedage[$i]}}" maxlength='10' size='10' onkeypress="return soloNumeros(event);"></td>
-				<td><input type='text' class='form-control' name='cause[]'  value='{{$patient->cause[$i]}}' maxlength='50' size='50'></td>
+				<td><input type='text' class='form-control' name='livingage[]'  value="<?php  echo  (isset($patient->livingage[$i])?$patient->livingage[$i]:''); ?>" maxlength='10' size='10'onkeypress="return soloNumeros(event);"></td>
+				<td><input type='text' class='form-control' name='health[]'  value='<?php  echo (isset($patient->health[$i])?$patient->health[$i]:''); ?>' maxlength='50' size='50'></td>
+				<td><input type='text' class='form-control' name='deceasedage[]'  value="<?php echo (isset($patient->deceasedage[$i])?$patient->deceasedage[$i]:''); ?>" maxlength='10' size='10' onkeypress="return soloNumeros(event);"></td>
+				<td><input type='text' class='form-control' name='cause[]'  value='<?php  echo  (isset($patient->cause[$i])?$patient->cause[$i]:''); ?>' maxlength='50' size='50'></td>
 			</tr>
 		@endfor
 	</table>
@@ -78,12 +79,12 @@ if(!isset($_SESSION)){session_start();} ?>
 	<strong>EXTENDED FAMILY PSYCHIATRIC PROBLEMS PAST & PRESENT:</strong>
 	<div class="form-group">
 	    <a>Maternal Relatives:</a>
-	    <input type="text" name="maternal" value="{{$patient->maternal}}" class="form-inline" maxlength="130" size="120">
+	    <input type="text" name="maternal" value="<?php  echo  (isset($patient->maternal)?$patient->maternal:''); ?>" class="form-inline" maxlength="130" size="120">
 	</div>
     
 	<div class="form-group">
    		<a>Paternal Relative:</a>
-    	<input type="text" name="paternal" value="{{$patient->paternal}}" class="form-inline" maxlength="130" size="120">
+    	<input type="text" name="paternal" value="<?php  echo  (isset($patient->paternal)?$patient->paternal:''); ?>" class="form-inline" maxlength="130" size="120">
 	</div>
 	
 	<strong style="text-align: left;">WOMENS REPRODUCTIVE HISTORY:</strong>
@@ -93,37 +94,37 @@ if(!isset($_SESSION)){session_start();} ?>
 		<div style="float: left; width: 50%;">
 			<div class="form-group">
 		   		<a>Age of first period:</a>
-		    	<input type="text" name="period" value="{{$patient->period}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		    	<input type="text" name="period" value="<?php  echo  (isset($patient->period)?$patient->period:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 			</div>
 			<div class="form-group">
 		   		<a># Pregnancies:</a>
-		    	<input type="text" name="pregnancies" value="{{$patient->pregnancies}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		    	<input type="text" name="pregnancies" value="<?php  echo  (isset($patient->pregnancies)?$patient->pregnancies:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 			</div>
 			<div class="form-group">
 		   		<a># Miscarriages:</a>
-		    	<input type="text" name="miscarriages" value="{{$patient->miscarriages}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		    	<input type="text" name="miscarriages" value="<?php  echo  (isset($patient->miscarriages)?$patient->miscarriages:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 			</div><div class="form-group">
 		   		<a># Abortions:</a>
-		    	<input type="text" name="abortions" value="{{$patient->abortions}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		    	<input type="text" name="abortions" value="<?php  echo  (isset($patient->abortions)?$patient->abortions:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 			</div>
 		</div>
 	
 		<div style="float: none;">
 			<div class="form-group">
 		   		<a>Last Papsmear:</a>
-		    	<input type="date" name="papsmear" value="{{$patient->papsmear}}" class="form-inline">
+		    	<input type="date" name="papsmear" value="<?php  echo  (isset($patient->papsmear)?$patient->papsmear:''); ?>" class="form-inline">
 			</div>
 			<div class="form-group">
 		   		<a>Results:</a>
-		    	<input type="text" name="papsmearresult" value="{{$patient->papsmearresult}}" class="form-inline">
+		    	<input type="text" name="papsmearresult" value="<?php  echo  (isset($patient->papsmearresult)?$patient->papsmearresult:''); ?>" class="form-inline">
 			</div>
 			<div class="form-group">
 		   		<a>Last Mamogram:</a>
-		    	<input type="date" name="mamogram" value="{{$patient->mamogram}}" class="form-inline">
+		    	<input type="date" name="mamogram" value="<?php  echo  (isset($patient->mamogram)?$patient->mamogram:''); ?>" class="form-inline">
 			</div>
 			<div class="form-group">
 		   		<a>Results:</a>
-		    	<input type="text" name="mamogramresult" value="{{$patient->mamogramresult}}" class="form-inline">
+		    	<input type="text" name="mamogramresult" value="<?php  echo  (isset($patient->mamogramresult)?$patient->mamogramresult:''); ?>" class="form-inline">
 			</div>		
 		</div>
 	</div>
@@ -131,12 +132,12 @@ if(!isset($_SESSION)){session_start();} ?>
 <div style="float: none;">
 	<div class="form-group">
 		<a>If reached menopause.  At what age?:</a>
-		<input type="text" name="menopause" value="{{$patient->menopause}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		<input type="text" name="menopause" value="<?php  echo  (isset($patient->menopause)?$patient->menopause:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 	</div>	
 
 	<div class="form-group">
 		<a>Have regular periods?. Period formula:</a>
-		<input type="text" name="periods" value="{{$patient->periods}}" class="form-inline" onkeypress="return soloNumeros(event);">
+		<input type="text" name="periods" value="<?php  echo  (isset($patient->periods)?$patient->periods:''); ?>" class="form-inline" onkeypress="return soloNumeros(event);">
 	</div>	
 </div>
 	<div class="col-xs-3 col-sm-3 col-md-3" style="text-align:  center; position: fixed; height: 40px; bottom:0;  width: 75%;">

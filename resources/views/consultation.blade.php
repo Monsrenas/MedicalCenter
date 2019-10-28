@@ -21,19 +21,35 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
     background: #768AC2;
 
 }
+.iinfor {font-size: small;
+          color: #ADC5E8;
+          width: 25%;
+         float: left;
+         text-align: left;
+        }
+.IntHead {font-size: large;
+          width: 40%;
+         float: left;}
+.ilabel{ text-align: left;
+          align: left;
+          width: 5%;
+         float: left;
+         }
 </style>
 
 <div class="container-fluid">
- <div id="consultationHeader">
-   <span class="consultationHeader">Consultation: </span><span id="fechaconsult"></span>
- </div>   
 <div id="faq" role="tablist" aria-multiselectable="true">
 
 <div class="panel panel-default">
-<div class="panel-heading" role="tab" id="questionThree" style="background:#3149D5; color: white;">
+<div class="panel-heading" role="tab" id="questionThree" style="background:#3149D5; color: white; height: 40px;">
 <h5 class="panel-title">
 <a class="collapsed" data-toggle="collapse" data-parent="#faq" href="#answerThree" aria-expanded="false" aria-controls="answerThree">
-    <div class="">Interrogation</div> 
+    <div>
+      <div class="ilabel" style="text-align: left;">Date: </div>
+      <div id="InDate" class="iinfor">.</div>
+      <div class="IntHead">INTERROGATION</div>
+      <div class="iinfor" id="InPatien"></div>
+    </div> 
 </a>
 </h5>
 </div>
@@ -49,7 +65,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 <div class="panel-heading" role="tab" id="questionOne" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
 <a data-toggle="collapse" data-parent="#faq" href="#answerOne" aria-expanded="true" aria-controls="answerOne">
-    <div>Physical exam</div>
+    <div>PHYSICAL EXAM</div>
 </a>
 </h5>
 </div>
@@ -64,7 +80,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 <div class="panel-heading" role="tab" id="questionTwo" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
 <a class="collapsed" data-toggle="collapse" data-parent="#faq" href="#answerTwo" aria-expanded="false" aria-controls="answerTwo" target='_blank'>
-        <div>Laboratory exams</div> 
+        <div>LABORATORY EXAMS</div> 
 </a>
 </h5>
 </div>

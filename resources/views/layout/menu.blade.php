@@ -52,8 +52,8 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
 <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;" role="navigation">
   <div class="container-fluid">
-    <div class="navbar-header" style="text-align: center; padding-right: 20px;">
-      <a href="#" style=" color:#C3F836; font-size: x-large; ">
+    <div class="navbar-header" style="text-align: center; padding-right: 20px; background: #94AED4; margin-top: 6px;">
+      <a href="#" style=" color:#43A181; font-size: x-large; ">
         <img src="../images/menu/mainLogo.png" alt="" width="40%" margin="1" style="margin-top: 6px; margin-right: -10px;"><br><strong>Medical Center</strong> </a>
     </div>
     <ul class="nav navbar-nav">
@@ -71,7 +71,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
     </ul>
  
     <ul class="nav navbar-nav navbar-right" >
-      <li><a><span ></span>USER: Nombre </a></li>
+      <li><a><span ></span>USER: Dr Urbino Perez </a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>

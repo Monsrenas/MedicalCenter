@@ -9,7 +9,7 @@
 
  ?>
 
- @if (isset($patient))
+@if (isset($patient))
            <?php $identification=$patient->identification;  
            ?>
 @endif

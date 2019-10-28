@@ -21,7 +21,8 @@ if(!isset($_SESSION)){
 
 class DataController extends Controller
 {
-
+  public function debug_to_console( $data ) 
+        { $output = $data; if ( is_array( $output ) ) $output = implode( ',', $output); echo ""; }
 	public function modelo($ind)
     {
         switch ($ind) {
@@ -64,7 +65,7 @@ class DataController extends Controller
     }
 
     public function Genstore(Request $request, $classdata)
-    { 
+    {  
        $ert=strval($request->identification);
        if ( (is_null($ert)) or ($ert=='') ) { return $request; }
                        

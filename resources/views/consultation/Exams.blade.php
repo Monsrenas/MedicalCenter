@@ -77,10 +77,7 @@ use App\Exams;
     </div>
     <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
     
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
-        <button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
-        <br>
-    </div>
+    <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>	
 
 <script type="text/javascript">
