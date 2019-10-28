@@ -4,7 +4,8 @@
 
 
 <script type="text/javascript">
-$("input").change(function(){
+
+/*$("input").change(function(){
 
   rec = $(this).attr("name");
   $("#salvar").css("color", "#F32525");
@@ -18,5 +19,12 @@ $("textarea").change(function(){
 
 $( "#salvar" ).click(function() {
   $("#salvar").css("color", "#FFFFFF");
-});
+});*/
+
+
+$('body').on('input','input', function (evento) {  
+    $(this).parents('form:first').find('input[type="submit"]').css('color', 'red') 
+     evento.preventDefault();
+ });
+
 </script>

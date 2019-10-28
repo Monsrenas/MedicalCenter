@@ -1,7 +1,6 @@
 <?php use App\Interrogation;
   if(!isset($_SESSION)){session_start();}
   $idAct=(isset($_SESSION['identification'])) ?$_SESSION['identification'] : ""; 
-
 ?>
 
  @if (isset($patient))
@@ -9,7 +8,6 @@
               $identification="000";
              ?>
  @else         
-
            <?php    
               $patient[]=new Interrogation;
               if (!isset($id)) {$id="";}           

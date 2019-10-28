@@ -45,13 +45,13 @@
 	
 </script>
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
-<form  action="{{url('almacena')}}" method="post">
+<form  id="MyLastMedical" action="javascript:SaveDataNoRefreshView('MyLastMedical','store')" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.LastMedicalHistory'>
 	<input type="hidden" name="enlace"  value='history.LastMedicalHistory'>
 	
-	<input type="hidden" name="_method" value="get">
+	<input type="hidden" name="_method" value="post">
 	 <input type="hidden" name="modelo" id="modelo" value="Lastmedical" />
  
 <table style="width: 100%;">

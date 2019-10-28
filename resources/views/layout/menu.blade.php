@@ -1,5 +1,12 @@
 <?php  if(!isset($_SESSION)){session_start();}
-        $_SESSION['user']='44240514037'; ?>
+        $_SESSION['user']='44240514037'; 
+        function PasientAct(){
+
+          return (isset($_SESSION['identification']))? $_SESSION['identification']:null;
+        }
+
+
+        ?>
 
 @if (isset($_SESSION['identification']))
     <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";</script>
@@ -43,19 +50,23 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 <?php include(app_path().'/Includes/menu_data.php');?>
 
 
-<nav class="navbar navbar-default fixed-top" style="margin-bottom: 0px;">
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header" style="text-align: center; padding-right: 20px;">
-      <a class="" href="#" style=" color:#C3F836; font-size: x-large; ">
+      <a href="#" style=" color:#C3F836; font-size: x-large; ">
         <img src="../images/menu/mainLogo.png" alt="" width="40%" margin="1" style="margin-top: 6px; margin-right: -10px;"><br><strong>Medical Center</strong> </a>
     </div>
     <ul class="nav navbar-nav">
-      <?php 
+      <?php
+        $i=0; 
+        $pAc=PasientAct();
+
         foreach ($menuItem as $clave => $valor) {
         $info=json_encode($menuItem[$clave]);
-
-        echo "<li id='$clave'><a onclick= 'ShowOp($info)'   href='#' ><img src='../images/menu/$clave.png' alt='Icon  $clave' width='80px' margin='1'><br>$clave</a></li>";
-      }
+        $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
+        echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='80px' margin='1'><br>$clave</a></li>";
+          $i++;
+        }
       ?>
     </ul>
  
@@ -75,7 +86,10 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
 <script type="text/javascript">
 
-  function ShowOp($arreglo){
+  function ShowOp($arreglo,$op){
+  
+          if ($('#'+$op).attr('Class')=='dependen disabled') {return ;} /*Si no hay paciente activo */
+    
           $('#left_wind').empty();
           $('.contenidoCentro').hide();
           $arreglo.forEach(BuildMenu);
@@ -180,6 +194,8 @@ function cambiaPaciente(forma)
     $('#center_wind').empty();
     $.post('patientcng', data, function(subpage){  
                                   PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); 
+                                  Pacienteactivo="<?php echo (isset($_SESSION['identification']))? $_SESSION['identification']:''; ?>";
+                                  $(".dependen").attr("class", "dependen");
                                 }
     );
 }
@@ -211,7 +227,6 @@ function CargaConsulta(ventana, xdata, control){
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}
-
 </script>
 
 

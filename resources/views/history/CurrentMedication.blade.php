@@ -6,11 +6,8 @@ $identification='';
 if(!isset($_SESSION)){session_start();}
  ?>
 
-
-@section('eltema')
-
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+          <?php $identification=(isset($patient->identification))?$patient->identification:"";  ?>
 
 @endif
 
@@ -30,14 +27,14 @@ if(!isset($_SESSION)){session_start();}
 </style>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
-<form  action="{{url('almacena')}}" method="post">
+<form  id="MyCurrentMedication" action="javascript:SaveDataNoRefreshView('MyCurrentMedication','store')" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'/>
 	<input type="hidden" name="url"  value='history.CurrentMedication'/>
 	<input type="hidden" name="enlace"  value='history.CurrentMedication'/>
     
-    <input type="hidden" name="_method" value="get"/>
-     <input type="hidden" name="modelo" id="modelo" value="Lastmedical" />
+    <input type="hidden" name="_method" value="post">
+     <input type="hidden" name="modelo" id="modelo" value="Currentmedication" />
 
 	<div class="form-group" id="drugs">
         <strong>Drug allergies:</strong>

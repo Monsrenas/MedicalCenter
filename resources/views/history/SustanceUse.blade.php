@@ -34,14 +34,14 @@
 </script>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; font-size: x-small;">
-<form  action="{{url('almacena')}}" method="post" style="width: 100%; text-align: center;">
+<form  id="MySustanceUse" action="javascript:SaveDataNoRefreshView('MySustanceUse','store')" method="post" style="width: 100%; text-align: center;">
 	@csrf 	
 
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SustanceUse'>
 	<input type="hidden" name="modelo"  value='SustanceUse'>
 
-	<input type="hidden" name="_method" value="get"/>
+	<input type="hidden" name="_method" value="post"/>
 
 	<?php 	$category=["Alcohol","Marijuana","Cocaine, crack", "Cigarettes", 'OPIOIDS:  Tylenol #2 & #3, 282’S, 292’S,
 Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasoline, aerosols, paint thinner, poppers, rush, locker room", "OTHER: specify"];

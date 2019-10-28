@@ -9,7 +9,7 @@ if(!isset($_SESSION)){session_start();} ?>
 
 
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $identification=(isset($patient->identification))?$patient->identification:"";  ?>
  @else         
            <?php                     
             $patient=new Familyhistory;
@@ -37,12 +37,13 @@ if(!isset($_SESSION)){session_start();} ?>
 
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #5E77A5;  opacity:1;">
-<form  action="{{url('almacena')}}" method="post" id='entrada'>
+<form  id="MyFamilyHistory" action="javascript:SaveDataNoRefreshView('MyFamilyHistory','store')" method="post">
 @csrf 	
 
 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 <input type="hidden" name="url"  value='history.FamilyHistory'>
-<input type="hidden" name="dtt"  value='FamilyHistory'>
+<input type="hidden" name="modelo"  value='FamilyHistory'>
+ <input type="hidden" name="_method" value="post"/>
 
 <div class="form-group">
 	<table id="medications">
@@ -145,7 +146,7 @@ if(!isset($_SESSION)){session_start();} ?>
 
 <script type="text/javascript">
 	
-	$("#entrada :input").change(function() {
+	$("#MyFamilyHistory :input").change(function() {
    $(".btn").disabled=false;
    document.getElementById('save').disabled=false;
 });

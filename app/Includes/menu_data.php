@@ -1,5 +1,5 @@
 
-
+/*Estructura de todas las opciones del sistema.. System option structure */
 <?php 
 
 $menuItem = [

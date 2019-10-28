@@ -1,6 +1,5 @@
-
-@section('eltema')
-<?php use App\Socialhistory; 
+<?php 
+use App\Socialhistory; 
 
 if(!isset($_SESSION)){session_start();}
 ?>
@@ -13,14 +12,14 @@ if(!isset($_SESSION)){session_start();}
 
 
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $identification=(isset($patient->identification))?$patient->identification:"";  ?>
  @else         
            <?php                     
             $patient=new Socialhistory;
             if (!isset($identification)) {$identification="";}
-             $patientActive=false;
             ?>  
 @endif
+
 
 <style type="text/css">
 	table {	font-size: small;
@@ -37,13 +36,14 @@ if(!isset($_SESSION)){session_start();}
 
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
-<form  action="{{url('almacena')}}" method="post">
+<form  id="MySocialHistory" action="javascript:SaveDataNoRefreshView('MySocialHistory','store')" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SocialHistory'>
+	<input type="hidden" name="enlace"  value='history.SocialHistory'>
 	<input type="hidden" name="modelo" id="modelo" value='Socialhistory'>
 
-	<input type="hidden" name="_method" value="get"/>
+	<input type="hidden" name="_method" value="post">
      
 
 
