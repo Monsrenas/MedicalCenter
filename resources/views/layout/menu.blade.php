@@ -1,5 +1,5 @@
 <?php  if(!isset($_SESSION)){session_start();}
-        $_SESSION['user']='44240514037'; 
+        $_SESSION['user']='613675132765'; 
         function PasientAct(){
 
           return (isset($_SESSION['identification']))? $_SESSION['identification']:null;
@@ -44,6 +44,12 @@ nav.navbar ul.nav li a{
 box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
     background: #7190C4;
  }
+
+ .navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
 </style>
 
 
@@ -56,7 +62,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
       <a href="#" style=" color:#43A181; font-size: x-large; ">
         <img src="../images/menu/mainLogo.png" alt="" width="40%" margin="1" style="margin-top: 6px; margin-right: -10px;"><br><strong>Medical Center</strong> </a>
     </div>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav navbar-center">
       <?php
         $i=0; 
         $pAc=PasientAct();
@@ -64,17 +70,22 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
         foreach ($menuItem as $clave => $valor) {
         $info=json_encode($menuItem[$clave]);
         $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
-        echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='80px' margin='1'><br>$clave</a></li>";
+        echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
           $i++;
         }
       ?>
     </ul>
- 
+
+    
     <ul class="nav navbar-nav navbar-right" >
       <li><a><span ></span>USER: Dr Urbino Perez </a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
+        <br><br><br>
+      <div class="col-3 col-md-3  navbar-right" id="right_wind" style="margin-left: 20px; "></div>
+      
   </div>
+    
   <div id="parrafo"></div>
 </nav>
 
@@ -113,17 +124,18 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
         if (elemento[2]) {
 
-            var xdata=elemento[2]+'&url='+elemento[1];
+          var xdata=elemento[2]+'&url='+elemento[1];
+          var accion1="<a  onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var accion2="<a  onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
 
-           $("#left_wind").append( "<a  onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>");
+          $("#left_wind").append((elemento[4])? accion2:accion1 );
         }else{
 
-        $("#left_wind").append( "<a  onclick= 'BuildMenu(\" "+elemento[1] + " \",1)' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
+        $("#left_wind").append( "<a onclick= 'BuildMenu(\" "+elemento[1] + " \",1)' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
         }
   }
 
-function ShoWindow(elemento, ventana, subpage){
-                              
+function ShoWindow(elemento, ventana, subpage){      
                         $frm= "fr"+elemento.trim(); /*nombre del elemento HTML */
                         $frm= $frm.replace('.', '_');
                         
@@ -141,6 +153,22 @@ function ShoWindow(elemento, ventana, subpage){
 
 }
 
+function RefreshWindow(elemento, ventana, subpage){      
+                        $frm= "fr"+elemento.trim(); /*nombre del elemento HTML */
+                        $frm= $frm.replace('.', '_');
+                        
+                        if (ventana=="#center_wind"){$('.contenidoCentro').hide();  
+                              if ( $('#'+$frm).length ) { 
+                                // hacer algo aquí si ya la opcion tiene un div con contenido
+                                $('#'+$frm).html(subpage);
+                                $('#'+$frm).show();
+                              } else {   
+                                    $(ventana).append("<div class='contenidoCentro' id='"+$frm+"'></div>");
+                                    $('#'+$frm).append(subpage);
+                              }
+                        } else { $(ventana).append(subpage);}
+}
+
 function LoadDataInView(elemento, forma,vista) {
     var data=$('#'+forma).serialize();
     var previo="#fr"+elemento.trim()
@@ -149,6 +177,14 @@ function LoadDataInView(elemento, forma,vista) {
         ShoWindow(elemento,"#center_wind",subpage);
     })
 
+}
+
+function RefreshDataInView(ventana, xdata, vista,elemento) {
+    var data=$('#llave').serialize();
+    data=data+xdata;      
+    $.post(vista, data, function(subpage){
+        RefreshWindow(elemento,ventana,subpage);
+    })
 }
 
 function SaveDataNoRefreshView(forma,vista) {
@@ -176,6 +212,15 @@ function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     })
 }
 
+function RtnValor(id, putIN){
+  var data=$('#llave').serialize();
+  data=data+'&noview=abc&modelo=Patient&_method=get&identification='+id;
+
+  $.post('find', data, function(valor){
+        $('#'+putIN).html(valor.name); 
+    }) 
+}
+
 function elimina(forma, linea) {
   var data=$('#'+forma).serialize();
   a=confirm('You want to erase patient information '+forma); 
@@ -195,7 +240,8 @@ function cambiaPaciente(forma)
     $.post('patientcng', data, function(subpage){  
                                   PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); 
                                   Pacienteactivo="<?php echo (isset($_SESSION['identification']))? $_SESSION['identification']:''; ?>";
-                                  $(".dependen").attr("class", "dependen");
+                                  NewPreLoadDataInView('#center_wind', '&modelo=Patient&url=patient_info', 'find','patient_info');
+                                  $(".dependen").attr("class", "dependen"); /*activa menu*/
                                 }
     );
 }
@@ -227,6 +273,8 @@ function CargaConsulta(ventana, xdata, control){
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}
+
+
 </script>
 
 
@@ -234,6 +282,16 @@ function CargaConsulta(ventana, xdata, control){
    74
   32*/
 
+
+function LoadDataInView(elemento, forma,vista) {
+    var data=$('#'+forma).serialize();
+    var previo="#fr"+elemento.trim()
+    if ($(previo).length) {$(previo).remove()}
+    $.post(vista, data, function(subpage){
+        ShoWindow(elemento,"#center_wind",subpage);
+    })
+
+}
 
                   /*
                     $('#enlace').val(elemento);

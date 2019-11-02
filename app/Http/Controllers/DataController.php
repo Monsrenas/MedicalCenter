@@ -14,6 +14,7 @@ use App\Socialhistory;
 use App\Familyhistory;
 use App\Surgicalhistory;
 use App\Sustanceuse;
+use App\Physiciansnote;
 
 if(!isset($_SESSION)){
     session_start();
@@ -36,6 +37,7 @@ class DataController extends Controller
           case 'Familyhistory': return $tmodelo= new Familyhistory; break;
           case 'Surgicalhistory': return $tmodelo= new Surgicalhistory; break;
           case 'Sustanceuse': return $tmodelo= new Sustanceuse; break; 
+          case 'Physiciansnote': return $tmodelo= new Physiciansnote; break; 
              
         }
     }
@@ -99,6 +101,7 @@ class DataController extends Controller
         if ($request->findit<>''){
                 $patient = Patient::where('identification', 'like', "%{$request->findit}%")->
                                           orWhere('id', 'like', "%{$request->findit}%")->
+                                          orWhere('name', 'like', "%{$request->findit}%")->
                                           orWhere('surname', 'like', "%{$request->findit}%")->get();
                                  } else { $patient = Patient::orderBy('surname', 'asc')->get();}
 
@@ -165,12 +168,17 @@ class DataController extends Controller
     }
 
     public function busca(Request $request) 
-    {  
-    	$view=$this->indexView($request);
+    { 
+      if (!$request->noview){ $view=$this->indexView($request);} 
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
+
+
+      if ($request->noview){return $result;}
       return $view->with('patient',$result); 
     }
+
+
 
     public function borra(Request $request) 
     {   

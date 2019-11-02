@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('layout.main');
 });
 
-Route::get('/prueba', function () {
-    return view('history.SocialHistory');
+Route::get('/pruebax', function () {
+    return view('history.PhysiciansNote');
 });
 
 Route::get('edit', function () {return view('edit_patient');});
@@ -31,3 +31,4 @@ Route::post('store', 'DataController@almacena');
 Route::post('IDstore', 'DataController@IDstore');
 Route::post('delete', 'DataController@borra');
 Route::get('patientcng', 'DataController@ChangePatient');
+

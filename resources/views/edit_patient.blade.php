@@ -36,9 +36,12 @@
                  margin-right: 40px;
                  margin-left: 0px;
                 }
+
+         input { background: #AFC4E8; }
+         select { background: #AFC4E8; }
     </style>
 
-    <div class="row edicion">
+    <div class="row edicion" style="background: #6D8DC4; margin: 0 auto; ">
         
         <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient" style="text-align: left;">
     
@@ -61,7 +64,7 @@
                 </div>
             </form>      
             <br>
-            <form  action="javascript:SaveDataNoRefreshView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data">
+            <form  action="javascript:SaveDataNoRefreshView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data" autocomplete="off">
             @csrf
                 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />

@@ -3,7 +3,7 @@
 <?php 
 
 $menuItem = [
-  'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list'],['New','edit_patient']],
+  'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list','*'],['New','edit_patient']],
   'History' => [['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
   				['Current Medication','history.CurrentMedication','&modelo=Currentmedication&_method=get&findit=','find'],
   				['Social History','history.SocialHistory','&modelo=Socialhistory&_method=get&findit=','find'],
@@ -14,7 +14,7 @@ $menuItem = [
   				['Physicians Note','www.monsrenas.com']			],
   'Admission' => ['consultation.Load','consultation'],        
   'Consultation' => ['consultation.Load','consultation'],
-  'Notes' => ['','Notas medicas por especialidades'],
+  'Notes' => [['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
   'Reports' => ['History','Service by dates','Exams'],
   'Appointment' => [['Listado','link'],['Nueva','Form']],

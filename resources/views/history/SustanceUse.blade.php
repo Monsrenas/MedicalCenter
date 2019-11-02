@@ -82,13 +82,6 @@ Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasol
         @endfor
 	</table>
 
-	<div class="form-group">
-	    <strong>URINE DIPSTICK:</strong>
-	    <input type="text" name="urine" value="{{$patient->urine}}" class="form-inline" maxlength="60" size="60">
-	    <strong>GMR:</strong>
-	    <input type="text" name="gmr" value="{{$patient->gmr}}" class="form-inline">
-	</div>
-
 	<div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-top: 12px;">
        	<button type="submit" class="btn btn-primary glyphicon glyphicon-floppy-save"> Save</button>
     </div>

@@ -51,7 +51,7 @@
     <input type="hidden" name="_method" value="post">
 
 	<div class="form-group">
-	    <strong>Admission note:</strong><br>
+	    <strong>Note:</strong><br>
 	    <textarea rows = "5" cols = "100%" name = "adm">
 	           {{$patient->adm}} 
 	    </textarea>
