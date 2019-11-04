@@ -1,34 +1,24 @@
-
-
-<?php use App\Interrogation; 
-	
+<?php 	
 	if(!isset($_SESSION)){ session_start(); }
-	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
+	$user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
-	
 ?>
 
  @if (isset($patient))
-           <?php $patient=$patient[0];
+           <?php $patient=(isset($patient[0]))? $patient[0]:$patient;
            	if($patient->identification) {$identification=$patient->identification;} else {
            	$identification=(isset($_SESSION['identification']))? $_SESSION['identification']:"";}
            	
            	$id=(isset($patient->id))? $patient->id : str_replace(" ", "",$hoy.$identification.$user);
            ?>
  @else         
-           <?php                     
-            $patient=new Interrogation;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>  
-	@if (isset($_SESSION['identification']))
-	           <?php 
-	           		$identification=($_SESSION['identification']);  
-	           		$id=str_replace(" ", "",$hoy.$identification.$user);
-				?>
-	@endif
-
-
+           <?php  if (!isset($identification)) {$identification="";} ?>  
+		   
+		   @if (!(isset($_SESSION['identification'])))    <?php return; ?>@endif
+		   
+		   <?php $identification=($_SESSION['identification']);  
+	           	 $id=str_replace(" ", "",$hoy.$identification.$user);
+			?>
 @endif
 
 <style type="text/css">
@@ -39,7 +29,9 @@
 							background: #AFC4E8;
 	}
 </style>
+
 <div style="padding: 1%;   align: center;  ">
+	
 <form  action="javascript:SaveDataNoRefreshView('MyInterrogation','IDstore')" method="post" style="width: 100%; text-align: center;" id="MyInterrogation">
 	@csrf
 	<input type="hidden" name="id" id="id" placeholder="Interrogation Id" value='{{ $id }}'>

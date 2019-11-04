@@ -1,5 +1,7 @@
-<?php  if(!isset($_SESSION)){session_start();}
-        $_SESSION['user']='613675132765'; 
+<?php  if(!isset($_SESSION)){ session_start(); }
+        $_SESSION['dr_user']='44240514037'; 
+        $_SESSION['dr_user']='613675132765';
+
         function PasientAct(){
 
           return (isset($_SESSION['identification']))? $_SESSION['identification']:null;
@@ -52,7 +54,6 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 }
 </style>
 
-
 <?php include(app_path().'/Includes/menu_data.php');?>
 
 
@@ -94,6 +95,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
   <input type="hidden" name="_method" value="GET">
   <input type="hidden" id="enlace" name="enlace" value="">
 </form> 
+
 
 <script type="text/javascript">
 
@@ -248,8 +250,8 @@ function cambiaPaciente(forma)
 
 /* Util para ventanas que cargan datos automaticamente*/
 function CrearVista(ventana, vista) {
-    $('#enlace').val(vista);
     var data=$('#llave').serialize();
+    data=data+'&url='+vista;
     $.post('renderView', data, function(subpage){                             
                                                   $(ventana).empty().append(subpage);
                                                 }
@@ -260,8 +262,8 @@ function AbreConsulta(ventana, vista){
    
   /*$('#botonNewconsulta').empty();*/
   CrearVista(ventana, vista);
-  CrearVista('#Physical', 'consultation.PhysicalExamination');
-  CrearVista('#Laboratory', 'consultation.Exams');
+  /*CrearVista('#Physical', 'consultation.PhysicalExamination');
+  CrearVista('#Laboratory', 'consultation.Exams');*/
 }
 
 

@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('layout.main');
 });
 
-Route::get('/pruebax', function () {
-    return view('history.PhysiciansNote');
+Route::get('/prueba', function () {
+    return view('consultation.interrogation');
 });
 
 Route::get('edit', function () {return view('edit_patient');});

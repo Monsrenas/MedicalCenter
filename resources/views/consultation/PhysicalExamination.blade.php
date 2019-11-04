@@ -1,6 +1,6 @@
 <?php use App\Physical; 
 	if(!isset($_SESSION)){ session_start(); }
-	$user=(isset($_SESSION['user']))?$_SESSION['user'] : "";
+	$user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
 ?>
 

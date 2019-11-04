@@ -43,7 +43,7 @@ class DataController extends Controller
     }
 
      public function indexView(Request $request){
-	        $view = View::make($request->url); 
+     	    $view = View::make($request->url); 
 	        if($request->ajax()){
 	            return $view; 
 	        }else return $view;
@@ -122,7 +122,7 @@ class DataController extends Controller
         $ert=strval($request->findit);
         
         if ($ert<>''){
-                $patient = ($classdata)::where('id', '=', "{$request->findit}")->
+                $patient = ($classdata)::where('id', 'like', "%{$request->findit}%")->
                                           orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
 
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->get(); }
