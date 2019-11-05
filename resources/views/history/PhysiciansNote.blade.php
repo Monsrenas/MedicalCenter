@@ -1,14 +1,10 @@
-<?php $identification=''; ?>
-
-<?php use App\Physiciansnote; ?>
+<?php $identification=''; 
+      $id='';
+?>
 
  @if (isset($patient))
-           <?php $identification="000";  ?>
- @else         
-           <?php                     
-            $patient[]=new Physiciansnote;
-            if (!isset($identification)) {$identification="";}
-            ?>  
+           <?php $identification=(isset($patient->identification))?$patient->identification:'';
+                 $id=(isset($patient->id))?$patient->id:'';  ?>
 @endif
 
 <style type="text/css">
@@ -51,6 +47,7 @@
    @foreach($patient as $patmt)
                           <?php 
                               $idt=$patmt->identification;
+                              $idN=$patmt->id;
                               $i=$i+1; ?>
                               
                              <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 60px;" id="linea{{$idt}}">
@@ -82,15 +79,21 @@
 
                                   @if (100>1)
                                   <div class="form-inline" style="float: right; margin-right: 10px;">
-                                    <form class="form-inline" id='edl{{$idt}}' action="javascript:LoadDataInView('edit_patient','edl{{$idt}}','find')">
-                                      @csrf
-                                        <input type="hidden" name="modelo" id="modelo" value="Patient" />
-                                        <input type="hidden" name="url" id="url" value="edit_patient" />
-                                        <input type="hidden" name="_method" value="get">
-                                        <input type="hidden" name="identification" value='{{$idt}}'> 
-
+                                    <?php $xdata='&modelo=Physiciansnote&url=history.Edit_note&method=get&findit='.$idN; ?>
+                                    <form class="form-inline" id='edl{{$idN}}' action="javascript:RefreshDataInView('#center_wind','{{$xdata}}','findbyId','history.Edit_note')">
                                       <button type="submit" class="btn btn-default glyphicon glyphicon-pencil mio"></button>
                                     </form>
+                                    <!--
+                                    <form class="form-inline" id='edl{{$idN}}' action="javascript:RefreshDataInView('history.Edit_note','edl{{$idN}}','findbyId')">
+
+                                      @csrf
+                                        <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />
+                                        <input type="hidden" name="url" id="url" value="history.Edit_note" />
+                                        <input type="hidden" name="_method" value="get">
+                                        <input type="hidden" name="findit" value='{{$idN}}'>
+                                        <input type="hidden" name="identification" value=''>
+                                      <button type="submit" class="btn btn-default glyphicon glyphicon-pencil mio"></button>
+                                    </form>-->
                                   </div>
                                   @endif 
                             </a>
@@ -112,6 +115,8 @@
         <p id="parr1" style="text-align: justify;"> </p>
         <strong>Treatment</strong>
         <p id="parr2" style="text-align: justify;"> </p>
+        <strong>Medication</strong>
+        <p id="parr3" style="text-align: justify;"> </p>
 
      </div>
     </div>
@@ -127,9 +132,18 @@
       $('#parr1').html(reg.evolution);
       $('#parr2').html(reg.treatment);
 
+      $mdcn="<br><table><tr><th scope='row' WIDTH='250'>Drug</th><th WIDTH='100'>Dose</th><th>Frequency</th></tr>";
+      for (var i =0 ; i <= reg.drug.length - 1; i++) {
+        $mdcn=$mdcn+ '<tr>';
+        $mdcn=$mdcn+'<td>'+String(reg.drug[i][0])+'</td>'+'<td>'+String(reg.drug[i][1])+'</td>'+'<td>'+String(reg.drug[i][2])+'</td>';
+        $mdcn=$mdcn+'</tr>';
+      }
+      $mdcn=$mdcn+'</table>';
+      $('#parr3').html($mdcn);
     }
 
 
 </script>
+
 
 

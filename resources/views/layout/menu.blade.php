@@ -1,6 +1,6 @@
 <?php  if(!isset($_SESSION)){ session_start(); }
         $_SESSION['dr_user']='44240514037'; 
-        $_SESSION['dr_user']='613675132765';
+       /* $_SESSION['dr_user']='613675132765';*/
 
         function PasientAct(){
 
@@ -93,7 +93,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 <form  id="llave" action="{{url('renderView')}}" method="get" >
   @csrf
   <input type="hidden" name="_method" value="GET">
-  <input type="hidden" id="enlace" name="enlace" value="">
+  <input type="hidden" id="enlace" name="url" value="">
 </form> 
 
 
@@ -117,7 +117,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
                                                         if ($(previo).length) {$(previo).remove()}
                                                       }
                     $ventana=((indice=="0") ? "#left_wind":"#center_wind");                                  
-                    NewPreLoadDataInView($ventana,'&enlace='+elemento, 'renderView', elemento)   
+                    NewPreLoadDataInView($ventana,'&url='+elemento, 'renderView', elemento)   
                   }
   }
 
@@ -175,6 +175,7 @@ function LoadDataInView(elemento, forma,vista) {
     var data=$('#'+forma).serialize();
     var previo="#fr"+elemento.trim()
     if ($(previo).length) {$(previo).remove()}
+
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,"#center_wind",subpage);
     })
@@ -252,7 +253,7 @@ function cambiaPaciente(forma)
 function CrearVista(ventana, vista) {
     var data=$('#llave').serialize();
     data=data+'&url='+vista;
-    $.post('renderView', data, function(subpage){                             
+    $.post('renderView', data, function(subpage){                           
                                                   $(ventana).empty().append(subpage);
                                                 }
     );  
@@ -262,15 +263,14 @@ function AbreConsulta(ventana, vista){
    
   /*$('#botonNewconsulta').empty();*/
   CrearVista(ventana, vista);
-  /*CrearVista('#Physical', 'consultation.PhysicalExamination');
-  CrearVista('#Laboratory', 'consultation.Exams');*/
+  CrearVista('#Physical', 'consultation.PhysicalExamination');
+  CrearVista('#Laboratory', 'consultation.Exams');
 }
 
 
 function CargaConsulta(ventana, xdata, control){ 
   PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'findbyId');
   PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'findbyId');
-   
   PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
 }
 

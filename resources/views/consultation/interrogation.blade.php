@@ -43,21 +43,15 @@
     <input type="hidden" name="_method" value="post">
 
 	<div class="form-group">
-	    <strong>Note:</strong><br>
-	    <textarea rows = "5" cols = "100%" name = "adm">
-	           {{$patient->adm}} 
-	    </textarea>
-	</div>
-	<div class="form-group">
 	    <strong>Chief complaint (CC):</strong><br>
 	   <textarea rows = "5" cols = "100%" name = "cc">
-	           {{$patient->cc}} 
+	           <?php  echo (isset($patient->cc)?$patient->cc:''); ?> 
 	    </textarea>
 	</div>
 	<div class="form-group">
 		<strong>History of the present illness(HPI):</strong><br>
 		<textarea rows = "5" cols = "100%" name = "hpi">
-	           {{$patient->hpi}} 
+	          <?php  echo (isset($patient->hpi)?$patient->hpi:''); ?> 
 	    </textarea>
 	    </div>
 

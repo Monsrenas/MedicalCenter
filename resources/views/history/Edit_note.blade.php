@@ -2,12 +2,20 @@
     
     if(!isset($_SESSION)){ session_start(); }
     $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
-    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
-    
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);    
 ?>
 
  @if (isset($patient))
-           <?php $patient=$patient[0];
+           <?php 
+            
+            $abcd=json_decode($patient);
+
+            $patient=new Physiciansnote;  
+            
+           foreach ($abcd as $clave => $valor) {
+                if (isset($abcd->{$clave})) {$patient->{$clave}=$abcd->{$clave};}
+                }
+
             if($patient->identification) {$identification=$patient->identification;} else {
             $identification=(isset($_SESSION['identification']))? $_SESSION['identification']:"";}
             
@@ -119,9 +127,14 @@
     		@endforeach
     @endif
 
-    @if (isset($patient->drugname))
-    	@for ($i = 0; $i < count($patient->drugname); $i++)
-    		<script> addMedition('{{ $patient->drugname[$i] }}','{{ $patient->dose[$i] }}' ,' {{ $patient->time[$i] }} '); </script>
+    @if (isset($patient->drug))
+    	@for ($i = 0; $i < count($patient->drug); $i++)
+            <?php 
+              $col[0]=isset($patient->drug[$i][0])?$patient->drug[$i][0]:'';
+              $col[1]=isset($patient->drug[$i][1])?$patient->drug[$i][1]:'';
+              $col[2]=isset($patient->drug[$i][2])?$patient->drug[$i][2]:'';
+             ?>
+    		<script> addMedition('{{ $col[0] }}','{{$col[1] }}' ,' {{ $col[2] }} '); </script>
 		@endfor
     @endif 
 </div>
