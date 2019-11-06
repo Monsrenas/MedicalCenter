@@ -92,7 +92,7 @@ use App\Exams;
 	function addMedition($title, $Descrptn, $image){ 
         $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 350px;'>";
         $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 310px;'>";
-		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"img"+$xmed+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'></span> Add image</a>";
+		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"img"+$xmed+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'>7</span> Add image</a>";
         $bottDel="<a href='javascript:delelm(\"exams"+$xmed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>";
 		$others="<div id=\"exams"+$xmed+"\">"+$titlet+$descrt+$imgdrv+$bottDel+"</div>";
 		

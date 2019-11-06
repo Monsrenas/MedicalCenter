@@ -14,7 +14,7 @@ $menuItem = [
   				['Physicians Note','www.monsrenas.com']			],
   'Admission' => ['consultation.Load','consultation'],        
   'Consultation' => ['consultation.Load','consultation'],
-  'Notes' => [['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
+  'Notes' => [['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*'],'history.Load_list_note'],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
   'Reports' => ['History','Service by dates','Exams'],
   'Appointment' => [['Listado','link'],['Nueva','Form']],

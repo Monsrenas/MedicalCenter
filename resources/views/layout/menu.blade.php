@@ -125,10 +125,10 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
     function AddMenuItem(elemento, indice){
 
         if (elemento[2]) {
-
+          $btnID='btn'+elemento[1].replace('.', '_');
           var xdata=elemento[2]+'&url='+elemento[1];
-          var accion1="<a  onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
-          var accion2="<a  onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var accion1="<a id='"+$btnID+"' onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var accion2="<a id='"+$btnID+"' onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
 
           $("#left_wind").append((elemento[4])? accion2:accion1 );
         }else{
@@ -185,6 +185,7 @@ function LoadDataInView(elemento, forma,vista) {
 function RefreshDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;      
+    
     $.post(vista, data, function(subpage){
         RefreshWindow(elemento,ventana,subpage);
     })
@@ -200,6 +201,7 @@ function SaveDataNoRefreshView(forma,vista) {
 function PreLoadDataInView(ventana, xdata, vista) { 
     var data=$('#llave').serialize();
     data=data+xdata;  
+
     $.post(vista, data, function(subpage){ 
         $(ventana).empty().append(subpage); 
     })  .fail(function() {
