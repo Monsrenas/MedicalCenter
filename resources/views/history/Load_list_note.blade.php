@@ -10,7 +10,6 @@ if(!isset($_SESSION)){ session_start(); }
  	
 ?>
 <script type="text/javascript">
-
  RefreshDataInView('#center_wind', '&modelo=Physiciansnote&url=history.PhysiciansNote&_method=get&findit={{$busca}}', 'flexlist','history.PhysiciansNote');
  
  $("#btnhistory_PhysiciansNote").attr("onclick","RefreshDataInView('#center_wind', '&modelo=Physiciansnote&url=history.PhysiciansNote&_method=get&findit={{$busca}}', 'flexlist','history.PhysiciansNote')");

@@ -1,7 +1,16 @@
 
 /*Estructura de todas las opciones del sistema.. System option structure */
 <?php 
+ function DocID(){ 
+    if(!isset($_SESSION)){ session_start();}
+    $identification=(isset($_SESSION['identification']))?$_SESSION['dr_user'] : "";
+    $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    $id=str_replace(" ", "",$hoy.$identification.$user);
+    return $id;
+    }
 
+    $abx=DocID();
 $menuItem = [
   'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list','*'],['New','edit_patient']],
   'History' => [['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
@@ -14,7 +23,7 @@ $menuItem = [
   				['Physicians Note','www.monsrenas.com']			],
   'Admission' => ['consultation.Load','consultation'],        
   'Consultation' => ['consultation.Load','consultation'],
-  'Notes' => [['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*'],'history.Load_list_note'],
+  'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
   'Reports' => ['History','Service by dates','Exams'],
   'Appointment' => [['Listado','link'],['Nueva','Form']],
