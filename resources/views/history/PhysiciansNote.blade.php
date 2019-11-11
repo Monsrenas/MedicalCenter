@@ -22,7 +22,7 @@
                  margin-left: 0px;
                 }
         .mio { width: 35px; height: 35px; background: #7190C6; border: none;}
-        .blnc {font-size: large; float:left; color: #3149D5;}
+        .blnc {font-size: large; float:left; color: white;}
         .colTx { float:left;
                 font-size: xx-small; 
                 max-height: 35px;
@@ -36,11 +36,13 @@
   @csrf 
             
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
-                              <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:#3149D5; border-width:2px; position: fixed; z-index: 1;">
+                              <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px; position: fixed; z-index: 1;">
                                   <div class="form-inline blnc" style="width: 10%;">Date</div>
-                                  <div class="form-inline blnc" style="width: 40%;">Evolution</div> 
-                                  <div class="form-inline blnc" style="width: 20%">Treatment</div>
-                                  <div class="form-inline blnc" style="width: 10%">Medication</div>
+                                  <div class="form-inline blnc" style="width: 18%;">Subjective</div>
+                                  <div class="form-inline blnc" style="width: 18%;">Evolution</div> 
+                                  <div class="form-inline blnc" style="width: 18%">Assessment</div>
+                                  <div class="form-inline blnc" style="width: 18%;">Treatment</div>
+                                  <div class="form-inline blnc" style="width: 5%">Medication</div>
                                  
                               </div>  <br><br>    
   <?php $i=0; ?>
@@ -52,9 +54,11 @@
                               
                              <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 60px;" id="linea{{$idt}}">
                                   <div class="form-inline colTx" style="width: 10%; color: white; font-size: small;">{{substr($patmt->created_at,0,10)}}</div>
-                                  <div class="form-inline colTx" style="width:40%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div> 
-                                  <div class="form-inline colTx" style="width:20%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
-                                  <div class="form-inline colTx" style="width:10%;">
+                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
+                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div>
+                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->assessment)?$patmt->assessment:''); ?></div>  
+                                  <div class="form-inline colTx" style="width:18%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
+                                  <div class="form-inline colTx" style="width:5%;">
                                     <?php
                                       $ldrug=isset($patmt->drug)?$patmt->drug:null;
                                       for ($i = 0; $i < count($ldrug); $i++) { 
@@ -111,12 +115,13 @@
         <h4 class="modal-title" id="cabecera"></h4>
       </div>
      <div style="padding: 2em;">
-        <strong>Evolution</strong>
         <p id="parr1" style="text-align: justify;"> </p>
-        <strong>Treatment</strong>
         <p id="parr2" style="text-align: justify;"> </p>
-        <strong>Medication</strong>
         <p id="parr3" style="text-align: justify;"> </p>
+        <p id="parr4" style="text-align: justify;"> </p>
+
+        <strong>Medication</strong>
+        <p id="parr5" style="text-align: justify;"> </p>
 
      </div>
     </div>
@@ -126,11 +131,15 @@
 <script type="text/javascript">
     function ShowNote (reg){
       $('#qwerty').modal('show');
-
+      $fecha=reg.created_at.substr(0,10);
+    
       $a=RtnValor(reg.identification,'cabecera');
-      $('#cabecera').html(reg.created_at.substring(0,10)+'    '+$a);
-      $('#parr1').html(reg.evolution);
-      $('#parr2').html(reg.treatment);
+
+      $('#cabecera').html($fecha+'    ');
+      if (reg.subjective) {$('#parr1').html("<strong>S: </strong>"+reg.subjective);}
+      if (reg.evolution) {$('#parr2').html("<strong>O: </strong>"+reg.evolution);}
+      if (reg.assessment) {$('#parr3').html("<strong>A: </strong>"+reg.assessment);}
+      if (reg.treatment) {$('#parr4').html("<strong>P: </strong>"+reg.treatment);}
 
       $mdcn="<br><table><tr><th scope='row' WIDTH='250'>Drug</th><th WIDTH='100'>Dose</th><th>Frequency</th></tr>";
       for (var i =0 ; i <= reg.drug.length - 1; i++) {
@@ -139,7 +148,7 @@
         $mdcn=$mdcn+'</tr>';
       }
       $mdcn=$mdcn+'</table>';
-      $('#parr3').html($mdcn);
+      $('#parr5').html($mdcn);
     }
 
 

@@ -281,17 +281,4 @@
         iniSelect("myrelation",srelation);
         iniSelect("marital",marital);
         iniSelect("myblood",bloodtype);
-
-        if(document.forms[1].length > 0) {
-                                        
-                                        if(document.forms[0].elements.length > 0) {
-                                                                                    document.forms[0].elements[1].focus();
-                                                                                  }
-                                        for (i = 3; i < document.forms[1].elements.length; i++) {
-                                                                               
-                                                                            document.forms[1].elements[i].disabled =false; 
-                                                                           
-                                                                         };
-                                       }
-
 </script>

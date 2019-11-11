@@ -10,7 +10,7 @@
     return $id;
     }
 
-    $abx=DocID();
+    
 $menuItem = [
   'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list','*'],['New','edit_patient']],
   'History' => [['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],

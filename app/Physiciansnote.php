@@ -12,8 +12,17 @@ class Physiciansnote extends Eloquent
     
     protected $fillable = [	'id',
 							'identification', 
+							'subjective',
 							'evolution',
+							'assessment',
 							'treatment',
 							'drug'
     ];
 }
+
+
+/* 
+		evolution = O: Objetive  
+		treatment = P: Plan
+
+*/

@@ -26,7 +26,7 @@
                  margin-left: 0px;
                 }
         .mio { width: 35px; height: 35px; background: #7190C6; border: none;}
-        .blnc {font-size: large; float:left; color: #3149D5;}
+        .blnc {font-size: large; float:left; color: white;}
     </style>
 <div class="row" style="margin: 0px auto;">
   @csrf 
@@ -46,7 +46,7 @@
         </div>
             
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
-                              <div style="width: 100%; height: 30px; margin-top: 10px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:#3149D5; border-width:2px;">
+                              <div style="width: 100%; height: 30px; margin-top: 10px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px;">
                               
                                   <div class="form-inline blnc" style="width:160px;">Identification</div> 
                                   <div class="form-inline blnc" style="">Surname,  Name</div>

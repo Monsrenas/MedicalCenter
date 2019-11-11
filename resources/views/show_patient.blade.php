@@ -35,10 +35,10 @@
 
 <div class="dropdown" style="margin-left: -6px;">
   <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #3149D5; color: #AFC4E8;">
-    <strong>Patient Information</strong> <br>
-    {{$patient->name}} {{$patient->surname}}
+    <strong>Patient Information</strong>
+    {{$patient->name}}  {{$patient->surname}}
   </button>
-<div class="dropdown-menu verde" aria-labelledby="dropdownMenuButton" style="margin-left: -100px; max-width: 145%;">
+<div class="dropdown-menu verde" aria-labelledby="dropdownMenuButton" style="max-width: 145%;">
 
 
      <form  action="javascript:LoadDataInView('formacompleta','find')" method="get" id="formacompleta" name="formacompleta" enctype="multipart/form-data">

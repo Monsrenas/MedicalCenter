@@ -140,10 +140,11 @@ class DataController extends Controller
         $classdata=$this->modelo($request->modelo);
 
         $ert=strval($request->findit); 
+
         if ($ert<>''){
                 $patient = ($classdata)::where('id', '=', "{$request->findit}")->
                                           orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->first();
-
+                                  
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->first(); }
 
         if (is_null($patient)) {$abcd='{"id": "'.$request->id.'","identification": "'.$request->identification.'"}'; }

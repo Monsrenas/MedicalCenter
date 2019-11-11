@@ -59,10 +59,11 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
 <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;" role="navigation">
   <div class="container-fluid">
-    <div class="navbar-header" style="text-align: center; padding-right: 20px; background: #94AED4; margin-top: 6px;">
+    <div class="navbar-header" style="text-align: center; padding-right: 20px; margin-top: 3px;margin-bottom: 6px; float: left;">
       <a href="#" style=" color:#43A181; font-size: x-large; ">
-        <img src="../images/menu/mainLogo.png" alt="" width="40%" margin="1" style="margin-top: 6px; margin-right: -10px;"><br><strong>Medical Center</strong> </a>
+        <img src="../images/menu/MedicalCenterlogo.png" alt="" width="100%" margin="1" style="margin-top: 6px; margin-right: -10px;"><br><strong></strong> </a>
     </div>
+    <div style="float: none; ">
     <ul class="nav navbar-nav navbar-center">
       <?php
         $i=0; 
@@ -82,9 +83,8 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
       <li><a><span ></span>USER: Dr Urbino Perez </a></li>
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
-        <br><br><br>
-      <div class="col-3 col-md-3  navbar-right" id="right_wind" style="margin-left: 20px; "></div>
-      
+    <ul><div class="" id="right_wind" style="margin-left: 1px; width: 65%; float: left; margin-top: 80px; margin-left:75px"></div></ul>   
+    </div>
   </div>
     
   <div id="parrafo"></div>
@@ -123,9 +123,8 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
 
     function AddMenuItem(elemento, indice){
-
+        $btnID='btn'+elemento[1].replace('.', '_');
         if (elemento[2]) {
-          $btnID='btn'+elemento[1].replace('.', '_');
           var xdata=elemento[2]+'&url='+elemento[1];
           var accion1="<a id='"+$btnID+"' onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
           var accion2="<a id='"+$btnID+"' onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
@@ -133,7 +132,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
           $("#left_wind").append((elemento[4])? accion2:accion1 );
         }else{
 
-        $("#left_wind").append( "<a onclick= 'BuildMenu(\" "+elemento[1] + " \",1)' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
+        $("#left_wind").append( "<a id='"+$btnID+"' onclick= 'BuildMenu(\" "+elemento[1]+" \",1)' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
         }
   }
 

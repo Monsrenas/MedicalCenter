@@ -39,13 +39,14 @@
 
 @endif
 
-
 <style type="text/css">
     table { font-size: small;
              
             width: 100%;
             border-width:0px; border-style:none;  
           }
+
+     .soap {width: 100%; background:#6888C0; padding: 10px;}     
 </style>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
@@ -58,25 +59,39 @@
     
     <input type="hidden" name="_method" value="post">
      <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />
+    
+    <a href="javascript:showElement('subjective')" class="btn btn-default btn-block"><span  aria-hidden="true"></span> <strong>S: Subjective:</strong></a>   
+    <div id="divsubjective" class="form-group soap" <?php echo($patient->subjective)?'':"hidden='true'";?> >
+        <textarea rows = "5" cols = "100%" name = "subjective">
+               {{$patient->subjective}} 
+        </textarea>
+    </div>
 
-	<div class="form-group">
-        <strong>Evolution:</strong><br>
+    <a href="javascript:showElement('evolution')" class="btn btn-default btn-block"><span aria-hidden="true"></span><strong>O: Objective:</strong></a> 
+	<div id="divevolution" class="form-group soap" <?php echo($patient->evolution)?'':"hidden='true'";?> >
         <textarea rows = "5" cols = "100%" name = "evolution">
                {{$patient->evolution}} 
         </textarea>
     </div>
-    <div class="form-group">
-        <strong>Treatment</strong><br>
+
+    <a href="javascript:showElement('assessment')" class="btn btn-default btn-block"><span  aria-hidden="true"></span><strong>A: Assessment:</strong></a> 
+    <div id="divassessment" class="form-group soap" <?php echo($patient->assessment)?'':"hidden='true'";?>>
+        <textarea rows = "5" cols = "100%" name = "assessment">
+               {{$patient->assessment}} 
+        </textarea>
+    </div>
+
+    <a href="javascript:showElement('treatment')" class="btn btn-default btn-block"><span  aria-hidden="true"></span><strong>P: Plan</strong></a>
+    <div id="divtreatment" class="form-group soap" <?php echo($patient->treatment)?'':"hidden='true'";?>>
        <textarea rows = "5" cols = "100%" name = "treatment">
                {{$patient->treatment}} 
         </textarea>
     </div>
 
-	<div class="form-group">
+	<div class="form-group" style="padding-top: 20px;">
         <strong>Medical prescription</strong>
         <br>
-        <br>
-        <br>
+       <!-- 
         <table >
         	<tr>
         		<td style="width: 450px;">
@@ -90,10 +105,15 @@
 		         </td>
 		         <td></td>
 		     </tr>
-        </table>
+        </table>  --->
 
+        <div style="background: #AFC4E8;">
+           <div style="float: left; width: 49%; color: white;"><strong>Drug</strong></div> 
+           <div style="float: left; width: 16%; color: white;"><strong>Dose</strong></div>
+           <div style="float: left; width: 16%; color: white;"><strong>Frequency</strong></div>
+        </div>
 
-        <div id="PTNmedications"></div>
+        <div id="PTNmedications" style="background: #6888C0;"></div>
     </div>
     <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Medication</a>
     
@@ -109,6 +129,10 @@
         $('#'+$xeme).remove();
         
         }
+
+    function showElement($eName){
+        $('#div'+$eName).toggle();
+    }
 
 	function addMedition($vDrug, $vDose, $vtime){ 
 				
