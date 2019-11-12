@@ -21,7 +21,7 @@ $menuItem = [
   				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
   				['Physical Examination','consultation.PhysicalExamination'],
   				['Physicians Note','www.monsrenas.com']			],
-  'Admission' => ['consultation.Load','consultation'],        
+  'Admission' => [['Admission','admission']],        
   'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Exams' => ['Lista de examenes por fecha','Detalles'],

@@ -2,7 +2,8 @@
     
     if(!isset($_SESSION)){ session_start(); }
     $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
-    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);    
+    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    if ((!isset($_SESSION['identification']))or(!isset($_SESSION['dr_user']))) { return ;}    
 ?>
 
  @if (isset($patient))
@@ -21,23 +22,15 @@
             
             $id=(isset($patient->id))? $patient->id : str_replace(" ", "",$hoy.$identification.$user);
            ?>
- @else         
+   @else         
            <?php                     
             $patient=new Physiciansnote;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>  
-    @if (isset($_SESSION['identification']))
-               <?php 
-                    $identification=($_SESSION['identification']);  
-                    $id=str_replace(" ", "",$hoy.$identification.$user);
-                ?>
-    @else
-        <?php return; ?>
-    @endif
-
-
-@endif
+           ?>
+  @endif
+  <?php 
+    $identification=(!($identification))?$_SESSION['identification']:$identification;  
+    $id=(!($id))?str_replace(" ", "",$hoy.$identification.$user):$id;
+  ?> 
 
 <style type="text/css">
     table { font-size: small;

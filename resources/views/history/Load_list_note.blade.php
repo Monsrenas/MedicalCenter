@@ -7,7 +7,7 @@ if(!isset($_SESSION)){ session_start(); }
 	                                                 )?$_SESSION['identification'].$_SESSION['dr_user']: "";
 	$hoy=date("Y-m-d");  $actual=str_replace("-", "", $hoy);
 	$actual=$actual.$busca;
-	if ((!isset($_SESSION['identification']))or(!isset($_SESSION['dr_user']))) { return ;}
+	if ((!($_SESSION['identification']))or(!($_SESSION['dr_user']))) { return ;}
  	
 ?>
 <script type="text/javascript">

@@ -26,8 +26,6 @@ class Patient extends Eloquent
 							'email',
 							'nxOfKin',
 							'relation', 
-							'contact',];    
-
-
-
+							'contact',
+							'status',];    
 						}
