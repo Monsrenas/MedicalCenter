@@ -192,7 +192,7 @@ function RefreshDataInView(ventana, xdata, vista,elemento) {
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
-    alert(data);
+    
     $.post(vista, data, function(subpage){ 
         alert('Successful operation'); 
     })
