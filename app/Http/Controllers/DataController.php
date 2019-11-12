@@ -79,6 +79,7 @@ class DataController extends Controller
 
      public function IDstore(Request $request)
     {  
+       dd($request); 
        $view=$this->indexView($request);
        $classdata=$this->modelo($request->modelo);
         

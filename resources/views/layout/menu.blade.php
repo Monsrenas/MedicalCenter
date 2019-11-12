@@ -192,6 +192,7 @@ function RefreshDataInView(ventana, xdata, vista,elemento) {
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
+    alert(forma);
     $.post(vista, data, function(subpage){ 
         alert('Successful operation'); 
     })
@@ -210,7 +211,7 @@ function PreLoadDataInView(ventana, xdata, vista) {
 
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
-    data=data+xdata;      
+    data=data+xdata;     
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,ventana,subpage);
     })

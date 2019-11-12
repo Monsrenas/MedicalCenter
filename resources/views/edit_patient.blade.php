@@ -64,7 +64,7 @@
                 </div>
             </form>      
             <br>
-            <form  action="javascript:SaveDataNoRefreshView('formacompleta','store')" method="post" id="formacompleta" name="formacompleta" enctype="multipart/form-data" autocomplete="off">
+            <form  action="javascript:SaveDataNoRefreshView('editPatientForm','store')" method="post" id="editPatientForm" name="editPatientForm" enctype="multipart/form-data" autocomplete="off">
             @csrf
                 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />
