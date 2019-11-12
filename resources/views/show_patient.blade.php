@@ -163,7 +163,7 @@
         iniSelect("nation",nation);
         iniSelect("myrelation",srelation);
         iniSelect("marital",marital);
-
+/*
         if(document.forms[1].length > 0) {
                                         
                                         if(document.forms[1].elements.length > 0) {
@@ -174,7 +174,7 @@
                                                                             document.forms[2].elements[i].disabled =true; 
                                                                            
                                                                          };
-                                       }
+                                       }*/
 
   
     
