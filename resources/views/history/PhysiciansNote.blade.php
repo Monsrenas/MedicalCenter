@@ -46,13 +46,13 @@
                                  
                               </div>  <br><br>  
 
-  <?php $i=0;   dd($patient);?>
+  <?php $i=0;   ?>
    @foreach($patient as $patmt)
                           <?php 
                               $idt=$patmt->identification;
                               $idN=$patmt->id;
-                              $i=$i+1; ?>
-                              
+                              $i=$i+1;   dd($patmt); ?>
+                                            
                              <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 60px;" id="linea{{$idt}}">
                                   <div class="form-inline colTx" style="width: 10%; color: white; font-size: small;">{{substr($patmt->created_at,0,10)}}</div>
                                   <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
