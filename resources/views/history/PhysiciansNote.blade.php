@@ -61,11 +61,12 @@
                                   <div class="form-inline colTx" style="width:18%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
                                   <div class="form-inline colTx" style="width:5%;">
                                     <?php
+                                      dd($patmt);
                                       $ldrug=(isset($patmt->drug))?$patmt->drug:null;
                                       for ($i = 0; $i < count($ldrug); $i++) { 
                                           echo('<li>'.(isset($ldrug[$i][0])?$ldrug[$i][0]:'-').'</li>');
                                       } 
-                                       dd($patmt);
+
                                     ?>
                                   
                                   </div>
