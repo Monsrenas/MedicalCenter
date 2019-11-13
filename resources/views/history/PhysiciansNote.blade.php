@@ -51,7 +51,7 @@
                           <?php 
                               $idt=$patmt->identification;
                               $idN=$patmt->id;
-                              $i=$i+1;   dd($patmt); ?>
+                              $i=$i+1; ?>
                                             
                              <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 60px;" id="linea{{$idt}}">
                                   <div class="form-inline colTx" style="width: 10%; color: white; font-size: small;">{{substr($patmt->created_at,0,10)}}</div>
@@ -61,10 +61,11 @@
                                   <div class="form-inline colTx" style="width:18%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
                                   <div class="form-inline colTx" style="width:5%;">
                                     <?php
-                                      $ldrug=isset($patmt->drug)?$patmt->drug:null;
+                                      $ldrug=(isset($patmt->drug))?$patmt->drug:null;
                                       for ($i = 0; $i < count($ldrug); $i++) { 
                                           echo('<li>'.(isset($ldrug[$i][0])?$ldrug[$i][0]:'-').'</li>');
                                       } 
+                                       dd($patmt);
                                     ?>
                                   
                                   </div>
