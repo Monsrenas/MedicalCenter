@@ -63,10 +63,10 @@
                                     <?php
 
                                       $ldrug=(isset($patmt->drug))?$patmt->drug:null;
-                                      dd($ldrug);
-                                      for ($i = 0; $i < count($ldrug); $i++) { 
-                                          echo('<li>'.(isset($ldrug[$i][0])?$ldrug[$i][0]:'-').'</li>');
-                                      } 
+                                      if ($ldrug) {
+                                                                            for ($i = 0; $i < count($ldrug); $i++) { 
+                                                                                echo('<li>'.(isset($ldrug[$i][0])?$ldrug[$i][0]:'-').'</li>');
+                                                                            } }
 
                                     ?>
                                   
