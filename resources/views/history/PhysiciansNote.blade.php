@@ -2,10 +2,6 @@
       $id='';
 ?>
 
- @if (isset($patient))
-           <?php $identification=(isset($patient->identification))?$patient->identification:'';
-                 $id=(isset($patient->id))?$patient->id:'';  ?>
-@endif
 
 <style type="text/css">
         .list-group-item {background: #7190C6; }
