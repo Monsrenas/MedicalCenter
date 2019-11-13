@@ -2,6 +2,10 @@
       $id='';
 ?>
 
+ @if (isset($patient))
+           <?php $identification=(isset($patient->identification))?$patient->identification:'';
+                 $id=(isset($patient->id))?$patient->id:'';  ?>
+@endif
 
 <style type="text/css">
         .list-group-item {background: #7190C6; }
@@ -40,8 +44,9 @@
                                   <div class="form-inline blnc" style="width: 18%;">Treatment</div>
                                   <div class="form-inline blnc" style="width: 5%">Medication</div>
                                  
-                              </div>  <br><br>    
-  <?php $i=0; ?>
+                              </div>  <br><br>  
+
+  <?php $i=0;   dd($patient);?>
    @foreach($patient as $patmt)
                           <?php 
                               $idt=$patmt->identification;
