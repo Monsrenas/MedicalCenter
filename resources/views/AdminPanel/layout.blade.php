@@ -18,7 +18,7 @@ if(!isset($_SESSION)){
          <div style="background: #000000; margin: 1px; " >
           <div class="container-fluid" >
                 <ul class="nav navbar-nav navbar-right" >
-                    <li><a><span ></span>USER: {{ $_SESSION['username' ]}} </a></li>
+                <li><a><span ></span>USER: <?php  echo (isset($_SESSION['username' ]))?$_SESSION['username' ]:'';  ?></a></li>
                     <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
                 </ul>
             <div class="col-xs-3 col-sm-3 col-md-3" >
