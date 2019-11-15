@@ -11,7 +11,7 @@
     }
 
     
-$menuItem = [
+$patientITEMS = [
   'Patient' => [['List','list_patient','&modelo=Patient&_method=get&findit=','list','*'],['New','edit_patient']],
   'History' => [['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
   				['Current Medication','history.CurrentMedication','&modelo=Currentmedication&_method=get&findit=','find'],
@@ -21,7 +21,7 @@ $menuItem = [
   				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
   				['Physical Examination','consultation.PhysicalExamination'],
   				['Physicians Note','www.monsrenas.com']			],
-  'Admission' => [['Admission','admission']],        
+  'Admission' => [['Admission','admission'],['Medical release','']],        
   'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Exams' => ['Lista de examenes por fecha','Detalles'],
@@ -30,6 +30,8 @@ $menuItem = [
   
 ];
 
+$userITEMS = [
+  'Users' => [['List','AdminPanel.list_User','&modelo=medUser&_method=get&findit=','list','*'],['New','AdminPanel.editUser']] ];
 
  ?>
 

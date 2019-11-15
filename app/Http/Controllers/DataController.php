@@ -16,6 +16,7 @@ use App\Surgicalhistory;
 use App\Sustanceuse;
 use App\Physiciansnote;
 use App\Admission;
+use App\medUser;
 
 if(!isset($_SESSION)){
     session_start();
@@ -40,6 +41,7 @@ class DataController extends Controller
           case 'Sustanceuse': return $tmodelo= new Sustanceuse; break; 
           case 'Physiciansnote': return $tmodelo= new Physiciansnote; break; 
           case 'Admission': return $tmodelo= new Admission; break;   
+          case 'medUser': return $tmodelo= new medUser; break;   
         }
     }
 

@@ -1,6 +1,7 @@
 <?php  if(!isset($_SESSION)){ session_start(); }
-        $_SESSION['dr_user']='44240514037'; 
-       /* $_SESSION['dr_user']='613675132765';*/
+       /* $_SESSION['dr_user']='44240514037';
+    
+        $_SESSION['dr_user']='613675132765';*/
 
         function PasientAct(){
 
@@ -68,7 +69,7 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
       <?php
         $i=0; 
         $pAc=PasientAct();
-
+        if ($_SESSION['acceslevel']>=5)  {$menuItem=$userITEMS;} else {$menuItem=$patientITEMS;}
         foreach ($menuItem as $clave => $valor) {
         $info=json_encode($menuItem[$clave]);
         $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
@@ -80,10 +81,10 @@ box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
 
     
     <ul class="nav navbar-nav navbar-right" >
-      <li><a><span ></span>USER: Dr Urbino Perez </a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      <li><a><span ></span>USER: {{ $_SESSION['username' ]}} </a></li>
+      <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
-    <ul><div class="" id="right_wind" style="margin-left: 1px; width: 65%; float: left; margin-top: 80px; margin-left:75px"></div></ul>   
+    <ul><div class="" id="right_wind" style="margin-left: 1px; width: 45%; float: left; margin-top: 80px; margin-left:75px"></div></ul>   
     </div>
   </div>
     
@@ -170,7 +171,7 @@ function RefreshWindow(elemento, ventana, subpage){
                         } else { $(ventana).append(subpage);}
 }
 
-function LoadDataInView(elemento, forma,vista) {
+function LoadDataInView(elemento, forma,vista) { 
     var data=$('#'+forma).serialize();
     var previo="#fr"+elemento.trim()
     if ($(previo).length) {$(previo).remove()}

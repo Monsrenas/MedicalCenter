@@ -6,7 +6,8 @@
     
   } 
 
-  .panel-body { max-height: 440px; 
+  .panel-body { max-height: 440%;
+                height: 440%; 
                 overflow: auto scroll; 
                 background: #7190C6;
              -webkit-box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);
@@ -105,6 +106,10 @@ $(function () {
 $(function () {
   $('[data-toggle="popover"]').popover()
 })
+
+  $('.panel-body').css("height", screen.height-570);
+  $('.panel-body').css("max-height", screen.height-570);                          
+
   /*PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'flexlist');
    echo VIEW::make("consultation.PhysicalExamination")*/
 </script>
