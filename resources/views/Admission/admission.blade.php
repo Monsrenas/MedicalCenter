@@ -32,7 +32,7 @@
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
     <input type="hidden" name="modelo" id="modelo" value="Admission" />
-    <input type="hidden" name="url" id="url" value="admission" />
+    <input type="hidden" name="url" id="url" value="Admission.admission" />
     <input type="hidden" name="_method" value="post">
     
 	<div class="form-inline">

@@ -44,7 +44,7 @@
 
 	<div class="form-group">
 	    <strong>Chief complaint (CC):</strong><br>
-	   <textarea rows = "5" cols = "100%" name = "cc">
+	   <textarea id="wysihtml5-textarea" rows = "5" cols = "100%" name = "cc">
 	           <?php  echo (isset($patient->cc)?$patient->cc:''); ?> 
 	    </textarea>
 	</div>
@@ -57,7 +57,11 @@
 
     <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>
+
+
+
 </div>
+
 <script type="text/javascript">
 function fijafecha(dia, mes, year){
 		var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
