@@ -172,7 +172,7 @@ class DataController extends Controller
     }
 
     public function busca(Request $request) 
-    { 
+    { dd($request->url);
       if (!$request->noview){ $view=$this->indexView($request);} 
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);

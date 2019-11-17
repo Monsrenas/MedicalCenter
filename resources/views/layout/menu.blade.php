@@ -73,42 +73,6 @@ opacity: 100%;
 
 <?php include(app_path().'/Includes/menu_data.php');?>
 
-<!--
-<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header col-2 col-md-2" style="text-align: center; margin-top: 3px;margin-bottom: 6px; float: left;">
-      <a href="#" style=" color:#43A181; font-size: x-large; ">
-        <img src="../images/menu/medicalCenterLogo2.png" alt="" width="80%" margin="1" style="margin-top: 6px;"><br><strong></strong> </a>
-    </div>
-    <div style="float: none; ">
-    <ul class="nav navbar-nav navbar-center">
-      <?php  /*
-        $i=0; 
-        $pAc=PasientAct();
-        if ($_SESSION['acceslevel']>=5)  {$menuItem=$userITEMS;} else {$menuItem=$patientITEMS;}
-        foreach ($menuItem as $clave => $valor) {
-        $info=json_encode($menuItem[$clave]);
-        $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
-        echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
-          $i++;
-        }*/
-      ?>
-    </ul>
-
-    
-    <ul class="nav navbar-nav navbar-right" >
-      <li><a><span ></span>USER: {{ $_SESSION['username' ]}} </a></li>
-      <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-    </ul>
-    <ul><div class="col-4 col-md-4" id="right_wind" style="margin-left: 1px; width: 55%; float: left; margin-top: 80px; margin-left:75px"></div></ul>   
-    </div>
-  </div>
-    
-  <div id="parrafo"></div>
-</nav>  -->
-
-
-
 <div class="row navbar-fixed-top" id="work" style=" background-color: #ADC5E8; ">
 
   <div class="col-2 col-md-2" id="" style="text-align: center;"> 
@@ -130,8 +94,7 @@ opacity: 100%;
               echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
                 $i++;
               }
-            ?>
-            
+            ?>  
           </ul>
           
         </div>
@@ -283,7 +246,8 @@ function PreLoadDataInView(ventana, xdata, vista) {
 
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
-    data=data+xdata;     
+    data=data+xdata; 
+    alert(xdata);    
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,ventana,subpage);
     })
