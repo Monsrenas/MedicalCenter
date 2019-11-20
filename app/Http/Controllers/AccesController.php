@@ -45,12 +45,11 @@ class AccesController extends Controller
 	}
 
     public function find_user(Request $request)
-    {   /*se esta actualizando*/
-                            
+    {   /*se esta actualizando*/                 
         $usr=strval($request->user);
         $matchThese = ['user' => $usr];
         $user = Login::where($matchThese)->first();
-        
+        if (isset($request->noview)) { return $user;}
         return view('AdminPanel.editUser')->with('userdata',$user);       
     }
 

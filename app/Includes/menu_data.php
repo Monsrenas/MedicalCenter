@@ -20,7 +20,7 @@ $patientITEMS = [
   				['Surgical History','history.SurgicalHistory','&modelo=Surgicalhistory&_method=get&findit=','find'],
   				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
   				['Physical Examination','consultation.PhysicalExamination'],
-  				['Physicians Note','www.monsrenas.com']			],
+  				['Physicians Note','history.Load_ALL_note']			],
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],        
   'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],

@@ -1,11 +1,14 @@
 <?php $identification=''; 
       $id='';
+
 ?>
 
  @if (isset($patient))
            <?php $identification=(isset($patient->identification))?$patient->identification:'';
                  $id=(isset($patient->id))?$patient->id:'';  ?>
 @endif
+
+@include ('speciality')
 
 <style type="text/css">
         .list-group-item {background: #7190C6; }
@@ -25,41 +28,97 @@
         .blnc {font-size: large; float:left; color: white;}
         .colTx { float:left;
                 font-size: xx-small; 
-                max-height: 35px;
+                max-height: 45px;
                 overflow: hidden;
                 padding: 0 1em 1em 1em;
                 line-height: 1em;
                 text-align: justify;  
               }
     </style>
+
+<script type="text/javascript">
+    var $speciality=(<?php echo json_encode(specialityName('')) ; ?>);
+        $speciality[N]='Nurse';
+
+     function colorEsp(cod){ 
+        if (cod=='N'){color='yellow';} else  {color='green';}
+        
+        if (cod>1) {color='blue';}
+        
+      return color;  
+     }
+
+    function LoadUserData (esp, id) { 
+
+      data=$('#formaAuziliar').serialize();
+      data=data+'&user='+id;
+      
+      $.post('finduser', data, function(userInf){ 
+        if (userInf.speciality){$txtcolor=colorEsp(userInf.speciality);}
+        if (userInf.speciality=='N'){$SPname='Nurse'}else {$SPname=$speciality[userInf.speciality-1]}
+        $cad="<spam style='font-size: xx-small; color:"+$txtcolor+"'>";
+        $cad=$cad+$SPname+'<br>'+userInf.name+' '+userInf.surname;
+        $cad=$cad+'</spam>';
+        
+        $('#'+esp).html($cad);  
+      })
+      
+
+
+    }
+</script>
+
+<form  method="post" id="formaAuziliar">
+    @csrf
+    <input type="hidden" name="modelo" id="modelo" value="Login" />
+    <input type="hidden" name="_method" value="post">
+    <input type="hidden" name="noview" value="true">
+</form> 
+
 <div class="row" style="margin: 0px auto;">
   @csrf 
             
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
                               <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px; position: fixed; z-index: 1;">
-                                  <div class="form-inline blnc" style="width: 10%;">Date</div>
-                                  <div class="form-inline blnc" style="width: 18%;">Subjective</div>
-                                  <div class="form-inline blnc" style="width: 18%;">Evolution</div> 
-                                  <div class="form-inline blnc" style="width: 18%">Assessment</div>
-                                  <div class="form-inline blnc" style="width: 18%;">Treatment</div>
-                                  <div class="form-inline blnc" style="width: 5%">Medication</div>
+                                  <div class="form-inline blnc" style="width: 15%;">Date</div>
+                                  <div class="form-inline blnc" style="width: 17%;">Subjective</div>
+                                  <div class="form-inline blnc" style="width: 16%;">Evolution</div> 
+                                  <div class="form-inline blnc" style="width: 16%">Assessment</div>
+                                  <div class="form-inline blnc" style="width: 16%;">Treatment</div>
+                                  <div class="form-inline blnc" style="width: 7%">Medication</div>
                                  
                               </div>  <br><br>  
 
-  <?php $i=0;   ?>
+  <?php $i=0;   
+    
+
+  ?>
    @foreach($patient as $patmt)
                           <?php 
                               $idt=$patmt->identification;
+
+                              $tmi=strlen($idt);
+
                               $idN=$patmt->id;
-                              $i=$i+1; ?>
+                              $userid=strval(substr($idN, $tmi+8));
+                              
+                              $Editable=($userid==$_SESSION['dr_user'])?true:false;
+                              $borrable=(($_SESSION['acceslevel']>3)and$Editable);
+                              $i=$i+1;?>
                                             
-                             <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 60px;" id="linea{{$idt}}">
-                                  <div class="form-inline colTx" style="width: 10%; color: white; font-size: small;">{{substr($patmt->created_at,0,10)}}</div>
-                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
-                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div>
-                                  <div class="form-inline colTx" style="width:18%;"><?php echo (isset($patmt->assessment)?$patmt->assessment:''); ?></div>  
-                                  <div class="form-inline colTx" style="width:18%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
-                                  <div class="form-inline colTx" style="width:5%;">
+                             <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 70px;" id="linea{{$idt}}">
+                                  <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
+                            
+                                    <div id='userd{{$idN}}'>
+                                      <script type="text/javascript">LoadUserData('userd{{$idN}}','{{$userid}}' )</script>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="form-inline colTx" style="width:17%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
+                                  <div class="form-inline colTx" style="width:16%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div>
+                                  <div class="form-inline colTx" style="width:16%;"><?php echo (isset($patmt->assessment)?$patmt->assessment:''); ?></div>  
+                                  <div class="form-inline colTx" style="width:16%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
+                                  <div class="form-inline colTx" style="width:7%;">
                                     <?php
 
                                       $ldrug=(isset($patmt->drug))?$patmt->drug:null;
@@ -72,7 +131,7 @@
                                   
                                   </div>
   
-                                 @if (2==2)    
+                                 @if ($borrable)    
                                   <div class="form-inline" style="float: right;">
                                     <form class="form-inline" action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >
                                       @csrf
@@ -85,7 +144,7 @@
                                   </div>
                                   @endif 
 
-                                  @if (100>1)
+                                  @if ($Editable)
                                   <div class="form-inline" style="float: right; margin-right: 10px;">
                                     <?php $xdata='&modelo=Physiciansnote&url=history.Edit_note&method=get&findit='.$idN; ?>
                                     <form class="form-inline" id='edl{{$idN}}' action="javascript:RefreshDataInView('#center_wind','{{$xdata}}','findbyId','history.Edit_note')">
@@ -108,6 +167,9 @@
                            
               @endforeach
 </div> 
+<div  style="position: fixed; height: 40x; bottom:0; right:0; width: 100%; margin-left: 1%; background: #7190C6;">
+        <strong style="color: yellow;">Nurse</strong>  |  <strong style="color: green;">Doctor</strong>  |  <strong style="color: blue;">Specialist</strong>
+    </div>
 </div>
 
 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Note</button>-->
@@ -133,6 +195,7 @@
 </div>
 
 <script type="text/javascript">
+
     function ShowNote (reg){
       $('#qwerty').modal('show');
       $fecha=reg.created_at.substr(0,10);
@@ -154,8 +217,6 @@
       $mdcn=$mdcn+'</table>';
       $('#parr5').html($mdcn);
     }
-
-
 </script>
 
 

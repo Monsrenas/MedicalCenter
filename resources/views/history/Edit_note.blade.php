@@ -118,9 +118,8 @@
 		var $ymed=0;
         var $dru=0;
         function delelm($xeme){ 
-       
-        $('#'+$xeme).remove();
         
+        $('#'+$xeme).remove();   
         }
 
     function showElement($eName){
@@ -144,7 +143,8 @@
     		@endforeach
     @endif
 
-    @if (isset($patient->drug))
+    @if ((isset($patient->drug))and(is_array($patient->drug)))
+
     	@for ($i = 0; $i < count($patient->drug); $i++)
             <?php 
               $col[0]=isset($patient->drug[$i][0])?$patient->drug[$i][0]:'';

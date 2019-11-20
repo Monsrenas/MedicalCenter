@@ -16,7 +16,7 @@ class Discharge extends Eloquent
 							'date',
 							'time',
 							'admission_resume',
-							'discharge_resume'
+							'discharge_resume',
 							'discharge_reason',
 							'authorizing_doctor',
     ];

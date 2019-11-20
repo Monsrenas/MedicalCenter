@@ -17,6 +17,7 @@ use App\Sustanceuse;
 use App\Physiciansnote;
 use App\Admission;
 use App\medUser;
+use App\Discharge;
 
 if(!isset($_SESSION)){
     session_start();
@@ -41,7 +42,9 @@ class DataController extends Controller
           case 'Sustanceuse': return $tmodelo= new Sustanceuse; break; 
           case 'Physiciansnote': return $tmodelo= new Physiciansnote; break; 
           case 'Admission': return $tmodelo= new Admission; break;   
-          case 'medUser': return $tmodelo= new medUser; break;   
+          case 'medUser': return $tmodelo= new medUser; break;
+          case 'Discharge': return $tmodelo= new Discharge; break;   
+          
         }
     }
 
@@ -126,7 +129,8 @@ class DataController extends Controller
         
         if ($ert<>''){
                 $patient = ($classdata)::where('id', 'like', "%{$request->findit}%")->
-                                          orWhere('identification', '=', "{$request->findit}")->orderBy('created_at', 'desc')->get();
+                                          orWhere('identification', '=', "{$request->findit}")->
+                                          orWhere('identification', '=', "{$request->identification}")->orderBy('created_at', 'desc')->get();
 
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->get(); }
         $jsonData = json_encode($patient);                         
@@ -156,15 +160,16 @@ class DataController extends Controller
         return $viewx->with('patient',$abcd);
     }
 
-   public function destroy(Request $request){ 
-     $patient=Patient::where('identification','=', $request->identification)->first();
+   public function destroy(Request $request, $classdata){ 
+     $patient=($classdata)::where('identification','=', $request->identification)->first();
+
      $patient->delete();
-     $patient = Patient::get();
+     /*$patient = Patient::get();*/
      return $patient;  
 	}
 
     public function almacena(Request $request) 
-    {   
+    {  
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genstore($request, $classdata);
@@ -172,22 +177,34 @@ class DataController extends Controller
     }
 
     public function busca(Request $request) 
-    { dd($request->url);
+    { 
       if (!$request->noview){ $view=$this->indexView($request);} 
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
-
-
       if ($request->noview){return $result;}
       return $view->with('patient',$result); 
     }
 
+    public function buscaAdmission(Request $request) 
+    { 
+      if (!$request->noview){ $view=$this->indexView($request);} 
+      $classdata=$this->modelo('Admission');
+      $result=$this->Genfind($request, $classdata);
+      $classdata=$this->modelo('Discharge');
+      $result1=$this->Genfind($request, $classdata);
+      
+      if ($request->noview){return $result;}
+
+      return $view->with('patient',$result)->with('discharge',$result1); 
+    }
 
 
     public function borra(Request $request) 
     {   
     	$classdata=$this->modelo($request->modelo);
+
       $result=$this->destroy($request, $classdata);
+  
       return $result; 
     }
 

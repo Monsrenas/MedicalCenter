@@ -35,6 +35,9 @@ Route::group(['middleware' => 'IsAuten'], function(){
 								Route::post('IDstore', 'DataController@IDstore');
 								Route::post('delete', 'DataController@borra');
 								Route::get('patientcng', 'DataController@ChangePatient');
+
+								Route::get('buscaAdmission', 'DataController@buscaAdmission');
+								
 							}		
 		}
 

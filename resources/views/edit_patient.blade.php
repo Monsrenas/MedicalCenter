@@ -40,7 +40,7 @@
          input { background: #AFC4E8; }
          select { background: #AFC4E8; }
     </style>
-
+        
     <div class="row edicion" style="background: #6D8DC4; margin: 0 auto; ">
         
         <div class="col-xs-12 col-sm-12 col-md-12" id="dpatient" style="text-align: left;">

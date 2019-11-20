@@ -227,8 +227,7 @@ function RefreshDataInView(ventana, xdata, vista,elemento) {
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
-    
-    $.post(vista, data, function(subpage){ 
+    $.post(vista, data, function(subpage){  
         alert('Successful operation'); 
     })
 }
@@ -247,7 +246,7 @@ function PreLoadDataInView(ventana, xdata, vista) {
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata; 
-    alert(xdata);    
+       
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,ventana,subpage);
     })
@@ -310,6 +309,19 @@ function CargaConsulta(ventana, xdata, control){
   PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'findbyId');
   PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'findbyId');
   PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
+}
+
+function AltaMedica(identification){ 
+  a=confirm('Estar operacion efectua el alta medica del paciente, Desea Continuar ? ');
+  if (!a) {return}
+   SaveDataNoRefreshView('MyDischarge','store');
+   var data=$('#MyAdmission').serialize();
+
+   $.post('delete', data, function(result){  
+                $('#frAdmission_admission').remove();
+                $('#frAdmission_discharge').remove();
+                alert('Discharge done successful'); 
+            }); 
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}

@@ -2,7 +2,9 @@
   
    function specialityName($key)
    {
-        $speciality=[ 'Allergology',
+        $speciality=[
+                'General Physicias', 
+                'Allergology',
                 'Anaesthetics',
                 'Cardiology',
                 'Clinical biology',

@@ -1,19 +1,57 @@
 <?php
-	dd('Aquio'); 	
 	if(!isset($_SESSION)){ session_start(); }
 	if (!($_SESSION['dr_user'])) {return;}
 	$user_id=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $stime=substr(date("Y-m-d h:i:s"), 11);
-
+    $username=$_SESSION['username'];
+    $edit=true;
 ?>
 
  @if (isset($patient))
            <?php $patient=(isset($patient[0]))? $patient[0]:$patient;
            	$identification=($patient->identification)?$patient->identification:'';
-           	$user_id=(isset($patient->user_id))?$patient->user_id : $_SESSION['dr_user']; 	
+           	$user_id=(isset($patient->user_id))?$patient->user_id : $_SESSION['dr_user']; 
+
+           	$DA=(isset($patient->date))?$patient->date: $cdate;
+			$TA=(isset($patient->timearrives))?$patient->timearrives:$stime;
+			$DH=(isset($patient->date_hospitalization))?$patient->date_hospitalization:$cdate;
+	
+			$TH=(isset($patient->time_hospitalization))?$patient->time_hospitalization:$stime;
+			$AN=(isset($patient->admission_note))?$patient->admission_note:'';
+
+			$PS=(isset($patient->symptom))?$patient->symptom:'';
+			$PD=(isset($patient->diagnostic))?$patient->diagnostic:'';
+			$PI=(isset($patient->informant))?$patient->informant:'';
+
+			$a_r='It is detailed that at '.$TA.' hours of the day '.$DA.' the patient arrives at the hospital in the company of: '.$PI.' and detailing that: \n';
+			$a_r=$a_r.$AN;
+			$a_r=$a_r.'and presenting the following symptoms:';
+			$a_r=$a_r.$PS;
+			$a_r=$a_r.'Therefore, the stipulated check was made, after which the doctor concluded:';
+			$a_r=$a_r.$PD;
+			$a_r=$a_r.'For this reason the income is determined, it was made at: '.$TH.' of the day '.$DH;
            ?>
- @else         
-           <?php  $identification=($_SESSION['identification'])? $_SESSION['identification']:''?>
+@endif
+
+@if (!(isset($patient->admission_note)))
+           @if (isset($discharge))
+	           <?php $discharged=$discharge;
+	           		$edit=false;	  
+	           		$discharged=(isset($discharged[0]))? $discharged[0]:$discharged;
+	           		$identification=($discharged->identification)?$discharged->identification:'';
+	           		$user_id=(isset($discharged->user_id))?$discharged->user_id : $_SESSION['dr_user'];	
+           		?>
+           		@for ($i = 0; $i < 7; $i++)
+		            <?php
+		            	$admission_resume[$i]=$discharged->admission_resume[$i]; 
+		             ?>
+				@endfor
+
+       	   @else
+       	   		<?php
+       	   			echo "Patient no in hospital";
+       	   		 return  ?> 		     	
+		   @endif 
 
 @endif
 
@@ -23,93 +61,70 @@
 							box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							font-size: small;
 							background: #AFC4E8;
-	}
+						 }
 </style>
 
-<?php 
-	$DA=(isset($patient->date)?$patient->date: $cdate);
-	$TA=(isset($patient->timearrives)?$patient->timearrives:$stime);
-	$DH=(isset($patient->date_hospitalization)?$patient->date_hospitalization:$cdate);
-	$TH=isset($patient->time_hospitalization)?$patient->time_hospitalization:$stime);
-	$AN=($patient->admission_note)?$patient->admission_note:'');
-	$PS($patient->symptom)?$patient->symptom:'');
-	$PD(isset($patient->diagnostic)?$patient->diagnostic:'');
-	$PI(isset($patient->informant)?$patient->informant:'');
+<br>
+<div style="padding: 1%;   text-align: left;  ">
+<form  action="javascript:AltaMedica('{{ $identification }}')" method="post" style="width: 100%; text-align: left;" id="MyDischarge">
 
-	$tetx="It is detailed that at {{$TA}} hours of the day {{$DA}} the patient arrives at the hospital in the company of: {{$PI}} and detailing that: <br> {{$AN}} <br> and presenting the following symptoms: <br>
-{{$PS}} Therefore, the stipulated check was made, after which the doctor concluded: <br> {{$PD}} <br> For this reason the income is determined, it was made at: {{$TH}} of the day {{$DH}}"	
- ?>
-
-<div style="padding: 1%;   align: center;  ">
-	
-<form  action="javascript:SaveDataNoRefreshView('MyAdmission','store')" method="post" style="width: 100%; text-align: center;" id="MyAdmission">
-	@csrf
+	@csrf 
 	<input type="hidden" name="user_id" id="user_id" placeholder="Admission Id" value='{{ $user_id }}'> 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 
-    <input type="hidden" name="modelo" id="modelo" value="Admission" />
-    <input type="hidden" name="url" id="url" value="Admission.admission" />
-    <input type="hidden" name="_method" value="post">
-    
-	<div class="form-inline">
-	  	<div style="text-align:right; float: left; width: 30%; padding-right: 20px;"><strong>Arrival: </strong></div>
+    <input type="hidden" name="modelo" id="modelo" value="Discharge" />
+    <input type="hidden" name="url" id="url" value="Admission.discharge" />
+    <input type="hidden" name="_method" value="post">  
 
-	  	<div style="text-align:left; ">
-	  	<input type="date" name="date" id="date" value="<?php echo(isset($patient->date)?$patient->date: $cdate); ?>" />	
-	  	<input type="time" name="timearrives" id="timearrives" value="<?php echo(isset($patient->timearrives)?$patient->timearrives:$stime); ?>" /></div>
-	</div>
-							 identification',
-							'user_id',
-							'date',
-							'time',
-							'admission_resume',
-							'discharge_resume'
-							'discharge_reason',
-							'authorizing_doctor',
+<strong>Admission Resume:</strong>
+<a href="javascript:alert('{{$a_r}}')" class="list-group-item">						
+<div style="text-align: justify; font-size: xx-small; max-height: 60px; overflow: auto scroll; background: white; color: black">
 
-	<div class="form-inline">
-		<div style="text-align:right; float: left; width: 30%; padding-right: 20px;"><strong>Hospitalization: </strong></div>
-	    <div style="text-align:left; margin-right:  15px;">
-	  	<input type="date" name="date_hospitalization" id="date_hospitalization" value="<?php echo(isset($patient->date_hospitalization)?$patient->date_hospitalization:$cdate); ?>" />
-	  	<input type="time" name="time_hospitalization" id="time_hospitalization" value="<?php echo(isset($patient->time_hospitalization)?$patient->time_hospitalization:$stime); ?>" />
-	  	</div>
-	</div>
+	<p>{{$a_r}}</p>
 	
+</div> 
+</a>
 <br>
+<input type="hidden" name="admission_resume" id="admission_resume" value="{{$a_r}}" />
 
-	<div class="form-group">
-	    <strong>Admission Note</strong><br>
-	   <textarea rows = "5" cols = "100%" name = "admission_note">
-	           <?php  echo (isset($patient->admission_note)?$patient->admission_note:''); ?> 
-	    </textarea>
-	</div>
-	<div class="form-group">
-		<strong>Symptom</strong><br>
-		<textarea rows = "5" cols = "100%" name = "symptom">
-	          <?php  echo (isset($patient->symptom)?$patient->symptom:''); ?> 
-	    </textarea>
-	</div>
-	<div class="form-group">
-		<strong>Medical Diagnostic</strong><br>
-		<textarea rows = "5" cols = "100%" name = "diagnostic">
-	          <?php  echo (isset($patient->diagnostic)?$patient->diagnostic:''); ?> 
-	    </textarea>
+	<div class="form-inline">
+	
+	  <label for="date"><strong>Discharge:</strong></label>	
+	  <input type="date" name="date" id="date" value="<?php echo(isset($discharged->date)?$discharged->date:$cdate); ?>" />
+	  <input type="time" name="time" id="time" value="<?php echo(isset($discharged->time)?$discharged->time:$stime); ?>" />	
 	</div>
 
+
+			
+	<br>
 	<div class="form-group">
-		<strong>informant or representative:</strong>
-		<input type="text" name="informant" id="informant" value="<?php  echo (isset($patient->informant)?$patient->informant:''); ?> " />
+		<label for="discharge_reason"><strong>Discharge Reason:</strong></label>
+		   <select name="discharge_reason" id="discharge_reason" required>
+           <option value="0">Curado</option>
+            <option value="1">Mejorado</option>
+            <option value="2">Voluntario</option>
+            <option value="3">Traslado</option>
+            <option value="4">Muerte</option>
+            <option value="5">Other reason</option>
+        </select>  
 	</div>
-    <?php include(app_path().'/Includes/SaveButton.html') ?>
-</form>
+
+	<div class="form-group">
+	    <strong>Discharge Note</strong><br>
+	   <textarea rows = "5" cols = "100%" name = "discharge_resume">
+	           <?php  echo (isset($discharged->discharge_resume)?$discharged->discharge_resume:''); ?> 
+	    </textarea>
+	</div>
+	
+	<label for="authorizing_doctor"><strong>Authorizing Doctor:</strong></label>
+	<input type="text" name="authorizing_doctor" id="authorizing_doctor" value="{{$username}}" style="width: 30%;" >
+
+	<?php 
+	if ($edit) {  include(app_path().'/Includes/SaveButton.html');  } ?>
+
+</form>	
 </div>
-<script type="text/javascript">
-function fijafecha(dia, mes, year){
-		var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-		$('#InDate').empty().append(dia+' '+monthNames[mes-1]+' '+year);
-	}
-
-fijafecha('{{substr($cdate, 6,2)}}','{{substr($cdate, 4,2)}}','{{substr($cdate, 0,4)}}');
-	
-	
-</script>
+<script type="text/javascript"> 
+/* $a='alkjlkj';
+	alert($a.blink());
+$a=prompt('Entre valor','William')*/</script>
