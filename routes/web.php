@@ -27,7 +27,8 @@ Route::group(['middleware' => 'IsAuten'], function(){
     													return view('AdminPanel.Changepassword');});
 			Route::post('saveuser','AccesController@user_store');
 			Route::get('deleteuser','AccesController@destroy');
-			Route::post('dochangepassword','AccesController@change_password');
+			Route::post('USERmultifind','AccesController@xmultifind');
+			Route::post('finduser','AccesController@find_user');
 		} else {
 				Route::get('/', function () {return view('layout.main');});
 
@@ -54,15 +55,15 @@ Route::group(['middleware' => 'IsAuten'], function(){
 
 /*User operation*/ 
 
-Route::post('USERmultifind','AccesController@xmultifind');
 
+Route::post('dochangepassword','AccesController@change_password');
 Route::post('accestrue','AccesController@change_user');
 
 
 
 Route::get('userlogout','AccesController@logoff');
 
-Route::post('finduser','AccesController@find_user');
+
 
 
 
