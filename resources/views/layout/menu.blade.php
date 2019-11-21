@@ -8,6 +8,17 @@
           return (isset($_SESSION['identification']))? $_SESSION['identification']:null;
         }
 
+        function OptionByLevel($op){
+          $acces=$_SESSION['acceslevel'];
+          $speci=$_SESSION['speciality'];
+          
+          if (($op==0)or($acces==4)) {return true;}
+          
+          if ((($op>4))and(($speci=="N")or($acces==1))) {return true;}
+          if ((($op>0)and($op<4))and($acces>2)) {return true;}
+          
+          return false;
+        }
 
         ?>
 
@@ -83,16 +94,19 @@ opacity: 100%;
       <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
         <div class="container-fluid" style=" text-align: center; align-items: center;">    
           <ul class="nav navbar-nav navbar-center" style="width: 690px; ">
-            
+        
             <?php
               $i=0; 
               $pAc=PasientAct();
               if ($_SESSION['acceslevel']>=5)  {$menuItem=$userITEMS;} else {$menuItem=$patientITEMS;}
               foreach ($menuItem as $clave => $valor) {
-              $info=json_encode($menuItem[$clave]);
-              $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
-              echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
-                $i++;
+                    if (OptionByLevel($i)){  
+                            $info=json_encode($menuItem[$clave]);
+                            $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
+                            echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
+                              
+                    }
+                    $i++;
               }
             ?>  
           </ul>
