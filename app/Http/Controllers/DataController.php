@@ -161,7 +161,15 @@ class DataController extends Controller
     }
 
    public function destroy(Request $request, $classdata){ 
-     $patient=($classdata)::where('identification','=', $request->identification)->first();
+     if ($request->identification) {
+                                    $campo='identification';
+                                    $ert=$request->identification;
+   } else {
+            $campo='id';
+            $ert=$request->id;
+   }
+
+     $patient=($classdata)::where($campo,'=', $ert)->first();
 
      $patient->delete();
      /*$patient = Patient::get();*/

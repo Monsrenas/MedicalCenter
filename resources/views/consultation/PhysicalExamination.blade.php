@@ -2,8 +2,17 @@
 	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    $prueba='mInDate';
 ?>
+<script type="text/javascript">
+	if ($('#mInDate').length) {
+		<?php $prueba='vInDate'; ?>
+	}
 
+	if ($('#vInDate').length) {
+		<?php $prueba='xInDate'; ?>
+	}
+</script>
  @if (isset($patient))
            <?php
             $abcd=json_decode($patient);
@@ -220,11 +229,13 @@ global  $patient1;
 		<tr>
 			<th colspan="2" width="5">INTEGRATED MEDICAL CARE</th>
 			<th colspan="5" width="5">PHYSICAL EXAMINATION</th>
+			<th><div id='{{$prueba}}'></div></th>
 		</tr>
 		<tr>
 			<th colspan="7">GENERAL, REGIONAL AND BY SYSTEMS</th>
+
 		</tr>
-		<tr>
+		<tr>   
 			<th colspan="4" >GENERAL</th>
 			<th colspan="1">N</th>
 			<th colspan="1">AN</th>
@@ -296,27 +307,7 @@ global  $patient1;
 </form>
 </div>
 
+@include('funciones')
 <script type="text/javascript">
-	 function soloNumeros(e,lmt)
-
-        {
-            // capturamos la tecla pulsada
-           
-            var teclaPulsada=window.event ? window.event.keyCode:e.which;
-            // capturamos el contenido del input
-            var valor=lmt;	
-            if(valor.length<20)
-            {
-                // 13 = tecla enter
-                // Si el usuario pulsa la tecla enter o el punto y no hay ningun otro
-                // punto
-                if(teclaPulsada==13) { return false; }
-
-     			if(teclaPulsada==46) { return true; }
-                // devolvemos true o false dependiendo de si es numerico o no
-                return /\d/.test(String.fromCharCode(teclaPulsada));
-            }else{
-                return false;
-            }
-        }	
+	fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}','{{$prueba}}');
 </script>

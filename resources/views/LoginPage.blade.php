@@ -1,6 +1,10 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" /> 
+    <title>Medical Center Management</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
 <!------ Include the above in your HEAD tag ---------->
 <style type="text/css">
 .login-container{
@@ -56,23 +60,23 @@
     text-decoration: none;
 }
 </style>
-
-<div class="container login-container">
+<body style="width: 100%; height: 100%; margin-top: 0px; opacity: 90%; background: url('../images/menu/fondoMC.png') no-repeat center;">
+<div class="container login-container" >
             <div class="row">
                 <div class="col-md-3">
                 </div>   
                 <div class="col-md-6 login-form-2">
-                    <h3>Clinical History Login</h3>
+                    <h3>Medical Center Login</h3>
                     <form action="{{url('accestrue')}}" method="post">
                         @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your User *" value="" name='user'/>
+                            <input type="text" class="form-control" placeholder="User Name" value="" name='user'/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *" value="" name='password'/>
+                            <input type="password" class="form-control" placeholder="Enter password" value="" name='password'/>
                         </div>
                         <div>
-                            <input type="submit" class="btnSubmit" value="Login" />
+                            <button type="submit" class="btn btn-default btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
                         </div>
                     </form>
                     <form action="{{url('changepassword')}}" method="post">
@@ -84,3 +88,5 @@
                 </div>
             </div>
         </div>
+
+</body>

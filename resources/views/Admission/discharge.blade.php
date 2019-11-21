@@ -100,11 +100,11 @@
 	<div class="form-group">
 		<label for="discharge_reason"><strong>Discharge Reason:</strong></label>
 		   <select name="discharge_reason" id="discharge_reason" required>
-           <option value="0">Curado</option>
-            <option value="1">Mejorado</option>
-            <option value="2">Voluntario</option>
-            <option value="3">Traslado</option>
-            <option value="4">Muerte</option>
+           <option value="0">Cured</option>
+            <option value="1">improvement</option>
+            <option value="2">By will</option>
+            <option value="3">Transfer</option>
+            <option value="4">Death</option>
             <option value="5">Other reason</option>
         </select>  
 	</div>

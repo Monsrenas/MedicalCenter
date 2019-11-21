@@ -16,12 +16,36 @@
 
     
     <div class="row" id="work" style="margin-top: 120px;">
+      @include('modal')
       <div class="col-2 col-md-2" id="left_wind" style="margin-left: 5px;"></div>
       <div class="col-10 col-md-10" id="center_wind" style="background: #E2E2E2; min-height: 385px; max-height: 385px; margin-right: -16px; text-align: center;  overflow: auto scroll;"></div>
       <!--<div class="col-2 col-md-2" id="right_wind" style="margin-right: 5px; margin-left: 6px; padding-left: 30px;"></div> -->
     </div>
 	
 </body>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Note</button>-->
+
+<div id="qwerty" class="modal fade bd-example-modal-lg" tabindex="10" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="cabecera"></h4>
+      </div>
+     <div style="padding: 2em;">
+        <p id="parr1" style="text-align: justify;"> </p>
+        <p id="parr2" style="text-align: justify;"> </p>
+        <p id="parr3" style="text-align: justify;"> </p>
+        <p id="parr4" style="text-align: justify;"> </p>
+
+        <strong>Medication</strong>
+        <p id="parr5" style="text-align: justify;"> </p>
+
+     </div>
+    </div>
+  </div>
+</div>
+
 </html>
 <script type="text/javascript">
   $('#center_wind').css("height", screen.height-312);

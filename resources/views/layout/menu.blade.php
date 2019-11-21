@@ -235,7 +235,7 @@ function SaveDataNoRefreshView(forma,vista) {
 function PreLoadDataInView(ventana, xdata, vista) { 
     var data=$('#llave').serialize();
     data=data+xdata;  
-
+    
     $.post(vista, data, function(subpage){ 
         $(ventana).empty().append(subpage); 
     })  .fail(function() {

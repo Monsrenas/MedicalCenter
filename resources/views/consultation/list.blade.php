@@ -39,7 +39,7 @@
                               $i=$i+1; 
                               ?>
                               
-                             <a href="javascript:CargaConsulta('#Interrogation', '&findit={{$idC}}&identification={{$idt}}&id={{$idC}}', 'flexlist');" class="list-group-item"  id="linea{{$idC}}" style=" background: #738CC3; color: #C4D5F3;">
+                             <a href="javascript:CargaConsulta('#Interrogation', '&findit={{$idC}}&identification=&id={{$idC}}', 'flexlist');" class="list-group-item"  id="linea{{$idC}}" style=" background: #738CC3; color: #C4D5F3;">
                                   <div style="background: #738CC3;">{{$fecha}}</div>  
                             </a>
                            

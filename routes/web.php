@@ -21,6 +21,13 @@ Route::group(['middleware' => 'IsAuten'], function(){
 
 		if ((isset($_SESSION['dr_user']))&&($_SESSION['acceslevel']>4)) {
 			Route::get('/', function () {    return view('AdminPanel.layout');   });
+
+			Route::get('edituser','AccesController@edit_user');
+			Route::post('changepassword', function () {
+    													return view('AdminPanel.Changepassword');});
+			Route::post('saveuser','AccesController@user_store');
+			Route::get('deleteuser','AccesController@destroy');
+			Route::post('dochangepassword','AccesController@change_password');
 		} else {
 				Route::get('/', function () {return view('layout.main');});
 
@@ -51,16 +58,14 @@ Route::post('USERmultifind','AccesController@xmultifind');
 
 Route::post('accestrue','AccesController@change_user');
 
-Route::post('changepassword', function () {
-    return view('AdminPanel.Changepassword');
-});
+
 
 Route::get('userlogout','AccesController@logoff');
-Route::get('edituser','AccesController@edit_user');
+
 Route::post('finduser','AccesController@find_user');
-Route::post('saveuser','AccesController@user_store');
-Route::get('deleteuser','AccesController@destroy');
-Route::post('dochangepassword','AccesController@change_password');
+
+
+
 
 Route::get('UserCng/{iden}', function($iden){
 												if(!isset($_SESSION)){		session_start();		} 

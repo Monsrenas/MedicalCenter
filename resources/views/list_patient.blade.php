@@ -1,16 +1,5 @@
 <?php $identification=''; ?>
 
-<?php use App\Patient; ?>
-
- @if (isset($patient))
-           <?php $identification="000";  ?>
- @else         
-           <?php                     
-            $patient[]=new Patient;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
-            ?>  
-@endif
 <style type="text/css">
         .list-group-item {background: #7190C6; }
         .form-inline { font-family: arial, helvetica, sans-serif; 
@@ -28,6 +17,7 @@
         .mio { width: 35px; height: 35px; background: #7190C6; border: none;}
         .blnc {font-size: large; float:left; color: white;}
     </style>
+
 <div class="row" style="margin: 0px auto;">
   @csrf 
         <div class="navbar-fixed">
@@ -52,7 +42,12 @@
                                   <div class="form-inline blnc" style="">Surname,  Name</div>
                                  
                               </div>  <br>    
-  <?php $i=0; ?>
+  <?php 
+    if (!(isset($patient))) {return;}
+
+
+    $i=0; 
+  ?>
    @foreach($patient as $patmt)
                   
                           <?php 

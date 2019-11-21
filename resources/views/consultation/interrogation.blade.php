@@ -61,14 +61,7 @@
 
 
 </div>
-
+@include('funciones')
 <script type="text/javascript">
-function fijafecha(dia, mes, year){
-		var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-		$('#InDate').empty().append(dia+' '+monthNames[mes-1]+' '+year);
-	}
-
-fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}');
-	
-	
+	fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}','InDate');
 </script>

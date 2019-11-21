@@ -86,7 +86,6 @@
                                   <div class="form-inline blnc" style="width: 16%">Assessment</div>
                                   <div class="form-inline blnc" style="width: 16%;">Treatment</div>
                                   <div class="form-inline blnc" style="width: 7%">Medication</div>
-                                 
                               </div>  <br><br>  
 
   <?php $i=0;   
@@ -108,7 +107,7 @@
                                             
                              <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 70px;" id="linea{{$idt}}">
                                   <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
-                            
+                                        
                                     <div id='userd{{$idN}}'>
                                       <script type="text/javascript">LoadUserData('userd{{$idN}}','{{$userid}}' )</script>
                                     </div>
@@ -135,9 +134,9 @@
                                   <div class="form-inline" style="float: right;">
                                     <form class="form-inline" action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >
                                       @csrf
-                                      <input type="hidden" name="modelo" id="modelo" value="Patient" />
+                                      <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />
                                       <input type="hidden" name="_method" value="post">
-                                      <input type="hidden" name="identification" value='{{$idt}}'> 
+                                      <input type="hidden" name="id" value='{{$idN}}'> 
 
                                       <button type="submit" class="colTx btn btn-default glyphicon glyphicon-trash btn-danger mio"></button>
                                     </form>
@@ -172,27 +171,7 @@
     </div>
 </div>
 
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Note</button>-->
 
-<div id="qwerty" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="cabecera"></h4>
-      </div>
-     <div style="padding: 2em;">
-        <p id="parr1" style="text-align: justify;"> </p>
-        <p id="parr2" style="text-align: justify;"> </p>
-        <p id="parr3" style="text-align: justify;"> </p>
-        <p id="parr4" style="text-align: justify;"> </p>
-
-        <strong>Medication</strong>
-        <p id="parr5" style="text-align: justify;"> </p>
-
-     </div>
-    </div>
-  </div>
-</div>
 
 <script type="text/javascript">
 
@@ -217,6 +196,10 @@
       $mdcn=$mdcn+'</table>';
       $('#parr5').html($mdcn);
     }
+
+    
+
+    
 </script>
 
 
