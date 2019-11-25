@@ -38,7 +38,7 @@
 
 <script type="text/javascript">
     var $speciality=(<?php echo json_encode(specialityName('')) ; ?>);
-        $speciality[N]='Nurse';
+        $speciality['N']='Nurse';
 
      function colorEsp(cod){ 
         if (cod=='N'){color='yellow';} else  {color='green';}

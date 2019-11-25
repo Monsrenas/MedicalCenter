@@ -28,7 +28,7 @@ Route::group(['middleware' => 'IsAuten'], function(){
 			Route::post('saveuser','AccesController@user_store');
 			Route::get('deleteuser','AccesController@destroy');
 			Route::post('USERmultifind','AccesController@xmultifind');
-			Route::post('finduser','AccesController@find_user');
+			
 		} else {
 				Route::get('/', function () {return view('layout.main');});
 
@@ -55,7 +55,7 @@ Route::group(['middleware' => 'IsAuten'], function(){
 
 /*User operation*/ 
 
-
+Route::post('finduser','AccesController@find_user');
 Route::post('dochangepassword','AccesController@change_password');
 Route::post('accestrue','AccesController@change_user');
 

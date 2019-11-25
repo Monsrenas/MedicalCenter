@@ -11,7 +11,7 @@
         function OptionByLevel($op){
           $acces=$_SESSION['acceslevel'];
           $speci=$_SESSION['speciality'];
-          
+
           if (($op==0)or($acces==4)) {return true;}
           
           if ((($op>4))and(($speci=="N")or($acces==1))) {return true;}
@@ -140,6 +140,7 @@ opacity: 100%;
 <script type="text/javascript">
   var $antr='';
   var $antr='';
+
   function ShowOp($arreglo,$op){
   
           if ($('#'+$op).attr('Class')=='dependen disabled') {return ;} /*Si no hay paciente activo */
@@ -175,13 +176,13 @@ opacity: 100%;
         $btnID='btn'+elemento[1].replace('.', '_');
         if (elemento[2]) {
           var xdata=elemento[2]+'&url='+elemento[1];
-          var accion1="<a id='"+$btnID+"' onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
-          var accion2="<a id='"+$btnID+"' onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var accion1="<a id='"+$btnID+"' onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var accion2="<a id='"+$btnID+"' onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
 
           $("#left_wind").append((elemento[4])? accion2:accion1 );
         }else{
 
-        $("#left_wind").append( "<a id='"+$btnID+"' onclick= 'BuildMenu(\" "+elemento[1]+" \",1)' class='btn btn-default btn-lg btn-block' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
+        $("#left_wind").append( "<a id='"+$btnID+"' onclick= 'BuildMenu(\" "+elemento[1]+" \",1)' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
         }
   }
 
@@ -341,8 +342,8 @@ function AltaMedica(identification){
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}
 
 
-</script>
 
+</script>
 
 <!-- /*224
    74

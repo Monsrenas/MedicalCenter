@@ -51,6 +51,8 @@ use App\Exams;
 	<input type="hidden" name="url"  value='consultation.Exams'>
 	<input type="hidden" name="modelo"  value='Exams'>
 
+    <input type='file' name='images'>
+
 	<div class="form-group" id="examenes">
         <strong>Exam(s) :</strong>
         <table>
