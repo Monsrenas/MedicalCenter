@@ -14,5 +14,6 @@ class Exams extends Eloquent
 							'identification',
 							'id', 
 							'exams',
+							'status',
     ];
 }

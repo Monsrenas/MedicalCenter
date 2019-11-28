@@ -133,12 +133,14 @@ class DataController extends Controller
                                           orWhere('identification', '=', "{$request->identification}")->orderBy('created_at', 'desc')->get();
 
                                  } else {$patient = ($classdata)::orderBy('created_at', 'desc')->get(); }
+
+        if (isset($request->option)) {$patient->option=$request->option;}
+
         $jsonData = json_encode($patient);                         
         if (count($patient)>0) { return $viewx->with('patient',$patient);}
 
         return $viewx->with('patient',$patient); 
     }
-
 
  public function findbyId(Request $request)
     {   
@@ -181,6 +183,7 @@ class DataController extends Controller
     	$view=$this->indexView($request);
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genstore($request, $classdata);
+      if ($request->noview){return $result;}
       return $view->with('patient',$result); 
     }
 
@@ -200,7 +203,7 @@ class DataController extends Controller
       $result=$this->Genfind($request, $classdata);
       $classdata=$this->modelo('Discharge');
       $result1=$this->Genfind($request, $classdata);
-      
+
       if ($request->noview){return $result;}
 
       return $view->with('patient',$result)->with('discharge',$result1); 
@@ -220,6 +223,14 @@ class DataController extends Controller
     {
     	if(!isset($_SESSION)){session_start();}
       $_SESSION['identification'] = $request->identification;
+
+      $classdata=$this->modelo('Admission');
+      $result=$this->Genfind($request, $classdata);
+
+      if ($result->admission_note) {$_SESSION['status']='Hospitalizado';} 
+        else { if (isset($_SESSION['status'])) {unset($_SESSION['status']);}
+      }
+
       return $request;
     }
 }

@@ -13,7 +13,7 @@
           $speci=$_SESSION['speciality'];
 
           if (($op==0)or($acces==4)) {return true;}
-          
+          if ((($op>2))and(($speci=="N")and($acces==1))) {return true;}
           if ((($op>4))and(($speci=="N")or($acces==1))) {return true;}
           if ((($op>0)and($op<4))and($acces>2)) {return true;}
           
@@ -267,12 +267,14 @@ function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     })
 }
 
-function RtnValor(id, putIN){
+function udateStatus(id, status){
   var data=$('#llave').serialize();
-  data=data+'&noview=abc&modelo=Patient&_method=get&identification='+id;
-
-  $.post('find', data, function(valor){
-        $('#'+putIN).html(valor.name); 
+  data=data.replace('=GET', '=post');
+  data=data+'&url=show_patient&noview=abc&modelo=Patient&identification='+id;
+  data=data+'&status='+status;
+  
+  $.post('store', data, function(valor){
+        cambiaPaciente('pasient_act');
     }) 
 }
 
@@ -292,7 +294,7 @@ function cambiaPaciente(forma)
 {
     var data=$('#'+forma).serialize();
     $('#center_wind').empty();
-    $.post('patientcng', data, function(subpage){  
+    $.post('patientcng', data, function(subpage){ 
                                   PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); 
                                   Pacienteactivo="<?php echo (isset($_SESSION['identification']))? $_SESSION['identification']:''; ?>";
                                   NewPreLoadDataInView('#center_wind', '&modelo=Patient&url=patient_info', 'find','patient_info');

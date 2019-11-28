@@ -1,5 +1,7 @@
 
-<?php use App\Patient;?>
+<?php use App\Patient;
+    $patientSTATUS='';
+?>
 
     @if (isset($patient))
            <?php 
@@ -17,6 +19,11 @@
          ?>           
     @endif 
 
+    @if (isset($_SESSION['status']))
+        <?php                     
+            $patientSTATUS=' ( Status:'.$_SESSION['status'].')'; 
+         ?>           
+    @endif 
 
    <style type="text/css">
          .verde {background: #E3F8CD;
@@ -36,7 +43,7 @@
 <div class="dropdown" style="margin-left: -6px;">
   <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #3149D5; color: #AFC4E8;">
     <strong>Patient Information</strong>
-    {{$patient->name}}  {{$patient->surname}}
+    {{$patient->name}}  {{$patient->surname}} {{$patientSTATUS}}
   </button>
 <div class="dropdown-menu verde" aria-labelledby="dropdownMenuButton" style="max-width: 145%;">
 

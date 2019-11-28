@@ -51,33 +51,16 @@ use App\Exams;
 	<input type="hidden" name="url"  value='consultation.Exams'>
 	<input type="hidden" name="modelo"  value='Exams'>
 
-    <input type='file' name='images'>
-
 	<div class="form-group" id="examenes">
         <strong>Exam(s) :</strong>
-        <table>
-        	<tr>
-        		<td class="exam">
-		         	<strong>Exam title</strong>
-		         </td>
-		         <td class="descr" style="">
-		         	<strong>Results</strong>
-		         </td>
-		         <td class="imagt">
-		         	<strong>Image</strong>
-		         </td>
-		         <td>
-                    <strong>----</strong>          
-                 </td>
-		     </tr>
-
-		     
-        </table>
-
+        <div style="background: #AFC4E8;">
+           <div style="float: left; width: 45%; color: black;"><strong>Exam title</strong></div> 
+           <div style="float: left; width: 45%; color: black;"><strong>Results</strong></div>
+        </div>        
 
         <div id="exmsList"></div>
     </div>
-    <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
+    <a href="javascript:addExams('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
     
     <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>	
@@ -85,24 +68,29 @@ use App\Exams;
 <script type="text/javascript">
 		
 		var $xmed=0;
-        function delelm($xeme){ 
-       
-        $('#'+$xeme).remove();
+        $accLvl=<?php echo $_SESSION['acceslevel']; ?>;
         
+
+        function delelm($xeme, $ind){ 
+            
+        $('#c0'+$xeme[$ind]).remove();
+        $('#c1'+$xeme[$ind]).remove();    
+        $('#'+$xeme).remove();
+        if (!($('.examitem').length)) {     $xmed=0;     }
         }
 
-	function addMedition($title, $Descrptn, $image){ 
-        $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 350px;'>";
-        $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 310px;'>";
-		$imgdrv= ($image) ? "<a href='#'>"+$image+"</a>" : "<a href='javascript:addimage(\"img"+$xmed+"\")' class='btn btn-normal'><span class='glyphicon ' aria-hidden='true'>7</span> Add image</a>";
-        $bottDel="<a href='javascript:delelm(\"exams"+$xmed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>";
-		$others="<div id=\"exams"+$xmed+"\">"+$titlet+$descrt+$imgdrv+$bottDel+"</div>";
-		
-		var txt = document.getElementById('exmsList');
+    function addExams($title, $Descrptn, $image){ 
+        $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 45%;'>";
+        $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 45%;' >";
+        $bottDel=(($accLvl>3)||(!$title))? "<a href='javascript:delelm(\"exams"+$xmed+"\" ,"+$xmed+")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>":"<a href='#' class='btn btn-success'><span class='glyphicon glyphicon' aria-hidden='true'></span></a>";
+        $others="<div class='examitem' id=\"exams"+$xmed+"\">"+$titlet+$descrt+$bottDel+"</div>";
+        
+        var txt = document.getElementById('exmsList');
         txt.insertAdjacentHTML('beforeend', $others);
         
         $xmed=$xmed+1;
-       }
+       } 
+
 </script>
 
     @if (isset($patient->exams))
@@ -115,8 +103,9 @@ use App\Exams;
                 $colResu=(isset($xyzabc[$i][1]))? $xyzabc[$i][1] : "";
                 $colImag=(isset($xyzabc[$i][2]))? $xyzabc[$i][2] : "";
              ?>
-    		<script> addMedition('{{ $colExam }}','{{ $colResu }}' ,' {{ $colImag }} '); </script>
+    		<script> addExams('{{ $colExam }}','{{ $colResu }}' ,' {{ $colImag }} '); </script>
 		@endfor
     @endif 
 </div>
-
+<!--
+-->

@@ -52,7 +52,8 @@ Route::group(['middleware' => 'IsAuten'], function(){
 		
     });
 
-
+Route::get('file', function () {return view('file');});
+Route::post('upload','FileController@update');
 /*User operation*/ 
 
 Route::post('finduser','AccesController@find_user');

@@ -11,8 +11,6 @@
         <p id="parr2" style="text-align: justify;"> </p>
         <p id="parr3" style="text-align: justify;"> </p>
         <p id="parr4" style="text-align: justify;"> </p>
-
-        <strong>Medication</strong>
         <p id="parr5" style="text-align: justify;"> </p>
 
      </div>
@@ -21,8 +19,12 @@
 </div>
 
 <script type="text/javascript">
-$( "#qwerty" ).click(function() {
+/*$( "#qwerty" ).click(function() {
   $("#qwerty").modal("hide");
+});*/
+$( "#qwerty" ).blur(function() {
+    
+      $('#parr1').html(''); $('#parr2').html(''); $('#parr3').html(''); $('#parr4').html(''); $('#parr5').html('');
+    
 });
-
 </script>

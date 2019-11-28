@@ -105,7 +105,7 @@
                               $borrable=(($_SESSION['acceslevel']>3)and$Editable);
                               $i=$i+1;?>
                                             
-                             <a href="javascript:ShowNote({{$patmt}})" class="list-group-item" style="height: 70px;" id="linea{{$idt}}">
+                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px;" id="linea{{$idt}}">
                                   <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
                                         
                                     <div id='userd{{$idN}}'>
@@ -175,17 +175,19 @@
 
 <script type="text/javascript">
 
-    function ShowNote (reg){
+    function ShowNote (medico,reg){
       $('#qwerty').modal('show');
       $fecha=reg.created_at.substr(0,10);
     
-      $a=RtnValor(reg.identification,'cabecera');
+      /*$a=RtnValor(reg.identification,'cabecera');*/
 
-      $('#cabecera').html($fecha+'    ');
-      if (reg.subjective) {$('#parr1').html("<strong>S: </strong>"+reg.subjective);}
-      if (reg.evolution) {$('#parr2').html("<strong>O: </strong>"+reg.evolution);}
-      if (reg.assessment) {$('#parr3').html("<strong>A: </strong>"+reg.assessment);}
-      if (reg.treatment) {$('#parr4').html("<strong>P: </strong>"+reg.treatment);}
+      $who=$('#'+medico).html(); 
+      $('#cabecera').html($fecha+'     <br>'+$who);
+    
+      $('#parr1').html("<strong>S: </strong>"+((reg.subjective)?reg.subjective:''));
+      $('#parr2').html("<strong>O: </strong>"+((reg.evolution)?reg.evolution:''));
+      $('#parr3').html("<strong>A: </strong>"+((reg.assessment)?reg.assessment:''));
+      $('#parr4').html("<strong>P: </strong>"+((reg.treatment)?reg.treatment:''));
 
       $mdcn="<br><table><tr><th scope='row' WIDTH='250'>Drug</th><th WIDTH='100'>Dose</th><th>Frequency</th></tr>";
       for (var i =0 ; i <= reg.drug.length - 1; i++) {

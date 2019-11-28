@@ -7,7 +7,7 @@
 </style>
 <div>
 	<strong>Physical Examination</strong>
-<div class="ambas" id='superior' style="max-height: 400px; height: 400px; overflow: auto;">
+<div class="ambas" id='superior' style="max-height: 400px; height: 400px; overflow: auto; background: white;">
 	
 </div>
 </div>

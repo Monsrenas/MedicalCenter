@@ -54,13 +54,15 @@
                               $stringpat=$patmt->surname.', '.$patmt->name.' '.$patmt->age;
                               $StrURL='PatienCng/'.$patmt->identification;
                               $idt=$patmt->identification;
+                              $status=(isset($patmt->status))?$patmt->status:'0';
+                              $status=($status=='1')?'Hospitalizado':'';
                               $i=$i+1; ?>
                               
                              <a href="javascript:cambiaPaciente('edl{{$idt}}')" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
                               
-                                  <div class="form-inline" style="float:left; width:140px;">{{$patmt->identification}}</div> 
-                                  <div class="form-inline" style="float: left;">{{$stringpat  }}</div>
-  
+                                  <div class="form-inline" style="float:left; width:140px; text-align: right; padding-right: 20px;">{{$patmt->identification}}</div> 
+                                  <div class="form-inline" style="float: left; width:440px; text-align: left;">{{$stringpat  }}</div>
+                                  <div class="form-inline" style="float: left;">{{$status}}</div>
                                  @if (2==2)    
                                   <div class="form-inline" style="float: right;">
                                     <form class="form-inline" action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >

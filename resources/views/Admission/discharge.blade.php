@@ -23,13 +23,13 @@
 			$PD=(isset($patient->diagnostic))?$patient->diagnostic:'';
 			$PI=(isset($patient->informant))?$patient->informant:'';
 
-			$a_r='It is detailed that at '.$TA.' hours of the day '.$DA.' the patient arrives at the hospital in the company of: '.$PI.' and detailing that: \n';
+			$a_r='<strong>It is detailed that at </strong>'.$TA.'<strong> hours of the day </strong>'.$DA.'<strong> the patient arrives at the hospital  '.(($PI)?'in the company of: ':'').'</strong>'.$PI.'<strong> and detailing that:</strong> <br><br>';
 			$a_r=$a_r.$AN;
-			$a_r=$a_r.'and presenting the following symptoms:';
+			$a_r=$a_r.'<br><strong> and presenting the following symptoms:</strong> <br><br>';
 			$a_r=$a_r.$PS;
-			$a_r=$a_r.'Therefore, the stipulated check was made, after which the doctor concluded:';
+			$a_r=$a_r.'<br><br> <strong>Therefore, the stipulated check was made, after which the doctor concluded:</strong> <br><br>';
 			$a_r=$a_r.$PD;
-			$a_r=$a_r.'For this reason the income is determined, it was made at: '.$TH.' of the day '.$DH;
+			$a_r=$a_r.'<br><br> <strong>For this reason the income is determined, it was made at:</strong> '.$TH.' <strong>of the day</strong> '.$DH;
            ?>
 @endif
 
@@ -39,18 +39,22 @@
 	           		$edit=false;	  
 	           		$discharged=(isset($discharged[0]))? $discharged[0]:$discharged;
 	           		$identification=($discharged->identification)?$discharged->identification:'';
-	           		$user_id=(isset($discharged->user_id))?$discharged->user_id : $_SESSION['dr_user'];	
+	           		$user_id=(isset($discharged->user_id))?$discharged->user_id : $_SESSION['dr_user'];
+
+	           		if (isset($discharged->admission_resume)) {
+	           													$a_r=$discharged->admission_resume;
+	           													echo "<h1>Last Medical release</h1>";
+	           		} else { echo "<h1>No existe registro de ingresos o actas medicas para el paciente</h1>"; 
+	           				 return;
+	           			   }
+	           		 
+	           		
            		?>
            		@for ($i = 0; $i < 7; $i++)
 		            <?php
 		            	$admission_resume[$i]=$discharged->admission_resume[$i]; 
 		             ?>
-				@endfor
-
-       	   @else
-       	   		<?php
-       	   			echo "Patient no in hospital";
-       	   		 return  ?> 		     	
+				@endfor 		     	
 		   @endif 
 
 @endif
@@ -77,10 +81,10 @@
     <input type="hidden" name="_method" value="post">  
 
 <strong>Admission Resume:</strong>
-<a href="javascript:alert('{{$a_r}}')" class="list-group-item">						
+<a href="javascript:showModal('<?php echo($a_r); ?>')" class="list-group-item">						
 <div style="text-align: justify; font-size: xx-small; max-height: 60px; overflow: auto scroll; background: white; color: black">
 
-	<p>{{$a_r}}</p>
+	<p><?php echo($a_r); ?></p>
 	
 </div> 
 </a>
@@ -125,6 +129,15 @@
 </form>	
 </div>
 <script type="text/javascript"> 
+
+	function showModal($info) {
+
+	  $('#qwerty').modal('show');
+      
+      $('#cabecera').html('Admission Resume');
+      $('#parr1').html($info);
+	}
+
 /* $a='alkjlkj';
 	alert($a.blink());
 $a=prompt('Entre valor','William')*/</script>

@@ -82,12 +82,14 @@ if(!isset($_SESSION)){session_start();}
         function delelm($xeme){ 
        
         $('#'+$xeme).remove();
+        if (!($('.meditems').length)) {     $med=0;     }
         
+        if (!($('.alergitems').length)) {   $dru=0;     }
         }
 
 	function addMedition($vDrug, $vDose, $vtime){ 
 				
-		$others="<div id='med"+$med+"'> <input type='text' class='form-inline' name='drugname[]'  value='"+$vDrug+"' maxlength='50' size='50'><input type='text' class='form-inline' name='dose[]'  value='"+$vDose+"'><input type='text' class='form-inline' name='time[]'  value='"+$vtime+"'><a href='javascript:delelm(\"med"+$med+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> Delete</a></div>";
+		$others="<div class='meditems' id='med"+$med+"'> <input type='text' class='form-inline' name='drugname[]'  value='"+$vDrug+"' maxlength='50' size='50'><input type='text' class='form-inline' name='dose[]'  value='"+$vDose+"'><input type='text' class='form-inline' name='time[]'  value='"+$vtime+"'><a href='javascript:delelm(\"med"+$med+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> Delete</a></div>";
 		
 		var txt = document.getElementById('medications');
         txt.insertAdjacentHTML('beforeend', $others);
@@ -95,7 +97,7 @@ if(!isset($_SESSION)){session_start();}
        }
 
 	function addDrug($vAlerg){ 
-		$others="<div id='drug"+$dru+"'><input type='text' class='form-inline' name='allergieTo[]' placeholder='Drug to which the patient is allergic' value='"+$vAlerg+"' maxlength='100' size='100'> <a href='javascript:delelm(\"drug"+$dru+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> </a> </div>";
+		$others="<div class='alergitems' id='drug"+$dru+"'><input type='text' class='form-inline' name='allergieTo[]' placeholder='Drug to which the patient is allergic' value='"+$vAlerg+"' maxlength='100' size='100'> <a href='javascript:delelm(\"drug"+$dru+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> </a> </div>";
 		
 		var txt = document.getElementById('drugs');
         txt.insertAdjacentHTML('beforeend', $others);

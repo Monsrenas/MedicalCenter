@@ -1,5 +1,4 @@
-<?php use App\Physiciansnote; 
-    
+<?php use App\Physiciansnote;     
     if(!isset($_SESSION)){ session_start(); }
     $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
@@ -84,22 +83,6 @@
 	<div class="form-group" style="padding-top: 20px;">
         <strong>Medical prescription</strong>
         <br>
-       <!-- 
-        <table >
-        	<tr>
-        		<td style="width: 450px;">
-		         	<strong>Drug</strong>
-		         </td>
-		         <td style="width: 170px;">
-		         	<strong>Dose</strong>
-		         </td>
-		         <td style="width: 300px;">
-		         	<strong>Frequency</strong>
-		         </td>
-		         <td></td>
-		     </tr>
-        </table>  --->
-
         <div style="background: #AFC4E8;">
            <div style="float: left; width: 49%; color: white;"><strong>Drug</strong></div> 
            <div style="float: left; width: 16%; color: white;"><strong>Dose</strong></div>
@@ -108,7 +91,8 @@
 
         <div id="PTNmedications" style="background: #6888C0;"></div>
     </div>
-    <a href="javascript:addMedition('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Medication</a>
+
+    <a href="javascript:addMedicina('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Medication</a>
     
    <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>	
@@ -120,15 +104,17 @@
         function delelm($xeme){ 
         
         $('#'+$xeme).remove();   
+         if (!($('.Medicationitem').length)) {     $ymed=0;     }
+        
         }
 
     function showElement($eName){
         $('#div'+$eName).toggle();
     }
 
-	function addMedition($vDrug, $vDose, $vtime){ 
+	function addMedicina($vDrug, $vDose, $vtime){ 
 				
-		$others="<div id='med"+$ymed+"'> <input type='text' class='form-inline' name='drug["+$ymed+"][0]'  value='"+$vDrug+"' maxlength='50' size='50'><input type='text' class='form-inline' name='drug["+$ymed+"][1]'  value='"+$vDose+"'><input type='text' class='form-inline' name='drug["+$ymed+"][2]'  value='"+$vtime+"'><a href='javascript:delelm(\"med"+$ymed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> Delete</a></div>";
+		$others="<div class='Medicationitem' id='med"+$ymed+"'> <input type='text' class='form-inline' name='drug["+$ymed+"][0]'  value='"+$vDrug+"' maxlength='50' size='50'><input type='text' class='form-inline' name='drug["+$ymed+"][1]'  value='"+$vDose+"'><input type='text' class='form-inline' name='drug["+$ymed+"][2]'  value='"+$vtime+"'><a href='javascript:delelm(\"med"+$ymed+"\")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span> Delete</a></div>";
 		
 		var txt = document.getElementById('PTNmedications');
         txt.insertAdjacentHTML('beforeend', $others);
@@ -151,11 +137,10 @@
               $col[1]=isset($patient->drug[$i][1])?$patient->drug[$i][1]:'';
               $col[2]=isset($patient->drug[$i][2])?$patient->drug[$i][2]:'';
              ?>
-    		<script> addMedition('{{ $col[0] }}','{{$col[1] }}' ,' {{ $col[2] }} '); </script>
+    		<script> addMedicina('{{ $col[0] }}','{{$col[1] }}' ,' {{ $col[2] }} '); </script>
 		@endfor
     @endif 
 </div>
 <script type="text/javascript">
-    
 
 </script>
