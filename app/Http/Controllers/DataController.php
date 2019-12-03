@@ -22,6 +22,7 @@ use App\Admission;
 use App\Login;
 use App\Discharge;
 use App\Services;
+use App\Appointment;
 if(!isset($_SESSION)){
     session_start();
 }
@@ -47,6 +48,7 @@ class DataController extends Controller
           case 'Admission': return $tmodelo= new Admission; break;   
           case 'medUser': return $tmodelo= new medUser; break;
           case 'Discharge': return $tmodelo= new Discharge; break;   
+          case 'Appointment': return $tmodelo= new Appointment; break;
           
         }
     }
@@ -315,7 +317,7 @@ class DataController extends Controller
           $result=$this->findbyDate($request, $classdata);
           $comprometidos=$comprometidos+count($result);  
           }
-          
+
         return $comprometidos;
     }
 

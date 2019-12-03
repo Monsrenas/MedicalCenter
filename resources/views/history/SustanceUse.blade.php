@@ -3,26 +3,24 @@
 	if(!isset($_SESSION)){
     session_start();
 	}
-	$_SESSION['opcion']='bott8';
-
 ?>
 
 @if (isset($_SESSION['identification']))
            <?php 
-           		$identification=($_SESSION['identification']);  
+           		$identification=$_SESSION['identification'];  
 			?>
 @endif
 
 
  @if (isset($patient))
-           <?php $identification=$patient->identification;  ?>
+           <?php $identification=($patient->identification)?$patient->identification:$identification; ?>
  @else         
            <?php                     
             $patient=new Sustanceuse;
-            if (!isset($identification)) {$identification="";}
-             $patientActive=false;
+            if (!isset($identification)) {$identification=$_SESSION['identification'];}
             ?>  
 @endif
+
 
 <script type="text/javascript">
 	

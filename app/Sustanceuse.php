@@ -15,8 +15,6 @@ class Sustanceuse extends Eloquent
 							'often',
 							'yearsuse',
 							'lastuse',
-							'urine',
-							'gmr',
 							'yesno',
     ];
 }

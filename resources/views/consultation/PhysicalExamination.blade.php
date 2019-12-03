@@ -117,7 +117,6 @@ global  $patient1;
                                <option ".(($mHeight=='ft') ? "selected":"")." value='ft' >Feet</option>
                                <option ".(($mHeight=='m') ? "selected":"")." value='m' >Meters</option>
                              </select>";
-            
             if (isset($patient1->$nom[0])) {$valor=$patient1->$nom[0];}
 	        $nom=$nom."[0]";
 	        break;
@@ -128,7 +127,7 @@ global  $patient1;
 	         break; 
 	        } 
 	 
-	 $vlr=(isset($valor[1]))? "":$valor;
+	 $vlr=(is_array($valor))? $valor[1]:$valor;
 	
 	 if ($nom<>'') {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)'>";
 				$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2).$ctrlr.$unit." </td>";

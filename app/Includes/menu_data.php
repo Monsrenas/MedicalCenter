@@ -26,7 +26,7 @@ $patientITEMS = [
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],
   'Exams' => ['exams.load_list',['Realizados','xmsrealizados'],['Solicitados','xmssolicitados']],
   'Reports' => [['Resumen de Servicios','report.searche']],
-  'Appointment' => [['Listado','link'],['Nueva','Form']],
+  'Appointment' => [['Make appointment','appointment.find'],['Listado','link']],
   
 ];
 

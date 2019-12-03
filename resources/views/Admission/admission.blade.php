@@ -30,7 +30,7 @@
 
 <div style="padding: 1%;   align: center;  ">
 	<strong id="MuestraFecha"></strong><br><br>
-<form  action="javascript:SaveDataNoRefreshView('MyAdmission','store')" method="post" style="width: 100%; text-align: center;" id="MyAdmission" onsubmit="javascript:EliminaVentanaDischarge('{{ $identification }}')">
+<form  action="javascript:SaveDataNoRefreshView('MyAdmission','store')" method="post" style="width: 100%; text-align: center;" id="MyAdmission" onsubmit="javascript:EliminaVentanaDischarge('{{ $identification }}')" oninput="javascript:VerficaLlenado()">
 	@csrf
 	<input type="hidden" name="user_id" id="user_id" placeholder="Admission Id" value='{{ $user_id }}'> 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -60,19 +60,19 @@
 <br>
 	<div class="form-group">
 	    <strong>Admission Note</strong><br>
-	   <textarea rows = "5" cols = "100%" name = "admission_note" {{$edit}}>
+	   <textarea id="TTadmission_note" rows = "5" cols = "100%" name = "admission_note" {{$edit}}>
 	           <?php  echo (isset($patient->admission_note)?$patient->admission_note:''); ?> 
 	    </textarea>
 	</div>
 	<div class="form-group">
 		<strong>Symptom</strong><br>
-		<textarea rows = "5" cols = "100%" name = "symptom" {{$edit}}>
+		<textarea id="TTsymptom" rows = "5" cols = "100%" name = "symptom" {{$edit}}>
 	          <?php  echo (isset($patient->symptom)?$patient->symptom:''); ?> 
 	    </textarea>
 	</div>
 	<div class="form-group">
 		<strong>Medical Diagnostic</strong><br>
-		<textarea rows = "5" cols = "100%" name = "diagnostic" {{$edit}}>
+		<textarea id="TTdiagnostic" rows = "5" cols = "100%" name = "diagnostic" {{$edit}}>
 	          <?php  echo (isset($patient->diagnostic)?$patient->diagnostic:''); ?> 
 	    </textarea>
 	</div>
@@ -81,7 +81,7 @@
 		<strong>informant or representative:</strong>
 		<input type="text" name="informant" id="informant" value="<?php  echo (isset($patient->informant)?$patient->informant:''); ?> " {{$edit}}/>
 	</div>
-    <?php include(app_path().'/Includes/SaveButton.html') ?>
+	<div hidden="true" id="BTNsaveAdmission"> <?php include(app_path().'/Includes/SaveButton.html') ?> </div>
 </form>
 </div>
 <script type="text/javascript">
@@ -95,8 +95,18 @@ function EliminaVentanaDischarge(id) {
 	if ($('#frAdmission_discharge').length) {$('#frAdmission_discharge').remove()}
      udateStatus(id,'1');		
 	}
+
 <?php $fecha=(isset($patient->date_hospitalization)?$patient->date_hospitalization:$cdate); ?>
 fijafecha('{{substr($fecha, 8,2)}}','{{substr($fecha, 5,2)}}','{{substr($fecha, 0,4)}}');
 	
+
+function VerficaLlenado(){ 
+	 	$sbj=($('#TTadmission_note').val().trim().length>0);
+        $vlt=($('#TTsymptom').val().trim().length>0);
+        $sss=($('#TTdiagnostic').val().trim().length>0);
+       
+        
+     if (($sbj)&&($vlt)&&($sss))  { $('#BTNsaveAdmission').show(); } else {$('#BTNsaveAdmission').hide();}
+}
 	
 </script>
