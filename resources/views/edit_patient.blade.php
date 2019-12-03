@@ -64,7 +64,7 @@
                 </div>
             </form>      
             <br>
-            <form  action="javascript:SaveDataNoRefreshView('editPatientForm','store')" method="post" id="editPatientForm" name="editPatientForm" enctype="multipart/form-data" autocomplete="off">
+            <form  action="javascript:GuardarUsuario()" method="post" id="editPatientForm" name="editPatientForm" enctype="multipart/form-data" autocomplete="off">
             @csrf
                 <input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />
@@ -206,6 +206,11 @@
           
     <script>
         
+        function GuardarUsuario(){
+            SaveDataNoRefreshView('editPatientForm','store');
+            $('#frlist_patient').remove();
+        }    
+
         /**
          * Función que solo permite la entrada de numeros, un signo negativo y
          * un punto para separar los decimales

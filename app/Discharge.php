@@ -15,6 +15,7 @@ class Discharge extends Eloquent
 							'user_id',
 							'date',
 							'time',
+							'admission_date',
 							'admission_resume',
 							'discharge_resume',
 							'discharge_reason',

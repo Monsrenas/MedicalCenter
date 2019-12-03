@@ -3,6 +3,7 @@ use App\Exams;
     if(!isset($_SESSION)){ session_start(); }
     $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    $examlst='exmsList';
 ?>
 
  
@@ -17,7 +18,9 @@ use App\Exams;
                 }
 
            $id=$patient->id;  
-           $identification=$patient->identification;?>
+           $identification=$patient->identification;
+           $examlst='exmlsr'.$id;
+           ?>
 @else
     <?php                     
             $patient=new Exams;
@@ -58,9 +61,9 @@ use App\Exams;
            <div style="float: left; width: 45%; color: black;"><strong>Results</strong></div>
         </div>        
 
-        <div id="exmsList"></div>
+        <div id="<?php echo $examlst ?>"></div>
     </div>
-    <a href="javascript:addExams('','','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
+    <a href="javascript:addExams('','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
     
     <?php include(app_path().'/Includes/SaveButton.html') ?>
 </form>	
@@ -79,13 +82,14 @@ use App\Exams;
         if (!($('.examitem').length)) {     $xmed=0;     }
         }
 
-    function addExams($title, $Descrptn, $image){ 
+    function addExams($title, $Descrptn){ 
+        $edtResu=($title)?'':'Disabled';
         $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 45%;'>";
-        $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 45%;' >";
+        $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 45%;' "+$edtResu+">";
         $bottDel=(($accLvl>3)||(!$title))? "<a href='javascript:delelm(\"exams"+$xmed+"\" ,"+$xmed+")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>":"<a href='#' class='btn btn-success'><span class='glyphicon glyphicon' aria-hidden='true'></span></a>";
         $others="<div class='examitem' id=\"exams"+$xmed+"\">"+$titlet+$descrt+$bottDel+"</div>";
         
-        var txt = document.getElementById('exmsList');
+        var txt = document.getElementById('<?php echo $examlst ?>');
         txt.insertAdjacentHTML('beforeend', $others);
         
         $xmed=$xmed+1;
@@ -103,7 +107,7 @@ use App\Exams;
                 $colResu=(isset($xyzabc[$i][1]))? $xyzabc[$i][1] : "";
                 $colImag=(isset($xyzabc[$i][2]))? $xyzabc[$i][2] : "";
              ?>
-    		<script> addExams('{{ $colExam }}','{{ $colResu }}' ,' {{ $colImag }} '); </script>
+    		<script> addExams('{{ $colExam }}','{{ $colResu }}'); </script>
 		@endfor
     @endif 
 </div>

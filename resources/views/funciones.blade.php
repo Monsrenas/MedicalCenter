@@ -30,3 +30,14 @@
 	
 	
 </script>
+
+
+<?php function dateString($fecha) {
+
+		$monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+			$year=substr($fecha,0, 4);
+			$dia=substr($fecha,8, 2);
+			$mes=substr($fecha,5, 2);
+			return $year.' ('.$dia.' '.$monthNames[$mes-1].')';	
+}
+?>

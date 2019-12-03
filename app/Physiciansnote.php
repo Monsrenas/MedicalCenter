@@ -16,7 +16,9 @@ class Physiciansnote extends Eloquent
 							'evolution',
 							'assessment',
 							'treatment',
-							'drug'
+							'drug',
+							'condition',
+							'status',
     ];
 }
 

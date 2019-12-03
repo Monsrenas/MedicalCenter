@@ -23,6 +23,8 @@
 			$PD=(isset($patient->diagnostic))?$patient->diagnostic:'';
 			$PI=(isset($patient->informant))?$patient->informant:'';
 
+			$adm_date=(isset($patient->date_hospitalization))?$patient->date_hospitalization:''; 
+
 			$a_r='<strong>It is detailed that at </strong>'.$TA.'<strong> hours of the day </strong>'.$DA.'<strong> the patient arrives at the hospital  '.(($PI)?'in the company of: ':'').'</strong>'.$PI.'<strong> and detailing that:</strong> <br><br>';
 			$a_r=$a_r.$AN;
 			$a_r=$a_r.'<br><strong> and presenting the following symptoms:</strong> <br><br>';
@@ -40,7 +42,7 @@
 	           		$discharged=(isset($discharged[0]))? $discharged[0]:$discharged;
 	           		$identification=($discharged->identification)?$discharged->identification:'';
 	           		$user_id=(isset($discharged->user_id))?$discharged->user_id : $_SESSION['dr_user'];
-
+	           		$adm_date=(isset($patient->admission_date))?$patient->admission_date:''; 
 	           		if (isset($discharged->admission_resume)) {
 	           													$a_r=$discharged->admission_resume;
 	           													echo "<h1>Last Medical release</h1>";
@@ -70,15 +72,17 @@
 
 <br>
 <div style="padding: 1%;   text-align: left;  ">
-<form  action="javascript:AltaMedica('{{ $identification }}')" method="post" style="width: 100%; text-align: left;" id="MyDischarge">
+<form  action="javascript:AltaMedica('{{ $identification }}')" method="post" style="width: 100%; text-align: left;" id="MyDischarge" >
 
 	@csrf 
 	<input type="hidden" name="user_id" id="user_id" placeholder="Admission Id" value='{{ $user_id }}'> 	
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
+	<input type="hidden" name="admission_date" value="<?php echo(isset($adm_date)?$adm_date:$cdate); ?>">
 
     <input type="hidden" name="modelo" id="modelo" value="Discharge" />
     <input type="hidden" name="url" id="url" value="Admission.discharge" />
     <input type="hidden" name="_method" value="post">  
+
 
 <strong>Admission Resume:</strong>
 <a href="javascript:showModal('<?php echo($a_r); ?>')" class="list-group-item">						

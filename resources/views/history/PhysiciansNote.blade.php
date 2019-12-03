@@ -1,11 +1,13 @@
 <?php $identification=''; 
       $id='';
-
+      $cdate=date("Y-m-d");
+      $carbon = new \Carbon\Carbon();
 ?>
 
  @if (isset($patient))
            <?php $identification=(isset($patient->identification))?$patient->identification:'';
-                 $id=(isset($patient->id))?$patient->id:'';  ?>
+                 $id=(isset($patient->id))?$patient->id:'';  
+           ?>
 @endif
 
 @include ('speciality')
@@ -94,6 +96,11 @@
   ?>
    @foreach($patient as $patmt)
                           <?php 
+                              $dateFi = $carbon->createFromDate($cdate);
+                              $dateIn = $carbon->createFromDate(substr($patmt->created_at,0, 10));
+                              $antiguedad=date_diff($dateFi,$dateIn);
+                              
+
                               $idt=$patmt->identification;
 
                               $tmi=strlen($idt);
@@ -105,7 +112,7 @@
                               $borrable=(($_SESSION['acceslevel']>3)and$Editable);
                               $i=$i+1;?>
                                             
-                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px;" id="linea{{$idt}}">
+                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px;" id="mNota{{$idN}}">
                                   <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
                                         
                                     <div id='userd{{$idN}}'>
@@ -132,7 +139,7 @@
   
                                  @if ($borrable)    
                                   <div class="form-inline" style="float: right;">
-                                    <form class="form-inline" action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >
+                                    <form class="form-inline" action="javascript:elimina('DNT{{$idN}}','mNota{{$idN}}')" id='DNT{{$idN}}' >
                                       @csrf
                                       <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />
                                       <input type="hidden" name="_method" value="post">

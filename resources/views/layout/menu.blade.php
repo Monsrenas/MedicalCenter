@@ -28,7 +28,7 @@
       @csrf
       <input type="hidden" name="modelo" id="modelo" value="Patient" />
       <input type="hidden" name="_method" value="get">
-      <input type="hidden" name="identification" value="{{$_SESSION['identification']}}"> 
+      <input type="hidden" name="identification" id='ACT_Identification' value="{{$_SESSION['identification']}}"> 
     </form>
     @else 
     <script type="text/javascript">var Pacienteactivo="";</script>
@@ -189,9 +189,9 @@ opacity: 100%;
 function ShoWindow(elemento, ventana, subpage){      
                         $frm= "fr"+elemento.trim(); /*nombre del elemento HTML */
                         $frm= $frm.replace('.', '_');
-                        
+
                         if (ventana=="#center_wind"){$('.contenidoCentro').hide();  
-                              if ( $('#'+$frm).length ) { 
+                              if ( $('#'+$frm).length ) {   
                                 // hacer algo aquí si ya la opcion tiene un div con contenido
                                 $('#'+$frm).show();
                               } else {   
@@ -220,12 +220,13 @@ function RefreshWindow(elemento, ventana, subpage){
                         } else { $(ventana).append(subpage);}
 }
 
-function LoadDataInView(elemento, forma,vista) { 
+function LoadDataInView(elemento, forma,vista) {   
     var data=$('#'+forma).serialize();
-    var previo="#fr"+elemento.trim()
-    if ($(previo).length) {$(previo).remove()}
 
-    $.post(vista, data, function(subpage){
+    var previo="#fr"+elemento.trim()
+    
+    if ($(previo).length) {$(previo).remove()}
+    $.post(vista, data, function(subpage){ 
         ShoWindow(elemento,"#center_wind",subpage);
     })
 
@@ -260,8 +261,7 @@ function PreLoadDataInView(ventana, xdata, vista) {
 
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
-    data=data+xdata; 
-       
+    data=data+xdata;    
     $.post(vista, data, function(subpage){
         ShoWindow(elemento,ventana,subpage);
     })
@@ -272,7 +272,7 @@ function udateStatus(id, status){
   data=data.replace('=GET', '=post');
   data=data+'&url=show_patient&noview=abc&modelo=Patient&identification='+id;
   data=data+'&status='+status;
-  
+  $('#ACT_Identification').val(id); 
   $.post('store', data, function(valor){
         cambiaPaciente('pasient_act');
     }) 
@@ -280,7 +280,8 @@ function udateStatus(id, status){
 
 function elimina(forma, linea) {
   var data=$('#'+forma).serialize();
-  a=confirm('You want to erase patient information '+forma); 
+  
+  a=confirm('You want to erase this information: '+forma); 
   if (a) {
             $.post('delete', data, function(subpage){ 
                 $('#'+linea).remove(); 
@@ -322,21 +323,24 @@ function AbreConsulta(ventana, vista){
 }
 
 
-function CargaConsulta(ventana, xdata, control){ 
+function CargaConsulta(ventana, xdata, control){ $('#exmsList').remove();
   PreLoadDataInView('#Physical', '&modelo=Physical&url=consultation.PhysicalExamination'+xdata, 'findbyId');
   PreLoadDataInView('#Laboratory', '&modelo=Exams&url=consultation.Exams'+xdata, 'findbyId');
   PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation'+xdata, 'flexlist');
 }
 
-function AltaMedica(identification){ 
-  a=confirm('Estar operacion efectua el alta medica del paciente, Desea Continuar ? ');
-  if (!a) {return}
+function AltaMedica(identification){
+  
+  efectuar=confirm('Estar operacion efectua el alta medica del paciente, Desea Continuar ? ');
+  if (!efectuar) {return}
+
    SaveDataNoRefreshView('MyDischarge','store');
    var data=$('#MyAdmission').serialize();
 
    $.post('delete', data, function(result){  
                 $('#frAdmission_admission').remove();
                 $('#frAdmission_discharge').remove();
+                udateStatus(identification,'0');
                 alert('Discharge done successful'); 
             }); 
 }

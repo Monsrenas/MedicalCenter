@@ -3,34 +3,35 @@
     $user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
     $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
     if ((!isset($_SESSION['identification']))or(!isset($_SESSION['dr_user']))) { return ;}    
+    $status=(isset($_SESSION['status']))?$_SESSION['status'] : "0";
+
 ?>
 
  @if (isset($patient))
-           <?php 
-            
+           <?php             
             $abcd=json_decode($patient);
-
-            $patient=new Physiciansnote;  
-            
-           foreach ($abcd as $clave => $valor) {
-                if (isset($abcd->{$clave})) {$patient->{$clave}=$abcd->{$clave};}
+            $patient=new Physiciansnote;
+                                
+            foreach ($abcd as $clave => $valor) {
+                    if (isset($abcd->{$clave})) {$patient->{$clave}=$abcd->{$clave};}
                 }
 
             if($patient->identification) {$identification=$patient->identification;} else {
             $identification=(isset($_SESSION['identification']))? $_SESSION['identification']:"";}
-            
             $id=(isset($patient->id))? $patient->id : str_replace(" ", "",$hoy.$identification.$user);
+            $status=(isset($patient->status))?$patient->status:(isset($_SESSION['status']))?$_SESSION['status']:'0';         
            ?>
    @else         
            <?php                     
             $patient=new Physiciansnote;
            ?>
   @endif
-  <?php 
+  <?php
+
     $identification=(!($identification))?$_SESSION['identification']:$identification;  
     $id=(!($id))?str_replace(" ", "",$hoy.$identification.$user):$id;
   ?> 
-
+ 
 <style type="text/css">
     table { font-size: small;
              
@@ -46,6 +47,7 @@
 	@csrf
     <input type="hidden" name="id" id="id" placeholder="Interrogation Id" value='{{ $id }}'>
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'/>
+  <input type="hidden" name="status" value="$status">
 	<input type="hidden" name="url"  value='history.Edit_note'/>
 	<input type="hidden" name="enlace"  value='history.Edit_note'/>
     
@@ -71,6 +73,7 @@
         <textarea rows = "5" cols = "100%" name = "assessment">
                {{$patient->assessment}} 
         </textarea>
+        condition
     </div>
 
     <a href="javascript:showElement('treatment')" class="btn btn-default btn-block"><span  aria-hidden="true"></span><strong>P: Plan</strong></a>

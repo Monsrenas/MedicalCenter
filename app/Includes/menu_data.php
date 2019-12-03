@@ -25,7 +25,7 @@ $patientITEMS = [
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],
   'Exams' => ['exams.load_list',['Realizados','xmsrealizados'],['Solicitados','xmssolicitados']],
-  'Reports' => ['History','Service by dates','Exams'],
+  'Reports' => [['Resumen de Servicios','report.searche']],
   'Appointment' => [['Listado','link'],['Nueva','Form']],
   
 ];

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
 use View;
 use App\Patient;
@@ -16,9 +19,9 @@ use App\Surgicalhistory;
 use App\Sustanceuse;
 use App\Physiciansnote;
 use App\Admission;
-use App\medUser;
+use App\Login;
 use App\Discharge;
-
+use App\Services;
 if(!isset($_SESSION)){
     session_start();
 }
@@ -162,6 +165,48 @@ class DataController extends Controller
         return $viewx->with('patient',$abcd);
     }
 
+ public function findbyDate(Request $request, $classdata)
+    {   
+        
+        if (!($request->identification)) {return; }
+        $ptn='';
+        if (($request->Date_from)and($request->Date_to)) 
+            { $ptn='0';} else { 
+                              if ($request->Date_from) {$ptn='1';} else { 
+                                                                        if ($request->Date_to){$ptn='2';}
+                                                                      } 
+                              }
+        
+        $carbon = new \Carbon\Carbon();
+        
+        $dateIn = ($request->Date_from)? $carbon->createFromDate($request->Date_from):'';
+        $dateFi = ($request->Date_to)? $carbon->createFromDate($request->Date_to):'';
+
+        switch ($ptn) {
+           case '0': 
+             $patient = ($classdata)::where('identification','=', "{$request->identification}")->
+                                      where('created_at','>',$dateIn)->
+                                      where('created_at','<',$dateFi)->orderBy('created_at','desc')->get();
+             break;
+           case '1':
+             $patient = ($classdata)::where('identification','=', "{$request->identification}")->
+                                      where('created_at','>',$dateIn)->orderBy('created_at','desc')->get();
+             break;
+           case '2':
+             $patient = ($classdata)::where('identification','=', "{$request->identification}")->
+                                      where('created_at','<', $dateFi)->orderBy('created_at','desc')->get();
+             break;
+           default:
+             $patient = ($classdata)::where('identification','=', "{$request->identification}")->orderBy('created_at','desc')->get();
+               
+               
+             break;
+         } 
+        return $patient;
+    }
+
+
+
    public function destroy(Request $request, $classdata){ 
      if ($request->identification) {
                                     $campo='identification';
@@ -209,6 +254,56 @@ class DataController extends Controller
       return $view->with('patient',$result)->with('discharge',$result1); 
     }
 
+    public function Facturacion(Request $request)
+    {     
+
+    
+      $lst=[0=>['Interrogation','CSL'],1=>['Discharge','HPT'],2=>['Exams','LXM'],3=>['Physical','FXM']];
+      $carbon = new \Carbon\Carbon();
+
+        $view=$this->indexView($request);
+        $services=[];  
+        $i=0;
+        for ($y=0; $y<count($lst); $y++) { 
+          
+          $classdata=$this->modelo($lst[$y][0]);
+          $result=$this->findbyDate($request, $classdata);
+          
+
+          foreach ($result as $elm) {
+             $doc=($y==1)?$elm->user_id:substr($elm->id, 8+strlen($elm->identification));
+             $doc= Login::where('user', $doc)->first();
+             $doc= (isset($doc->surname))?$doc->surname:''; 
+            $tmp=['code'=> $lst[$y][1],'identification'=> $elm->identification, 'date'=> substr($elm->created_at,0, 10),'id'=>$doc ];
+           switch ($y) {
+              case 0: $tmp['details']= substr($elm->cc, 0,100); break;
+              case 1: $tmpd=(isset($elm->admission_date))?$elm->admission_date:$tmp['date'];
+                      $dateIn = $carbon->createFromDate($elm->date);
+                      $dateFi = $carbon->createFromDate($tmpd);
+
+                      $tmp['details']=date_diff($dateFi, $dateIn)->days.' Day(s)'.', From: '.$tmpd.' to: '.$elm->date.'. '.substr($elm->discharge_reason, 0,100);  
+
+                      
+                      $tmp['date']=$tmpd;  
+              break;
+              case 2: $tmp['details']=count($elm->exams).' laboratory exam(s): ';
+                      for ($z=0; $z<count($elm->exams); $z++) { 
+                        $coma=($z>0)?', ':'';
+                        $tmp['details']=$tmp['details'].$coma.$elm->exams[$z][0];
+                      }             
+               break;
+              case 3: $tmp['details']= 'A physical examination done'; break;
+           }
+           if (!($tmp['details'])) {$tmp['details']='.';}      
+              $services[$i]=$tmp;
+              $i=$i+1;  
+          }
+
+        }
+        $services=collect($services)->sortBy('date');
+      
+        return $view->with('patient',$services);
+    }
 
     public function borra(Request $request) 
     {   
@@ -227,11 +322,11 @@ class DataController extends Controller
       $classdata=$this->modelo('Admission');
       $result=$this->Genfind($request, $classdata);
 
-      if ($result->admission_note) {$_SESSION['status']='Hospitalizado';} 
+      if ($result->admission_note) {$_SESSION['status']='1';} 
         else { if (isset($_SESSION['status'])) {unset($_SESSION['status']);}
       }
 
       return $request;
     }
 }
-
+                     

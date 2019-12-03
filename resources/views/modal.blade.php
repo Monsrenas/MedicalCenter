@@ -22,8 +22,7 @@
 /*$( "#qwerty" ).click(function() {
   $("#qwerty").modal("hide");
 });*/
-$( "#qwerty" ).blur(function() {
-    
+$( "#qwerty" ).hide(function() {
       $('#parr1').html(''); $('#parr2').html(''); $('#parr3').html(''); $('#parr4').html(''); $('#parr5').html('');
     
 });
