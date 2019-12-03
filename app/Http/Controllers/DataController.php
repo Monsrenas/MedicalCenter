@@ -305,6 +305,20 @@ class DataController extends Controller
         return $view->with('patient',$services);
     }
 
+     public function Comprobar(Request $request)
+    {     
+
+      $lst=[0=>['Interrogation','CSL'],1=>['Discharge','HPT'],2=>['Exams','LXM'],3=>['Physical','FXM']];
+      $comprometidos=0;
+        for ($y=0; $y<count($lst); $y++) { 
+          $classdata=$this->modelo($lst[$y][0]);
+          $result=$this->findbyDate($request, $classdata);
+          $comprometidos=$comprometidos+count($result);  
+          }
+          
+        return $comprometidos;
+    }
+
     public function borra(Request $request) 
     {   
     	$classdata=$this->modelo($request->modelo);

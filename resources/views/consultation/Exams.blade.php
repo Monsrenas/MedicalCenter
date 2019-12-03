@@ -46,7 +46,7 @@ use App\Exams;
 </style>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center;  background: #AFC4E8; ">
-<form  action="javascript:SaveDataNoRefreshView('MyExams','IDstore')" method="post" id="MyExams">
+<form  action="javascript:SaveDataNoRefreshView('MyExams','IDstore')" method="post" id="MyExams" oninput="javascript:$('#EXAMSaveBTN').show()">
 	@csrf
     <input type="hidden" name="_method" value="post">
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -64,8 +64,9 @@ use App\Exams;
         <div id="<?php echo $examlst ?>"></div>
     </div>
     <a href="javascript:addExams('','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
-    
+    <div hidden="true" id="EXAMSaveBTN">
     <?php include(app_path().'/Includes/SaveButton.html') ?>
+    </div>
 </form>	
 
 <script type="text/javascript">
@@ -79,12 +80,12 @@ use App\Exams;
         $('#c0'+$xeme[$ind]).remove();
         $('#c1'+$xeme[$ind]).remove();    
         $('#'+$xeme).remove();
-        if (!($('.examitem').length)) {     $xmed=0;     }
+        if (!($('.examitem').length)) {     $xmed=0; $('#EXAMSaveBTN').hide();    }
         }
 
     function addExams($title, $Descrptn){ 
         $edtResu=($title)?'':'Disabled';
-        $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 45%;'>";
+        $titlet="<input type='text' class='form-inline exam' name='exams["+$xmed+"][0]'  value='"+$title+"' style='width: 45%;' required>";
         $descrt="<input type='text' class='form-inline' name='exams["+$xmed+"][1]'  value='"+$Descrptn+"' style='width: 45%;' "+$edtResu+">";
         $bottDel=(($accLvl>3)||(!$title))? "<a href='javascript:delelm(\"exams"+$xmed+"\" ,"+$xmed+")' class='btn btn-success'><span class='glyphicon glyphicon glyphicon-minus' aria-hidden='true'></span></a>":"<a href='#' class='btn btn-success'><span class='glyphicon glyphicon' aria-hidden='true'></span></a>";
         $others="<div class='examitem' id=\"exams"+$xmed+"\">"+$titlet+$descrt+$bottDel+"</div>";
@@ -97,19 +98,18 @@ use App\Exams;
 
 </script>
 
-    @if (isset($patient->exams))
-        <?php $xyzabc=json_decode(json_encode($patient->exams), true); ?>
-    	@for ($i = 0; $i < count($xyzabc); $i++)
-            <?php 
-                
-                
-                $colExam=(isset($xyzabc[$i][0]))? $xyzabc[$i][0] : "";
-                $colResu=(isset($xyzabc[$i][1]))? $xyzabc[$i][1] : "";
-                $colImag=(isset($xyzabc[$i][2]))? $xyzabc[$i][2] : "";
-             ?>
-    		<script> addExams('{{ $colExam }}','{{ $colResu }}'); </script>
-		@endfor
-    @endif 
+@if (isset($patient->exams))
+    <?php $xyzabc=json_decode(json_encode($patient->exams), true); ?>
+	@for ($i = 0; $i < count($xyzabc); $i++)
+        <?php 
+            
+            
+            $colExam=(isset($xyzabc[$i][0]))? $xyzabc[$i][0] : "";
+            $colResu=(isset($xyzabc[$i][1]))? $xyzabc[$i][1] : "";
+            $colImag=(isset($xyzabc[$i][2]))? $xyzabc[$i][2] : "";
+         ?>
+		<script> addExams('{{ $colExam }}','{{ $colResu }}'); </script>
+	@endfor
+@endif 
+
 </div>
-<!--
--->

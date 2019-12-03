@@ -39,9 +39,10 @@
 
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
 	<input type="hidden" name="url"  value='history.SustanceUse'>
-	<input type="hidden" name="modelo"  value='SustanceUse'>
+	<input type="hidden" name="modelo"  value='Sustanceuse'>
 
 	<input type="hidden" name="_method" value="post"/>
+
 
 	<?php 	$category=["Alcohol","Marijuana","Cocaine, crack", "Cigarettes", 'OPIOIDS:  Tylenol #2 & #3, 282’S, 292’S,
 Percodan, Percocet, Opium, Morphine, Demerol, Dilaudid', "INHALANTS: Glue, gasoline, aerosols, paint thinner, poppers, rush, locker room", "OTHER: specify"];

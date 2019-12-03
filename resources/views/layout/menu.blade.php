@@ -119,11 +119,11 @@ opacity: 100%;
       </nav>
   </div>
   
-  <div class="col-2 col-md-2" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9;">
-    <ul class="nav navbar-nav navbar-right" >
-      <li><span >USER: {{ $_SESSION['dr_user' ]}}</span></li>
-      <li><span >{{ $_SESSION['username' ]}}</span></li>
-      <li><a href="{{ url('userlogout') }}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+  <div class="col-2 col-md-2" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9; margin-left: 0px; overflow: hidden;" >
+    <ul class="nav navbar-nav"  style="margin-top: 41px; text-align: left; width: 100%;">
+      <li style="float: none;"><span >USER: {{ $_SESSION['dr_user' ]}}</span></li>
+      <li style="float: none;"><span >{{ $_SESSION['username' ]}}</span></li>
+      <li style="width: 100%;"><a href="{{ url('userlogout') }}" style="height: 33px; width: 120%; margin-top: 1px; margin-left: -14px; text-align: center; padding-top: 6px; background: #ADC5E8; color: white;" class="btn-block"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
   </div>
 </div>
@@ -278,16 +278,31 @@ function udateStatus(id, status){
     }) 
 }
 
-function elimina(forma, linea) {
-  var data=$('#'+forma).serialize();
-  
+function ConfirmaYelimina(forma,data,linea) {
+
   a=confirm('You want to erase this information: '+forma); 
   if (a) {
             $.post('delete', data, function(subpage){ 
                 $('#'+linea).remove(); 
             }); 
          }
+
 }
+
+function elimina(forma, linea) {
+  var data=$('#'+forma).serialize();
+  if (data.match('=Patient')) {  
+                                  CPdata=data.replace('=post','=GET'); 
+                                  $.post('Comprueba', CPdata, function(subpage){ 
+                                          if (subpage>0){
+                                                          alert('El codigo de cliente esta comprometido con '+subpage+' registro(s). NO ES POSIBLE ELIMINARLO');
+                                                        } else {  ConfirmaYelimina(forma,data, linea);  }
+                                  }); 
+
+  } else {    (ConfirmaYelimina(forma, data, linea));   }
+}
+
+
 
 /*Especificos*/
 

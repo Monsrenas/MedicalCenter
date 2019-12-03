@@ -98,8 +98,7 @@
                           <?php 
                               $dateFi = $carbon->createFromDate($cdate);
                               $dateIn = $carbon->createFromDate(substr($patmt->created_at,0, 10));
-                              $antiguedad=date_diff($dateFi,$dateIn);
-                              
+                              $antiguedad=date_diff($dateIn,$dateFi)->days;
 
                               $idt=$patmt->identification;
 
@@ -108,11 +107,11 @@
                               $idN=$patmt->id;
                               $userid=strval(substr($idN, $tmi+8));
                               
-                              $Editable=($userid==$_SESSION['dr_user'])?true:false;
+                              $Editable=(($userid==$_SESSION['dr_user'])and($antiguedad==0))?true:false;
                               $borrable=(($_SESSION['acceslevel']>3)and$Editable);
                               $i=$i+1;?>
                                             
-                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px;" id="mNota{{$idN}}">
+                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px; overflow: hidden;" id="mNota{{$idN}}">
                                   <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
                                         
                                     <div id='userd{{$idN}}'>

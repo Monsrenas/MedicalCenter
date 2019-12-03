@@ -28,10 +28,11 @@ $identification='';
 	table, th, td {	  text-align: center;
 					  padding-bottom: 6px;
 				  }
+	.secc { padding-bottom: 20px; }			  
 </style>
 
 
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
+<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; text-align: left; background: #AFC4E8; ">
 <form  id="MySocialHistory" action="javascript:SaveDataNoRefreshView('MySocialHistory','store')" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -43,7 +44,7 @@ $identification='';
      
 
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>1- Highest  educational level reached:</strong>
 	    <select name="education" id="education" required>
 	        <option value="H" >High School</option>
@@ -54,14 +55,14 @@ $identification='';
 	     <script type="text/javascript"> var education="<?php  echo  (isset($patient->education)?$patient->education:''); ?>"; </script> 
 	</div>
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>2- Current or past occupation:</strong>
 	    <input type="text" name="occupation" value="<?php echo (isset($patient->occupation)?$patient->occupation:'');?>" class="form-inline" maxlength="70" size="70" required>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>3- Currently working:</strong>
-	    <table  style="background: #AFC4E8; border: 1px solid rgba(100, 200, 0, 0.3); width: 100%;"> 
+	    <table  style="width: 100%;"> 
 	    	<tr style="text-align: center;">
 	    		<th style="width: 50%; text-align: center;"><strong>YES</strong></th>
 	    		<th style="width: 50%; text-align: center;" ><strong>NO</strong></td>
@@ -88,15 +89,15 @@ $identification='';
 	    </table>
 	</div>
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>4- Religion:</strong>
 	    <input type="text" name="religion" value="<?php echo  (isset($patient->religion)?$patient->religion:'');?>" class="form-inline" maxlength="70" size="70">
 	</div>
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>5- Previous hospital admissions:</strong>
 	    
-	    <table  style="background: #AFC4E8; border: 1px solid rgba(100, 200, 0, 0.3); width: 100%;"> 
+	    <table  style="border: none; width: 100%;"> 
 	    	<tr style="text-align: center;">
 	    		<th style="width: 50%; text-align: center;"><strong>Reason for admission</strong></th>
 	    		<th style="width: 50%; text-align: center;" ><strong>Duration</strong></td>
@@ -113,7 +114,7 @@ $identification='';
 
 	</div>
 
-	<div class="form-group">
+	<div class="form-group secc">
 	    <strong>6- Any history of sexually transmitted disease:</strong>
 	    <input type="text" name="sextrans" value="<?php echo  (isset($patient->sextrans)?$patient->sextrans:'');?>" class="form-inline" maxlength="70" size="70">
 	</div>
