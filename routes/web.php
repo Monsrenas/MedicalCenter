@@ -47,6 +47,7 @@ Route::group(['middleware' => 'IsAuten'], function(){
 								Route::get('buscaAdmission', 'DataController@buscaAdmission');
 								Route::get('facturacion', 'DataController@Facturacion');
 								Route::get('Comprueba', 'DataController@Comprobar');
+								Route::get('findAppoinment', 'DataController@findAppoinment'); 
 								
 							}		
 		}

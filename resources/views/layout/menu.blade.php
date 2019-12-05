@@ -33,56 +33,53 @@
     @else 
     <script type="text/javascript">var Pacienteactivo="";</script>
  @endif
+
 <style type="text/css">
+      nav.navbar {  background-color: #ADC5E8;  }
 
+      .navbar-nav .nav li a{  color: yellow  !important;  }
 
+      nav.navbar ul.nav li a{
+                              color:#3953A7;
+                              opacity: 100%;
+                              text-align: center; 
+                            }
 
-nav.navbar {
-    background-color: #ADC5E8;
-}
-.navbar-nav .nav li a{
-  color: yellow  !important; 
-}
+       nav.navbar ul.nav li a:hover{
+                                     color:white;
+                                     -webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+                                     -moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+                                     box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+                                     background: #7190C4;
+                                   }
 
-/*Mouse encima*/
-nav.navbar ul.nav li a{
-    color:#3953A7;
-    opacity: 100%;
-    text-align: center;
- }
+       .navbar-nav.navbar-center {
+                                  position: absolute;
+                                  left: 50%;
+                                  transform: translatex(-50%);
+                                 }
 
- nav.navbar ul.nav li a:hover{
-    color:white;
+      .loco {  
+              background: #7190C4;
+              -webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+              -moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+              box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
+            }
 
-    -webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
--moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
-    background: #7190C4;
- }
+      .active { 
+                background: #7190C4;
+                -webkit-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
+                -moz-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
+                box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
+                opacity: 100%;
+              }
 
- .navbar-nav.navbar-center {
-    position: absolute;
-    left: 50%;
-    transform: translatex(-50%);
-}
+      .disabled { opacity: 30%; }
 
-.loco {background: #7190C4;
--webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
--moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
-}
-
-.active {background: #7190C4;
--webkit-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
--moz-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
-opacity: 100%;
-}
-
-.disabled {opacity: 30%;}
 </style>
 
 <?php include(app_path().'/Includes/menu_data.php');?>
+
 
 <div class="row navbar-fixed-top" id="work" style=" background-color: #ADC5E8; ">
 
@@ -138,20 +135,20 @@ opacity: 100%;
 
 
 <script type="text/javascript">
+
   var $antr='';
   var $antr='';
 
-  function ShowOp($arreglo,$op){
-  
+
+  function ShowOp($arreglo,$op){  
           if ($('#'+$op).attr('Class')=='dependen disabled') {return ;} /*Si no hay paciente activo */
          
 
-          if ($antr) {
-            $('#'+$anop).attr("class", $antr);}
+          if ($antr) {      $('#'+$anop).attr("class", $antr);      }
+
           $antr=$('#'+$op).attr("class");      
           $anop=$op;
-           $('#'+$op).attr("class", "active");
-
+          $('#'+$op).attr("class", "active");
           
           $('#left_wind').empty();
           $('.contenidoCentro').hide();
@@ -170,20 +167,28 @@ opacity: 100%;
                     NewPreLoadDataInView($ventana,'&url='+elemento, 'renderView', elemento)   
                   }
   }
-
+    function ButtonString(elemento, estilo)
+    {
+      $btnID='btn'+elemento[1].replace('.', '_');  
+      return "<a id='"+$btnID+"' onclick= '"+elemento[5]+"' class='botonOp btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
+    }
 
     function AddMenuItem(elemento, indice){
         $btnID='btn'+elemento[1].replace('.', '_');
         if (elemento[2]) {
+          
           var xdata=elemento[2]+'&url='+elemento[1];
-          var accion1="<a id='"+$btnID+"' onclick= 'NewPreLoadDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
-          var accion2="<a id='"+$btnID+"' onclick= 'RefreshDataInView(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'>"+elemento[0] + "</a>";
+          var colorf=(elemento[4])? '#3149D5':'#0099D1';
+          var accPre=(elemento[4])? 'RefreshDataInView':'NewPreLoadDataInView'; 
+          elemento[5]=accPre+"(\"#center_wind\",\""+xdata+"\",\""+elemento[3]+"\", \""+elemento[1]+"\")";
+          var accion=ButtonString(elemento,"background:"+colorf+"; color: #AFC4E8;");
 
-          $("#left_wind").append((elemento[4])? accion2:accion1 );
-        }else{
+        } else { 
+                  elemento[5]="BuildMenu(\" "+elemento[1]+" \",1)";
+                  accion=ButtonString(elemento,"background: #3149D5; color: #AFC4E8;");
+               }
 
-        $("#left_wind").append( "<a id='"+$btnID+"' onclick= 'BuildMenu(\" "+elemento[1]+" \",1)' class='btn btn-default btn-lg btn-block btnizqrd' href='#' style='background: #3149D5; color: #AFC4E8;'  >"+elemento[0] + "</a>");
-        }
+        $("#left_wind").append(accion);
   }
 
 function ShoWindow(elemento, ventana, subpage){      
@@ -262,7 +267,8 @@ function PreLoadDataInView(ventana, xdata, vista) {
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;    
-    $.post(vista, data, function(subpage){
+
+    $.post(vista, data, function(subpage){  
         ShoWindow(elemento,ventana,subpage);
     })
 }
@@ -277,6 +283,18 @@ function udateStatus(id, status){
         cambiaPaciente('pasient_act');
     }) 
 }
+
+
+function RegisterRTN(xdata) {
+    var data=$('#llave').serialize();
+    data=data+xdata+'&noview=yes';      
+    alert(data);
+    $.post('busca', data, function(subpage){
+        alert(subpage);
+        return (subpage);
+    });
+}
+
 
 function ConfirmaYelimina(forma,data,linea) {
 
@@ -361,9 +379,7 @@ function AltaMedica(identification){
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}
-
-
-
+      
 </script>
 
 <!-- /*224

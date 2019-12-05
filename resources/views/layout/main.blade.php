@@ -62,5 +62,6 @@
 </html>
 <script type="text/javascript">
   $('#center_wind').css("height", screen.height-312);
-  $('#center_wind').css("max-height", screen.height-312);                          
+  $('#center_wind').css("max-height", screen.height-312); 
+  $('.botonOp').click(function(){$('#qwerty').modal('show');});                         
 </script>

@@ -96,11 +96,14 @@ global  $patient1;
 
   function unit_measurement($cdn) {
   	global $patient1;
-  	$nom=str_replace(" ", "", substr($cdn, 2,-1));	
+  	$nom=str_replace(" ", "", substr($cdn, 2,-1));
+  	$mID="MY".str_replace(" ", "", substr($cdn, 2,-1));	
   	$unit='';
   	$valor=($patient1->$nom); 
+  	$xtra='';
 	switch ($nom) {
 	    case 'Weight':
+	    		$xtra="onchange='javascript:actualizaBMI()'";
 	    		$mWeight=(isset($patient1->Weight[1]))? $patient1->Weight[1]:'';
 	    		$unit="<select name='Weight[1]' id='SLTWeight'>
                            <option ".(($mWeight=='kg') ? "selected":"")." value='kg' >Kilogram</option>
@@ -112,6 +115,7 @@ global  $patient1;
                 $nom=$nom."[0]";
 	        break;
 	    case 'Height':
+	    	$xtra="onchange='javascript:actualizaBMI()'";
 	    	$mHeight=(isset($patient1->Height[1]))? $patient1->Height[1]:'';
 	    	$unit="<select name='Height[1]' id='SLTHeight' value='m'>
                                <option ".(($mHeight=='ft') ? "selected":"")." value='ft' >Feet</option>
@@ -120,16 +124,16 @@ global  $patient1;
             if (isset($patient1->$nom[0])) {$valor=$patient1->$nom[0];}
 	        $nom=$nom."[0]";
 	        break;
-	    case 'BMI':
+	    case 'BMI':	
 	        $nWeight=(isset($patient1->Weight))? $patient1->Weight:"";	
 	        $nHeight=(isset($patient1->Height))? $patient1->Height:"";
-	         return "<td colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($nWeight,$nHeight)."</strong> <br> ".BMIClass(BMI($nWeight,$nHeight))."</td>";
+	         return "<td id='BMISHOW' colspan='".substr($cdn, 1,1)."'> ".substr($cdn, 2)."<strong>".BMI($nWeight,$nHeight)."</strong> <br> ".BMIClass(BMI($nWeight,$nHeight))."</td>";
 	         break; 
 	        } 
 	 
 	 $vlr=(is_array($valor))? $valor[1]:$valor;
 	
-	 if ($nom<>'') {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)'>";
+	 if ($nom<>'') {   $ctrlr="<input type='text' name='".$nom."' size='5' value='".$vlr."' onkeypress='return soloNumeros(event, this.value)' ".$xtra." id='".$mID."'>";
 				$resu="<td colspan='".substr($cdn, 1,1)."'>".substr($cdn, 2).$ctrlr.$unit." </td>";
 				return $resu;
   					}
@@ -308,5 +312,10 @@ global  $patient1;
 
 @include('funciones')
 <script type="text/javascript">
+	function actualizaBMI(){
+		
+		$('#BMISHOW').html('');
+
+	}
 	fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}','{{$prueba}}');
 </script>

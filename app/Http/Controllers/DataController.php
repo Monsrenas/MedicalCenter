@@ -207,6 +207,18 @@ class DataController extends Controller
         return $patient;
     }
 
+    public function findAppoinment(Request $request)
+    {   
+        $viewx=$this->indexView($request);
+
+        $classdata=$this->modelo($request->modelo);
+
+        $patient = ($classdata)::where('dr_code', '=', "{$request->dr_code}")->
+                                 where('date', '=', "{$request->date}")->orderBy('time')->get();                                
+        if (!count($patient)) { return $viewx->with('patient',$request); }
+        
+        return $viewx->with('patient',$patient);
+    }
 
 
    public function destroy(Request $request, $classdata){ 

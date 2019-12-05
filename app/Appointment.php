@@ -10,14 +10,15 @@ class Appointment extends Eloquent
     protected $connection = 'mongodb';
     protected $collection = 'appointments';
     
-    protected $fillable = [
+    protected $fillable = [	'id',
 							'dr_code',
 							'date',
 							'time',
-							'identification'
-							'details'
+							'date_done',
+							'time_done',
+							'identification',
+							'details',
 							'user', 
-							'exams',
 							'status',
     ];
 }

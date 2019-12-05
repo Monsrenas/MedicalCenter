@@ -12,20 +12,18 @@
 
     
 $patientITEMS = [
-  'Patient' => [['List','list_patient'],['New','edit_patient']],
-  'History' => [['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
+  'Patient' => ['patient',['List','list_patient'],['New','edit_patient']],
+  'History' => [['Physicians Note','history.Load_ALL_note'],['Physical Examination','history.Load_PhysicalExamination_list'],['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
   				['Current Medication','history.CurrentMedication','&modelo=Currentmedication&_method=get&findit=','find'],
   				['Social History','history.SocialHistory','&modelo=Socialhistory&_method=get&findit=','find'],
   				['Family History','history.FamilyHistory','&modelo=Familyhistory&_method=get&findit=','find'],
   				['Surgical History','history.SurgicalHistory','&modelo=Surgicalhistory&_method=get&findit=','find'],
-  				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
-  				['Physical Examination','history.Load_PhysicalExamination_list'],
-  				['Physicians Note','history.Load_ALL_note']			],        
+  				['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],],        
   'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],
-  'Exams' => ['exams.load_list',['Realizados','xmsrealizados'],['Solicitados','xmssolicitados']],
-  'Reports' => [['Resumen de Servicios','report.searche']],
+  'Exams' => ['exams.load_list',['Performed','xmsrealizados'],['Requested','xmssolicitados']],
+  'Reports' => [['Summary of services','report.searche']],
   'Appointment' => [['Make appointment','appointment.find'],['Listado','link']],
   
 ];

@@ -44,16 +44,16 @@
 	  	<div style="text-align:right; float: left; width: 30%; padding-right: 20px;"><strong>Arrival: </strong></div>
 
 	  	<div style="text-align:left; ">
-	  	<input type="date" name="date" id="date" value="<?php echo(isset($patient->date)?$patient->date: $cdate); ?>" {{$edit}}/>	
-	  	<input type="time" name="timearrives" id="timearrives" value="<?php echo(isset($patient->timearrives)?$patient->timearrives:$stime);?>" {{$edit}}/></div>
+	  	<input type="date" name="date" id="date" value="<?php echo(isset($patient->date)?$patient->date: $cdate); ?>" {{$edit}} required />	
+	  	<input type="time" name="timearrives" id="timearrives" value="<?php echo(isset($patient->timearrives)?$patient->timearrives:$stime);?>" {{$edit}} required/></div>
 	</div>
 
 
 	<div class="form-inline">
 		<div style="text-align:right; float: left; width: 30%; padding-right: 20px;"><strong>Hospitalization: </strong></div>
 	    <div style="text-align:left; margin-right:  15px;">
-	  	<input type="date" name="date_hospitalization" id="date_hospitalization" value="<?php echo(isset($patient->date_hospitalization)?$patient->date_hospitalization:$cdate); ?>" {{$edit}}/>
-	  	<input type="time" name="time_hospitalization" id="time_hospitalization" value="<?php echo(isset($patient->time_hospitalization)?$patient->time_hospitalization:$stime); ?>" {{$edit}}/>
+	  	<input type="date" name="date_hospitalization" id="date_hospitalization" value="<?php echo(isset($patient->date_hospitalization)?$patient->date_hospitalization:$cdate); ?>" {{$edit}} required />
+	  	<input type="time" name="time_hospitalization" id="time_hospitalization" value="<?php echo(isset($patient->time_hospitalization)?$patient->time_hospitalization:$stime); ?>" {{$edit}} required/>
 	  	</div>
 	</div>
 	

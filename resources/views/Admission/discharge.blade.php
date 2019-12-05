@@ -46,7 +46,7 @@
 	           		if (isset($discharged->admission_resume)) {
 	           													$a_r=$discharged->admission_resume;
 	           													echo "<h1>Last Medical release</h1>";
-	           		} else { echo "<h1>No existe registro de ingresos o actas medicas para el paciente</h1>"; 
+	           		} else { echo "<h1>There is no record of income or medical records for the patien</h1>"; 
 	           				 return;
 	           			   }
 	           		 

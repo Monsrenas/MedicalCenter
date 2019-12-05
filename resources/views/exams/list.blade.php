@@ -9,9 +9,9 @@
 
                  $option=(isset($patient->option))?$patient->option:'N';
                  switch ($option) {
-                   case '1': $titulo='Todos los examenes realizados al paciente '; break;
-                   case '0': $titulo='Examenes solicitados'; break;
-                   default: $titulo='Examenes solicitados y realizados. Indicados por: '.$_SESSION['username']; break;
+                   case '1': $titulo='All tests performed on the patient '; break;
+                   case '0': $titulo='Exams requested'; break;
+                   default: $titulo='Examinations requested and performed. Indicated by: '.$_SESSION['username']; break;
                  }
 
           ?>
