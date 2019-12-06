@@ -280,7 +280,11 @@
             alert("Prueba");
         }
 
-        function iniSelect(elm, vlr){   document.getElementById(elm).value=vlr;}
+        function iniSelect(elm, vlr){  
+
+            $('#'+elm).val(vlr);
+
+        }
 
         iniSelect("nation",nation);
         iniSelect("myrelation",srelation);

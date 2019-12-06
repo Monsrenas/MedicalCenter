@@ -117,9 +117,14 @@ class DataController extends Controller
                                  } else { $patient = Patient::orderBy('surname', 'asc')->get();}
 
         if (!is_null($patient)) { 
+                                if (isset($request->campos)) { return $view->with('patient',$patient)->with('campos',$request->campos);}
                                 return $view->with('patient',$patient);
                                 }
-        else { return 'identification'; }   
+        else { 
+
+                if (isset($request->campos)) {  return  $view->with('campos',$request->campos);}
+                return 'identification'; 
+             }   
     }
 
 

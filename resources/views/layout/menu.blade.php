@@ -237,6 +237,15 @@ function LoadDataInView(elemento, forma,vista) {
 
 }
 
+function LoadDataInModal(frame,forma,vista) {   
+    var data=$('#'+forma).serialize();
+    $.post(vista, data, function(subpage){ 
+        $("#"+frame).html(subpage);
+    })
+
+}
+
+
 function RefreshDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;      
@@ -294,7 +303,7 @@ function RegisterRTN(xdata, destino) {
         {
             $fld=destino[x][1];
 
-              $(destino[x][0]).append(' '+subpage[$fld]);
+              $(destino[x][0]).html(' '+subpage[$fld]);
           }      
        
        
@@ -392,26 +401,4 @@ function AltaMedica(identification){
 <!-- /*224
    74
   32*/
-
-
-function LoadDataInView(elemento, forma,vista) {
-    var data=$('#'+forma).serialize();
-    var previo="#fr"+elemento.trim()
-    if ($(previo).length) {$(previo).remove()}
-    $.post(vista, data, function(subpage){
-        ShoWindow(elemento,"#center_wind",subpage);
-    })
-
-}
-
-                  /*
-                    $('#enlace').val(elemento);
-
-                    var data=$('#llave').serialize();
-
-                    $.post('renderView', data, function(subpage){
-                        $ventana=((indice=="0") ? "#left_wind":"#center_wind");
-                        ShoWindow(elemento, $ventana, subpage);
-                       
-                    })                       
-                 */ -->
+-->

@@ -73,7 +73,7 @@
    @endforeach
 @endif
 
-<div id="citaVTN" class="Appointment"  style="position: fixed; height: 100; top:215px; right:2; width: 50%; text-align: left; background: blue; padding: 20px; opacity: 80%; color: yellow; margin-left: 100px;" hidden>
+<div id="citaVTN" class="Appointment" hidden>
   <a href="#" onclick="javascript:$('#citaVTN').hide()" style="float: right; color: white;">Close</a>
   <form id="MyPPNTMNT" action="javascript:SaveAndListUpdate()" method="post">
     @csrf
@@ -92,7 +92,7 @@
 
     <div style="float: left;">
         <label>Patient identification</label>
-        <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id"> 
+        <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id" autocomplete="off" ondblclick="javascript:FindPatient([['#appPName','name'],['#appPName','surname'],['appIdentification','identification']])"> 
     </div>
     <div style="float: left; margin-left: 10px; margin-top: 5px; font-size: small; " id="appPName"></div>
     

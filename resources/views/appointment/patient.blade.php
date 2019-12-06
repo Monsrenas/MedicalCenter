@@ -1,4 +1,7 @@
-<?php $identification=''; ?>
+<?php $identification='';
+
+  
+?>
 
 <style type="text/css">
         .list-group-item {background: #7190C6; }
@@ -21,10 +24,12 @@
 <div class="row" style="margin: 0px auto;">
   @csrf 
         <div class="navbar-fixed">
-                <form id="busqueda" class="navbar-form navbar-left" action="javascript:LoadDataInView('list_patient', 'busqueda','list')">
+                <form id="Modalbusqueda" class="navbar-form navbar-left" action="javascript:LoadDataInModal('parr1', 'Modalbusqueda','list')">
+
                 @csrf
-                <input type="hidden" name="url"  value='list_patient'>
-                <input type="hidden" name="enlace"  value='list_patient'>   
+                <?php if (isset($campos)) { 
+                 echo "<input type='hidden' name='campos' value='$campos'>"; } ?>
+                <input type="hidden" name="url"  value='appointment.patient'>  
                 <input type="hidden" name="modelo" id="modelo" value="Patient" />
                 <input type="hidden" name="_method" value="get">
 
@@ -42,9 +47,11 @@
                                   <div class="form-inline blnc" style="">Surname,  Name</div>
                                  
                               </div>  <br>    
-  <?php 
-    if (!(isset($patient))) {return;}
 
+  <?php
+    
+    if (!(isset($patient))) {return;}
+    
 
     $i=0; 
   ?>
@@ -56,46 +63,24 @@
                               $idt=$patmt->identification;
                               $status=(isset($patmt->status))?$patmt->status:'0';
                               $status=($status=='1')?'INCOMED':'';
-                              $i=$i+1; ?>
+                              $i=$i+1;
                               
-                             <a href="javascript:cambiaPaciente('edl{{$idt}}')" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
+                            ?>
                               
+                             <a href="javascript:Retorna('{{ $patmt->toJson() }}', '{{$campos}}')" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
                                   <div class="form-inline" style="float:left; width:140px; text-align: right; padding-right: 20px;">{{$patmt->identification}}</div> 
                                   <div class="form-inline" style="float: left; width:440px; text-align: left;">{{$stringpat  }}</div>
                                   <div class="form-inline" style="float: left; color: yellow;">{{$status}}</div>
-                                 @if (2==2)    
-                                  <div class="form-inline" style="float: right;">
-                                    <form class="form-inline" action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >
-                                      @csrf
-                                      <input type="hidden" name="modelo" id="modelo" value="Patient" />
-                                      <input type="hidden" name="_method" value="post">
-                                      <input type="hidden" name="identification" value='{{$idt}}'> 
-
-                                      <button type="submit" class="btn btn-default glyphicon glyphicon-trash btn-danger mio"></button>
-                                    </form>
-                                  </div>
-                                  @endif 
-
-                                  @if (100>1)
-                                  <div class="form-inline" style="float: right; margin-right: 10px;">
-                                    <form class="form-inline" id='edl{{$idt}}' action="javascript:LoadDataInView('edit_patient','edl{{$idt}}','find')">
-                                      @csrf
-                                        <input type="hidden" name="modelo" id="modelo" value="Patient" />
-                                        <input type="hidden" name="url" id="url" value="edit_patient" />
-                                        <input type="hidden" name="_method" value="get">
-                                        <input type="hidden" name="identification" value='{{$idt}}'> 
-
-                                      <button type="submit" class="btn btn-default glyphicon glyphicon-pencil mio"></button>
-                                    </form>
-                                  </div>
-                                  @endif 
                             </a>
                            
               @endforeach
 </div> 
 </div>
+<script type="text/javascript">
+  
+  function Retorna(regist, campos){
+    $('#appPName').html(regist);
 
-
-
-
-                                
+    $('#qwerty').modal('hide');
+  }
+</script>

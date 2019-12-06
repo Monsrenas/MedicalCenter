@@ -38,6 +38,7 @@
                  margin-right: 0px;
                  margin-left: 0px;
                 }
+        .tqtInterior {padding-left: 60px; }
     </style>
                  
     <div class="row infoPat" style="">
@@ -50,26 +51,24 @@
                         <label>Surname:</label><a><big> {{ $patient->surname }}</big></a>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="form-group tqtInterior">
                         <label>Name:</label><a><big> {{ $patient->name }}</big></a>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group tqtInterior">
                         <label>Date of Birth:</label><a><big> {{ $patient->DOB }}</big></a>
                     </div>
-        </div>
+        </div> <br><br>
+
 
 
         <div class="form-inline">    
                     <div class="form-group">
                         <strong> Nationality: </strong>
-                        <?php include(app_path().'/Includes/paises.php') ?>
-                        <a>
-                        {{ paises() }}
-                        </a>
-                        <script type="text/javascript"> var nation="<?php  echo  $patient->nationality; ?>"; </script>
+                        <?php include(app_path().'/Includes/ArraysForSelect.php') ?>
+                        <a><big> <?php  echo($pais[$patient->nationality]); ?></big></a>
                     </div>
-        </div>
+        </div> <br><br>
 
         <div class="form-inline">
                     <div class="form-group">
@@ -78,17 +77,9 @@
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group tqtInterior">
                         <label>Marital Status:</label>
-                        <a >
-                        <select name="maritalStts"id="marital" required disabled="true">
-                            <option value="S" >Single</option>
-                            <option value="M" >Married</option>
-                            <option value="D" >Divorced</option>
-                            <option value="W" >Widowed</option>
-                        </select>
-                        </a>
-                         <script type="text/javascript"> var marital="<?php  echo  $patient->maritalStts; ?>"; </script>    
+                       <a><big> <?php  echo($maritalStts[$patient->maritalStts]); ?></big></a>   
                     </div>
         </div>
         <br><br>
@@ -102,7 +93,7 @@
                     <div class="form-group">
                         <label>Telephone:</label><a><big> {{ $patient->telephone }}</big></a>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group tqtInterior">
                         <label>Email:</label><a><big>  {{ $patient->email }}</big></a>
                     </div>
         </div>
@@ -112,26 +103,9 @@
                     <div class="form-group">
                         <label>Next of kin:</label><a><big> {{ $patient->nxOfKin }}</big></a>
                     </div>
-                    <div class="form-group">
-                        <a>
+                    <div class="form-group tqtInterior">
                         <strong>Relationship:</strong>
-                        <select name="relation" id="myrelation" required disabled="true">
-                            <option value="SP" >Spouse</option>
-                            <option value="PR" >Parents</option>
-                            <option value="SB" >Siblings</option>
-                            <option value="CH" >Children</option>
-                            <option value="GC" >Grandchildren</option>
-                            <option value="GP" >Grandparents</option>
-                            <option value="NN" >Nieces/Nephews</option>
-                            <option value="AU" >Aunts/Uncles</option>
-                            <option value="TC" >Great Grandchildren</option>
-                            <option value="TP" >Great Grandparents</option>
-                            <option value="GN" >Great Nieces/Nephews</option>
-                            <option value="CS" >Cousins</option>
-                            <option value="NG" >Neighbor</option>
-                        </select>
-                        </a>
-                        <script type="text/javascript"> var srelation="<?php  echo  $patient->relation; ?>"; </script>
+                        <a><big> <?php  echo($Relationship[$patient->relation]); ?></big></a>
                     </div>
         </div>
         <div class="form-inline">
@@ -143,29 +117,3 @@
  
         
     </div> <!-- Fin del <div class="row ">  -->
-          
-    <script>
- 
-        $('#ptdt').find('input, textarea, button, select').attr('disabled','disabled');
-        function iniSelect(elm, vlr){  document.getElementById(elm).value=vlr;}
-
-        iniSelect("nation",nation);
-        iniSelect("myrelation",srelation);
-        iniSelect("marital",marital);
-/*
-        if(document.forms[1].length > 0) {
-                                        
-                                        if(document.forms[1].elements.length > 0) {
-                                                                                    document.forms[1].elements[1].focus();
-                                                                                  }
-                                        for (i = 2; i < document.forms[2].elements.length; i++) {
-                                                                               
-                                                                            document.forms[2].elements[i].disabled =true; 
-                                                                           
-                                                                         };
-                                       }*/
-
-  
-    
-
-</script>
