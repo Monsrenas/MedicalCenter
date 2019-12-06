@@ -24,17 +24,20 @@
 
           <div class="form-group" style="padding-right: 40px;">
             <label>Physician:</label>
-            <select name="dr_code" id="setDr_code" required >
+            <select name="dr_code" id="setDr_code" onchange="javascript:submit()" required >
               <option value="44240514037" >Estenos Martinez, Alicia</option>
               <option value="613675132765" >Jervacio Pena, Jhom</option>
               <option value="doctor1" >Diaz Soveron, Eulogio</option>
               <option value="doctor2" >Numero dos, Doctor</option>
             </select>
+
+            
+
           </div>
 
           <div class="form-group" style="padding-right: 40px;">
             <label>Date:</label>
-            <input type="date" name="date" id="setDate" class="form-control" value="{{$date}}" required>
+            <input type="date" name="date" id="setDate" class="form-control" value="{{$date}}" onchange="javascript:submit()()" required>
           </div>
 
         <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Spaces</button>
@@ -46,23 +49,33 @@
                                     <div class="form-inline blnc" style="width:15%;">Time</div>
                                     <div class="form-inline blnc" style="width:35%;">Patient</div> 
                                     <div class="form-inline blnc" style="width:50%;">Details</div>
-                                </div>  <br>    
+                                </div>  <br>   
+                                 
       <div id="rejilla" style="height: 490px; max-height: 490px; overflow: auto;"></div>
   </div> 
 </div>
 
-<?php if(!(isset($patient[0]))) { return ; }  
 
-?><script type="text/javascript">AppointArray();</script><?php 
-?> 
 
+@if (isset($patient)) 
+
+   <script type="text/javascript">AppointArray();</script>
+   @if (isset($patient[0]->dr_code))    <?php $dr_code=$patient[0]->dr_code ?>   @endif
+   @if (isset($patient->dr_code))       <?php $dr_code=$patient->dr_code ?>      @endif
+     
+
+   <script type="text/javascript">  $('#setDr_code').val('<?php echo $dr_code; ?>'); </script>
+@endif
+
+@if (isset($patient[0])) 
    @foreach($patient as $patmt)
-      <script type="text/javascript">LoadAppnt(<?php echo $patmt ?> );</script>                               
+    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}');</script>                               
    @endforeach
+@endif
 
 <div id="citaVTN" class="Appointment"  style="position: fixed; height: 100; top:215px; right:2; width: 50%; text-align: left; background: blue; padding: 20px; opacity: 80%; color: yellow; margin-left: 100px;" hidden>
   <a href="#" onclick="javascript:$('#citaVTN').hide()" style="float: right; color: white;">Close</a>
-  <form id="MyPPNTMNT" action="javascript:SaveDataNoRefreshView('MyPPNTMNT','IDstore')" method="post">
+  <form id="MyPPNTMNT" action="javascript:SaveAndListUpdate()" method="post">
     @csrf
     <input type="hidden" name="_method" value="post">
     <input type="hidden" name="url"  value='appointment.find'>
@@ -77,16 +90,19 @@
     <label>Date</label>
     <input type="date" id="appDate" name="date" required><br><br>
 
-    <label>Patient identification</label>
-    <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id"> 
-
-    <div style="margin-top: 30px;">
+    <div style="float: left;">
+        <label>Patient identification</label>
+        <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id"> 
+    </div>
+    <div style="float: left; margin-left: 10px; margin-top: 5px; font-size: small; " id="appPName"></div>
+    
+    <div style="margin-top: 50px;">
       <label>Appointment details</label>
-      <textarea style="width: 100%; height: 200px; color: black;" name="details">
+      <textarea style="width: 100%; height: 200px; color: black;" id="appDetails" name="details">
         
       </textarea>
     </div>
-    
+
      <?php include(app_path().'/Includes/SaveButton.html') ?>
   </form>
 

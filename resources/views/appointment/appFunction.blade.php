@@ -34,7 +34,7 @@
             hds=miFecha.toString().substring(16,24);
             $hID=('hspc'+hds.replace(':','')).substring(0,8);
             $cade="<div id='I"+$hID+"' hidden></div>"
-            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left; overflow:hidden;'>.</div>" 
+            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'></div>" 
             $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'></div>"
             $hora="<a href='#' class='list-group-item' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' onclick='showAPPnt(\""+$hID+"\")'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
             $('#rejilla').append($hora);
@@ -46,13 +46,21 @@
 
     }
 
-
     function showAPPnt(idLn){
         $horaC=$('#H'+idLn).text();
-        $('#appTime').val($horaC);
-        $('#appDate').val($('#setDate').val());
+        
+        $identification=($('#I'+idLn).text()).trim();
+         $doctor=$('#setDr_code').val();
+         $('#appID').val($identification+$doctor);
 
         $('#appDr_code').val($('#setDr_code').val());
+        $('#appDate').val($('#setDate').val());
+        $('#appTime').val($horaC);
+        $('#appIdentification').val($identification); 
+        $('#appDetails').val($('#D'+idLn).text());
+        $('#appPName').append($('#P'+idLn).text());
+
+        
         $('#citaVTN').show();
     }
 
@@ -62,13 +70,21 @@
       $('#appID').val($identification+$doctor);
     }
 
-    function LoadAppnt($patmt){
-      var idSpc=$patmt.time.toString();
+    function LoadAppnt(mtime, identification, details){
+      var idSpc=mtime.toString();
           idSpc="hspc"+(idSpc.replace(':','')).substring(0,4);
-          $('#I'+idSpc).html($patmt.identification);
-          $('#P'+idSpc).html($patmt.identification);
-          var $use=RegisterRTN('&identification='+$patmt.identification+'&modelo=Patient');
+          $('#I'+idSpc).html(identification);
+          RegisterRTN('&identification='+identification+'&modelo=Patient',[['#P'+idSpc,'name'],['#P'+idSpc,'surname']]);
           
-          $('#D'+idSpc).html($patmt.details);
+          $('#D'+idSpc).html(details);
     };
+
+    function SaveAndListUpdate(){
+      SaveDataNoRefreshView('MyPPNTMNT','IDstore');
+      var mtime=$('#appTime').val();
+      var identification=$('#appIdentification').val();
+      var details=$('#appDetails').val();
+      LoadAppnt(mtime, identification, details); 
+      $('#citaVTN').hide();
+    }
 </script>

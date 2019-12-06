@@ -210,13 +210,10 @@ class DataController extends Controller
     public function findAppoinment(Request $request)
     {   
         $viewx=$this->indexView($request);
-
         $classdata=$this->modelo($request->modelo);
-
         $patient = ($classdata)::where('dr_code', '=', "{$request->dr_code}")->
                                  where('date', '=', "{$request->date}")->orderBy('time')->get();                                
         if (!count($patient)) { return $viewx->with('patient',$request); }
-        
         return $viewx->with('patient',$patient);
     }
 
@@ -249,6 +246,7 @@ class DataController extends Controller
     public function busca(Request $request) 
     { 
       if (!$request->noview){ $view=$this->indexView($request);} 
+
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
       if ($request->noview){return $result;}

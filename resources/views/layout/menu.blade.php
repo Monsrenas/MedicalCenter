@@ -285,14 +285,21 @@ function udateStatus(id, status){
 }
 
 
-function RegisterRTN(xdata) {
+function RegisterRTN(xdata, destino) {
     var data=$('#llave').serialize();
     data=data+xdata+'&noview=yes';      
-    alert(data);
-    $.post('busca', data, function(subpage){
-        alert(subpage);
-        return (subpage);
+    $.post('find', data, function(subpage){ 
+
+      for(x=0;x<destino.length;x++)
+        {
+            $fld=destino[x][1];
+
+              $(destino[x][0]).append(' '+subpage[$fld]);
+          }      
+       
+       
     });
+    
 }
 
 
