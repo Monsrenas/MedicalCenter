@@ -79,6 +79,7 @@
 <script type="text/javascript">
   
   function Retorna(regist, campos){
+    regist=regist.split(',');
     $('#appPName').html(regist);
 
     $('#qwerty').modal('hide');
