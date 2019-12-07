@@ -1,13 +1,13 @@
 
 <style type="text/css">
-        .list-group-item {background: #E3F8CD; }
-        .form-inline { font-family: arial, helvetica, sans-serif; 
+        .ListGroupItem {background: #E3F8CD; }
+        .FormInline { font-family: arial, helvetica, sans-serif; 
                  margin-top: 0px;
                  margin-bottom: 0px;
                  color: #000000;
                 }
 
-        .list-group-item a:hover { color: black; background: blue; }
+        .ListGroupItem  a:hover { color: black; background: blue; }
 
         .form-group { font-family: arial, helvetica, sans-serif; 
                  margin-right: 0px;
@@ -45,7 +45,7 @@
             $cade="<div id='I"+$hID+"' hidden> </div>"
             $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'> </div>" 
             $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'> </div>"
-            $hora="<a href='#' class='list-group-item' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' onclick='showAPPnt(\""+$hID+"\")'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
+            $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' onclick='showAPPnt(\""+$hID+"\")'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
             $('#rejilla').append($hora);
             j=j+14;
 
@@ -59,6 +59,12 @@
         $horaC=$('#H'+idLn).text();
         
         $identification=($('#I'+idLn).text()).trim();
+
+        if ($identification){ $('#appIdentification').attr("readonly","readonly");
+                        
+         } 
+          else {$('#appIdentification').removeAttr("readonly");}
+
          $doctor=$('#setDr_code').val();
          var $fecha=(($('#setDate').val()).replace('-','')).toString();
              $fecha=$fecha.replace('-','');
@@ -76,11 +82,7 @@
     }
 
     function UpdateID(){
-      var $doctor=$('#setDr_code').val();
-      var $fecha=(($('#appDate').val()).replace('-','')).toString();
-          $fecha=$fecha.replace('-','');
-      var $hora=(($('#appTime').val()).replace(':','')).substring(0,4);
-      $('#appID').val($doctor+$fecha+$hora);
+       
     }
 
     function LoadAppnt(mtime, identification, details){

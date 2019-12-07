@@ -21,7 +21,7 @@
 
     @if (isset($_SESSION['status']))
         <?php                     
-            $statusTXT=($_SESSION['status']=='1')?'Incomed':'';
+            $statusTXT=($_SESSION['status']=='1')?'Hospitalized':'';
             $patientSTATUS=' ( Status: '.$statusTXT.' )'; 
          ?>           
     @endif 

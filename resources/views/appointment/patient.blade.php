@@ -77,10 +77,35 @@
 </div> 
 </div>
 <script type="text/javascript">
-  
+
+  function dividirCadena(cadenaADividir,separador) {
+   var arrayDeCadenas = cadenaADividir.split(separador);
+   document.write('<p>La cadena original es: "' + cadenaADividir + '"');
+   document.write('<br>El separador es: "' + separador + '"');
+   document.write("<br>El array tiene " + arrayDeCadenas.length + " elementos: ");
+
+   for (var i=0; i < arrayDeCadenas.length; i++) {
+      document.write(arrayDeCadenas[i] + " / ");
+   }
+}
+
+
   function Retorna(regist, campos){
-    regist=regist.split(',');
-    $('#appPName').html(regist);
+      var regist= JSON.parse(regist);
+       campos=""+campos+"";
+       campos=campos.split(",");
+       
+       for (var i = 0; i < campos.length; i++) {
+        if (!(($('#'+campos[i])[0].tagName)=='INPUT')) {$('#'+campos[i]).html(" ");  }  
+          i=i+1;
+        }
+
+       for (var i = 0; i < campos.length; i++) {
+        if (($('#'+campos[i])[0].tagName)=='INPUT') {   $('#'+campos[i]).val(regist[campos[i+1]]);                }
+                                              else  {   $('#'+campos[i]).append(regist[campos[i+1]]+" ");         }  
+          i=i+1;
+        } 
+    
 
     $('#qwerty').modal('hide');
   }

@@ -46,9 +46,9 @@
 
   <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
                                 <div style="width: 100%; height: 30px; margin-top: 10px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px;">
-                                    <div class="form-inline blnc" style="width:15%;">Time</div>
-                                    <div class="form-inline blnc" style="width:35%;">Patient</div> 
-                                    <div class="form-inline blnc" style="width:50%;">Details</div>
+                                    <div class="form-inline FormInline  blnc" style="width:15%;">Time</div>
+                                    <div class="form-inline FormInline  blnc" style="width:35%;">Patient</div> 
+                                    <div class="form-inline FormInline  blnc" style="width:50%;">Details</div>
                                 </div>  <br>   
                                  
       <div id="rejilla" style="height: 490px; max-height: 490px; overflow: auto;"></div>
@@ -81,18 +81,18 @@
     <input type="hidden" name="url"  value='appointment.find'>
     <input type="hidden" name="modelo"  value='Appointment'>
 
-    <input type="hidden" name="id" id="appID" value="">
+    <input type="text" name="id" id="appID" value="">
     <input type="hidden" name="dr_code" id="appDr_code"> 
     <input type="hidden" name="user" value="{{$_SESSION['dr_user']}}"> <!--  Codigo del Usuario que registra la sita -->
 
     <label>Time</label>
-    <input type="time" id="appTime" name="time" required>
+    <input type="time" id="appTime" name="time" required readonly>
     <label>Date</label>
-    <input type="date" id="appDate" name="date" required><br><br>
+    <input type="date" id="appDate" name="date" required readonly><br><br>
 
     <div style="float: left;">
         <label>Patient identification</label>
-        <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id" autocomplete="off" ondblclick="javascript:FindPatient([['#appPName','name'],['#appPName','surname'],['appIdentification','identification']])"> 
+        <input type="text" name="identification" style="color: black;" autofocus required onchange="javascript: UpdateID()" id="appIdentification" placeholder="Patient id" autocomplete="off" ondblclick="javascript:FindPatient([['appPName','name'],['appPName','surname'],['appIdentification','identification']])"> 
     </div>
     <div style="float: left; margin-left: 10px; margin-top: 5px; font-size: small; " id="appPName"></div>
     
