@@ -59,7 +59,6 @@
                   
                           <?php 
                               $stringpat=$patmt->surname.', '.$patmt->name.' '.$patmt->age;
-                              $StrURL='PatienCng/'.$patmt->identification;
                               $idt=$patmt->identification;
                               $status=(isset($patmt->status))?$patmt->status:'0';
                               $status=($status=='1')?'INCOMED':'';
@@ -67,7 +66,7 @@
                               
                             ?>
                               
-                             <a href="javascript:Retorna('{{ $patmt->toJson() }}', '{{$campos}}')" class="list-group-item" style="height: 50px;" id="linea{{$idt}}">
+                             <a href="javascript:Retorna('{{ $patmt}}', '{{$campos}}')" class="list-group-item" style="height: 25px; margin-top: 1px; padding-top: 1px; margin-bottom: 1px;" id="linea{{$idt}}">
                                   <div class="form-inline" style="float:left; width:140px; text-align: right; padding-right: 20px;">{{$patmt->identification}}</div> 
                                   <div class="form-inline" style="float: left; width:440px; text-align: left;">{{$stringpat  }}</div>
                                   <div class="form-inline" style="float: left; color: yellow;">{{$status}}</div>
@@ -77,18 +76,6 @@
 </div> 
 </div>
 <script type="text/javascript">
-
-  function dividirCadena(cadenaADividir,separador) {
-   var arrayDeCadenas = cadenaADividir.split(separador);
-   document.write('<p>La cadena original es: "' + cadenaADividir + '"');
-   document.write('<br>El separador es: "' + separador + '"');
-   document.write("<br>El array tiene " + arrayDeCadenas.length + " elementos: ");
-
-   for (var i=0; i < arrayDeCadenas.length; i++) {
-      document.write(arrayDeCadenas[i] + " / ");
-   }
-}
-
 
   function Retorna(regist, campos){
       var regist= JSON.parse(regist);

@@ -1,5 +1,5 @@
 
-@extends('history.AdminPanel.layout')
+@extends('AdminPanel.layout')
 @section('eltema')
 <?php use App\medUser; 
   $acceslevel=["Basic assistant",

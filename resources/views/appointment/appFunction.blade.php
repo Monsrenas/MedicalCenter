@@ -25,8 +25,7 @@
                             width: 50%; 
                             text-align: left; 
                             background: #748DC3; 
-                            padding: 20px;
-                            color: yellow; 
+                            padding: 20px; 
                             margin-left: 100px;
                           }
     </style>
@@ -61,9 +60,11 @@
         $identification=($('#I'+idLn).text()).trim();
 
         if ($identification){ $('#appIdentification').attr("readonly","readonly");
-                        
+                              $('#appDelete').removeAttr("disabled");
          } 
-          else {$('#appIdentification').removeAttr("readonly");}
+          else {$('#appIdentification').removeAttr("readonly");
+                $('#appDelete').attr("disabled","disabled");
+               }
 
          $doctor=$('#setDr_code').val();
          var $fecha=(($('#setDate').val()).replace('-','')).toString();
@@ -79,6 +80,7 @@
 
         
         $('#citaVTN').show();
+        $('#appIdentification').focus();
     }
 
     function UpdateID(){
@@ -112,9 +114,16 @@
       $.post('list', data, function(subpage){
         $("#parr1").html(subpage);
       });
+    }
 
-      
 
-
+    function DelAppointment() {
+        $horaC=$('#appTime').val();
+        $('#appIdentification').val("");;
+        elimina('MyPPNTMNT', '');
+        idLn=('hspc'+$horaC.replace(':','')).substring(0,8);
+        $('#D'+idLn).html(' ');
+        $('#P'+idLn).html(' ');    
+        $('#citaVTN').hide();   
     }
 </script>

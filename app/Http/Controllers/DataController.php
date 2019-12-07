@@ -92,7 +92,6 @@ class DataController extends Controller
     {  
        $view=$this->indexView($request);
        $classdata=$this->modelo($request->modelo);
-        
        $ert=strval($request->id);
 
 
@@ -131,10 +130,7 @@ class DataController extends Controller
     public function fleXmultifind(Request $request)
     {   
         $viewx=$this->indexView($request);
-
         $classdata=$this->modelo($request->modelo);
-
-        
         $ert=strval($request->findit);
         
         if ($ert<>''){
@@ -155,9 +151,7 @@ class DataController extends Controller
  public function findbyId(Request $request)
     {   
         $viewx=$this->indexView($request);
-
         $classdata=$this->modelo($request->modelo);
-
         $ert=strval($request->findit); 
 
         if ($ert<>''){
@@ -205,8 +199,6 @@ class DataController extends Controller
              break;
            default:
              $patient = ($classdata)::where('identification','=', "{$request->identification}")->orderBy('created_at','desc')->get();
-               
-               
              break;
          } 
         return $patient;
@@ -223,7 +215,8 @@ class DataController extends Controller
     }
 
 
-   public function destroy(Request $request, $classdata){ 
+   public function destroy(Request $request, $classdata){
+       
      if ($request->identification) {
                                     $campo='identification';
                                     $ert=$request->identification;
@@ -235,7 +228,6 @@ class DataController extends Controller
      $patient=($classdata)::where($campo,'=', $ert)->first();
 
      $patient->delete();
-     /*$patient = Patient::get();*/
      return $patient;  
 	}
 
@@ -251,7 +243,6 @@ class DataController extends Controller
     public function busca(Request $request) 
     { 
       if (!$request->noview){ $view=$this->indexView($request);} 
-
     	$classdata=$this->modelo($request->modelo);
       $result=$this->Genfind($request, $classdata);
       if ($request->noview){return $result;}
@@ -265,28 +256,22 @@ class DataController extends Controller
       $result=$this->Genfind($request, $classdata);
       $classdata=$this->modelo('Discharge');
       $result1=$this->Genfind($request, $classdata);
-
       if ($request->noview){return $result;}
-
       return $view->with('patient',$result)->with('discharge',$result1); 
     }
 
     public function Facturacion(Request $request)
     {     
-
-    
       $lst=[0=>['Interrogation','CSL'],1=>['Discharge','HPT'],2=>['Exams','LXM'],3=>['Physical','FXM']];
       $carbon = new \Carbon\Carbon();
-
-        $view=$this->indexView($request);
-        $services=[];  
-        $i=0;
+      $view=$this->indexView($request);
+      $services=[];  
+      $i=0;
         for ($y=0; $y<count($lst); $y++) { 
           
           $classdata=$this->modelo($lst[$y][0]);
           $result=$this->findbyDate($request, $classdata);
           
-
           foreach ($result as $elm) {
              $doc=($y==1)?$elm->user_id:substr($elm->id, 8+strlen($elm->identification));
              $doc= Login::where('user', $doc)->first();
@@ -299,8 +284,6 @@ class DataController extends Controller
                       $dateFi = $carbon->createFromDate($tmpd);
 
                       $tmp['details']=date_diff($dateFi, $dateIn)->days.' Day(s)'.', From: '.$tmpd.' to: '.$elm->date.'. '.substr($elm->discharge_reason, 0,100);  
-
-                      
                       $tmp['date']=$tmpd;  
               break;
               case 2: $tmp['details']=count($elm->exams).' laboratory exam(s): ';
@@ -318,30 +301,25 @@ class DataController extends Controller
 
         }
         $services=collect($services)->sortBy('date');
-      
         return $view->with('patient',$services);
     }
 
      public function Comprobar(Request $request)
     {     
-
       $lst=[0=>['Interrogation','CSL'],1=>['Discharge','HPT'],2=>['Exams','LXM'],3=>['Physical','FXM']];
       $comprometidos=0;
         for ($y=0; $y<count($lst); $y++) { 
           $classdata=$this->modelo($lst[$y][0]);
           $result=$this->findbyDate($request, $classdata);
           $comprometidos=$comprometidos+count($result);  
-          }
-
-        return $comprometidos;
+        }
+      return $comprometidos;
     }
 
     public function borra(Request $request) 
     {   
     	$classdata=$this->modelo($request->modelo);
-
       $result=$this->destroy($request, $classdata);
-  
       return $result; 
     }
 
@@ -359,5 +337,4 @@ class DataController extends Controller
 
       return $request;
     }
-}
-                     
+}                     

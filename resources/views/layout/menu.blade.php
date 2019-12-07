@@ -99,7 +99,7 @@
               foreach ($menuItem as $clave => $valor) {
                     if (OptionByLevel($i)){  
                             $info=json_encode($menuItem[$clave]);
-                            $oPStatus=((($i>0)and($i<5))and(!$pAc))?'disabled':'';
+                            $oPStatus=((($i>0)and($i<7))and(!$pAc))?'disabled':'';
                             echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
                               
                     }
@@ -299,28 +299,25 @@ function RegisterRTN(xdata, destino) {
     data=data+xdata+'&noview=yes';      
     $.post('find', data, function(subpage){ 
 
-      for(x=0;x<destino.length;x++)
-        {
-            $fld=destino[x][1];
+        for(x=0;x<destino.length;x++){ $(destino[x][0]).html(' ');}
 
-              $(destino[x][0]).html(' '+subpage[$fld]);
-          }      
-       
-       
+        for(x=0;x<destino.length;x++) {
+                                        $fld=destino[x][1];
+                                        $txt=(subpage[$fld])? subpage[$fld]:'Error';
+                                        $(destino[x][0]).append(' '+$txt);
+                                      }       
     });
     
 }
 
 
 function ConfirmaYelimina(forma,data,linea) {
-
   a=confirm('You want to erase this information: '+forma); 
   if (a) {
             $.post('delete', data, function(subpage){ 
                 $('#'+linea).remove(); 
             }); 
          }
-
 }
 
 function elimina(forma, linea) {
@@ -329,13 +326,12 @@ function elimina(forma, linea) {
                                   CPdata=data.replace('=post','=GET'); 
                                   $.post('Comprueba', CPdata, function(subpage){ 
                                           if (subpage>0){
-                                                          alert('El codigo de cliente esta comprometido con '+subpage+' registro(s). NO ES POSIBLE ELIMINARLO');
+                                                          alert('The customer code is committed to '+subpage+' record(s). IT IS NOT POSSIBLE TO DELETE IT');
                                                         } else {  ConfirmaYelimina(forma,data, linea);  }
                                   }); 
 
   } else {    (ConfirmaYelimina(forma, data, linea));   }
 }
-
 
 
 /*Especificos*/

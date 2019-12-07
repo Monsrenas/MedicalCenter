@@ -59,7 +59,7 @@
                     <div class="form-group">
 
                         <strong> Identification: </strong>
-                        <input type="text" name="identification"  placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" onkeypress="return NoSpace(event);" id="identification" onBlur=' this.form.submit();' required> 
+                        <input type="text" name="identification" onkeyup="javascript:this.value=this.value.toUpperCase()" placeholder="Identification number" value='{{ $identification }}' maxlength="15" size="15"  pattern="|^[0-9   A-ZñÑáéíóúÁÉÍÓÚüÜ]*$|" onkeypress="return NoSpace(event);" id="identification" onBlur=' this.form.submit();' required> 
                     </div>    
                 </div>
             </form>      
