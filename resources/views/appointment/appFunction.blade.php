@@ -108,6 +108,7 @@
       $('#H'+idSpc).css('color','#B5B7B5');
       $('#P'+idSpc).css('color','#71BA27');
       $('#D'+idSpc).css('color','#71BA27');
+      $('#V'+idSpc).prop("onclick", null).off("click");
                      
     }  
 
@@ -142,6 +143,7 @@
   
     function SaveAndListUpdate(){
       SaveDataNoRefreshView('MyPPNTMNT','IDstore');
+      $('#frappointment_done').remove();
       var mtime=$('#appTime').val();
       var identification=$('#appIdentification').val();
       var details=$('#appDetails').val();

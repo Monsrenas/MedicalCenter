@@ -1,7 +1,7 @@
 <?php  
       if(!isset($_SESSION)){ session_start(); }
       use App\Appointment;
-
+      $dr_name=$_SESSION['username'];
       $date=date("Y-m-d");  $stime=substr(date("Y-m-d h:i:s"), 11);
       $DoneDate=$date;  $DoneTime=$stime;
 
@@ -36,15 +36,18 @@
 
           <div class="form-group" style="padding-right: 40px;">
             <label>Physician:</label>
-            <input type="hidden" name="dr_code" id="mYappDr_code" value="{{$_SESSION['dr_user']}}"> 
+            <input type="hidden" name="dr_code" id="mYappDr_code" value="{{$_SESSION['dr_user']}}"> {{$dr_name}}
           </div>
+
+
 
           <div class="form-group" style="padding-right: 40px;">
             <label>Date:</label>
             <input type="date" name="date" id="mYsetDate" class="form-control" value="{{$date}}" onchange="javascript:submit()()" required>
           </div>
 
-        <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Spaces</button>
+        <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Appointments</button>
+        <strong> <span style="margin-left: 20px;"> List for execution of medical appointments </span> </strong>
       </form>
   </div>
 
