@@ -22,7 +22,7 @@
 @endif
 
 <style type="text/css">
-	.form-group textarea { 	-webkit-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
+	.MyFormGroup textarea { 	-webkit-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							-moz-box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							box-shadow: 0px 0px 22px -14px rgba(71,92,115,1);
 							font-size: small;
@@ -42,13 +42,13 @@
     <input type="hidden" name="url" id="url" value="consultation" />
     <input type="hidden" name="_method" value="post">
 
-	<div class="form-group">
+	<div class="form-group MyFormGroup">
 	    <strong>Chief complaint (CC):</strong><br>
 	   <textarea id="wysihtml5-textarea" rows = "5" cols = "100%" name = "cc">
 	           <?php  echo (isset($patient->cc)?$patient->cc:''); ?> 
 	    </textarea>
 	</div>
-	<div class="form-group">
+	<div class="form-group MyFormGroup">
 		<strong>History of the present illness(HPI):</strong><br>
 		<textarea rows = "5" cols = "100%" name = "hpi">
 	          <?php  echo (isset($patient->hpi)?$patient->hpi:''); ?> 

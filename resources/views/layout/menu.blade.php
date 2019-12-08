@@ -59,7 +59,7 @@
                                   transform: translatex(-50%);
                                  }
 
-      .loco {  
+      .locos {  
               background: #7190C4;
               -webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
               -moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
@@ -86,7 +86,6 @@
   <div class="col-2 col-md-2" id="" style="text-align: center;"> 
     <img src="../images/menu/medicalCenterLogo2.png" alt="" width="70%" margin="1" style="margin-top: 6px;">
   </div>
-  
   <div class="col-8 col-md-8" id="" style=" min-height: 116px; max-height: 116px; background-color: #ADC5E8; ">
       <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
         <div class="container-fluid" style=" text-align: center; align-items: center;">    
@@ -122,6 +121,7 @@
       <li style="float: none;"><span >{{ $_SESSION['username' ]}}</span></li>
       <li style="width: 100%;"><a href="{{ url('userlogout') }}" style="height: 33px; width: 120%; margin-top: 1px; margin-left: -14px; text-align: center; padding-top: 6px; background: #ADC5E8; color: white;" class="btn-block"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
+
   </div>
 </div>
 
@@ -163,14 +163,19 @@
                                                         var previo="#fr"+elemento.trim()
                                                         if ($(previo).length) {$(previo).remove()}
                                                       }
-                    $ventana=((indice=="0") ? "#left_wind":"#center_wind");                                  
+                                                      if (elemento=='appointment.done') {
+                                                        indice=1;
+                                                      }
+                    $ventana=((indice=="0") ? "#left_wind":"#center_wind");          
+                                             
                     NewPreLoadDataInView($ventana,'&url='+elemento, 'renderView', elemento)   
                   }
   }
     function ButtonString(elemento, estilo)
     {
-      $btnID='btn'+elemento[1].replace('.', '_');  
-      return "<a id='"+$btnID+"' onclick= '"+elemento[5]+"' class='botonOp btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
+      $btnID=(elemento[1])?'btn'+elemento[1].replace('.', '_'):'';  
+      $btnID=(elemento[6])?elemento[6]:$btnID;
+      return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
     }
 
     function AddMenuItem(elemento, indice){
@@ -194,7 +199,6 @@
 function ShoWindow(elemento, ventana, subpage){      
                         $frm= "fr"+elemento.trim(); /*nombre del elemento HTML */
                         $frm= $frm.replace('.', '_');
-
                         if (ventana=="#center_wind"){$('.contenidoCentro').hide();  
                               if ( $('#'+$frm).length ) {   
                                 // hacer algo aquí si ya la opcion tiene un div con contenido
@@ -276,7 +280,6 @@ function PreLoadDataInView(ventana, xdata, vista) {
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;    
-
     $.post(vista, data, function(subpage){  
         ShoWindow(elemento,ventana,subpage);
     })
@@ -305,6 +308,7 @@ function RegisterRTN(xdata, destino) {
                                         $fld=destino[x][1];
                                         $txt=(subpage[$fld])? subpage[$fld]:'Error';
                                         $(destino[x][0]).append(' '+$txt);
+
                                       }       
     });
     
@@ -391,10 +395,31 @@ function AltaMedica(identification){
 }
 
  if (Pacienteactivo) {cambiaPaciente('pasient_act');}
-      
+ 
+ var $btnAnte='';
+ var $btnClas='';
+
+
+ function Select(elm, clr) {
+    if ($btnAnte) { 
+      $('#'+$btnAnte).css("background", $btnClas);
+      $('#'+$btnAnte).css('color','#AFC4E8' ); 
+      $('#'+$btnAnte).css('margin-left','1px' );
+    } 
+
+    if (!(($btnAnte)==(elm)))  { 
+                          $btnAnte=elm;
+                          $btnClas=clr;
+                        }
+
+    $('#'+elm).css('background','#E2E2E2' );
+    $('#'+elm).css('color','black' );
+    $('#'+elm).css('margin-left','18px' ); 
+ }
 </script>
 
 <!-- /*224
-   74
+   74         
+   74         
   32*/
 -->

@@ -20,16 +20,16 @@
 @include ('speciality')
 
 <style type="text/css">
-        .list-group-item {background: #7190C6; }
-        .form-inline { font-family: arial, helvetica, sans-serif; 
+        .EXMYListGroupItem  {background: #7190C6; }
+        .EXMYFormInline { font-family: arial, helvetica, sans-serif; 
                  margin-top: 0px;
                  margin-bottom: 0px;
                  color: #000000;
                 }
 
-        .list-group-item a:hover { color: black; background: blue; }
+        .EXMYListGroupItem  a:hover { color: black; background: blue; }
 
-        .form-group { font-family: arial, helvetica, sans-serif; 
+        .EXMYFormGroup  { font-family: arial, helvetica, sans-serif; 
                  margin-right: 0px;
                  margin-left: 0px;
                 }
@@ -91,9 +91,9 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
                               <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px; position: fixed; z-index: 1;">
-                                  <div class="form-inline blnc" style="width: 20%;">Date</div>
-                                  <div class="form-inline blnc" style="width: 40%;">Exam </div>
-                                  <div class="form-inline blnc" style="width: 40%;">Result</div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 20%;">Date</div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 40%;">Exam </div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 40%;">Result</div>
                               </div>  <br><br>  
 
   <?php $i=0;   
@@ -123,8 +123,8 @@
                              
 
                              <?php 
-                              $Cadena="<a href='javascript:ShowNote(\"userd$idN\",$patmt)' class='list-group-item' style='max-height: 100px; height: 75px; overflow: hidden;' id='linea $idt'>";
-                               $Cadena=$Cadena."<div class='form-inline colTx' style='width: 20%; color: white; font-size:small;'>".substr($patmt->created_at,0,10)."<div id='userd$idN'> </div></div>";
+                              $Cadena="<a href='javascript:ShowNote(\"userd$idN\",$patmt)' class='list-group-item EXMYListGroupItem ' style='max-height: 100px; height: 75px; overflow: hidden;' id='linea $idt'>";
+                               $Cadena=$Cadena."<div class='form-inline EXMYFormInline colTx' style='width: 20%; color: white; font-size:small;'>".substr($patmt->created_at,0,10)."<div id='userd$idN'> </div></div>";
                             
                             
                               $lexams=(isset($patmt->exams))?$patmt->exams:null;
@@ -149,12 +149,12 @@
 
                                 }
 
-                             $Cadena=$Cadena."<div style='width: 70%; max-height: 70px; overflow: hidden;float: left;'><div class='form-inline' style='width:50%; float: left; text-align: left;'>".$txExam."</div><div class='form-inline' style='width:35%; float: left; text-align: left;'>".$txResu."</div></div>";
+                             $Cadena=$Cadena."<div style='width: 70%; max-height: 70px; overflow: hidden;float: left;'><div class='form-inline EXMYFormInline' style='width:50%; float: left; text-align: left;'>".$txExam."</div><div class='form-inline EXMYFormInline' style='width:35%; float: left; text-align: left;'>".$txResu."</div></div>";
 
   ?>
                               @if ($Editable) 
                                   <?php  $xdata='&method=get&findit='.$idN;
-$Cadena=$Cadena."<div class='form-inline' style='float: right; margin-right: 10px;'>  <form class='form-inline' id='edl$idN' action=\"javascript:editExamen('$xdata')\"><button type='submit' class='btn btn-default glyphicon glyphicon-pencil mio'></button></form></div>";
+$Cadena=$Cadena."<div class='form-inline EXMYFormInline' style='float: right; margin-right: 10px;'>  <form class='form-inline EXMYFormInline' id='edl$idN' action=\"javascript:editExamen('$xdata')\"><button type='submit' class='btn btn-default glyphicon glyphicon-pencil mio'></button></form></div>";
                                   ?>
                               @endif 
                         

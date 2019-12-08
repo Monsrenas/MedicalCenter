@@ -3,6 +3,8 @@
   $idAct=(isset($_SESSION['identification'])) ?$_SESSION['identification'] : ""; 
 ?>
 
+@include('funciones')
+
  @if (isset($patient))
            <?php  
               $identification="000";
@@ -27,7 +29,7 @@
 
 <div class="row" style="margin: 0px auto;">
   @csrf 
-<div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" > 
+<div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" id='ConsultMyList'> 
   <strong><h3>Consultation List</h3></strong>
   <?php $i=0;?>
    @foreach($patient as $patmt)
@@ -38,11 +40,23 @@
                               $test=$idC;
                               $i=$i+1; 
                               ?>
-                              
-                             <a href="javascript:CargaConsulta('#Interrogation', '&findit={{$idC}}&identification=&id={{$idC}}', 'flexlist');" class="list-group-item"  id="linea{{$idC}}" style=" background: #0099D1; color: #C4D5F3;">
-                                  <div style="background: #0099D1;">{{$fecha}}</div>  
-                            </a>
+
+                              <script type="text/javascript">
+                                  
+                                  var elemento=[];
+                                  elemento[0]='<?php echo dateString($fecha); ?>'  ;
+                                  elemento[5]="javascript:CargaConsulta(\"#Interrogation\", \"&findit=<?php echo $idC ?>&identification=&id=<?php echo $idC ?>\", \"flexlist\")";
+                                  elemento[6]='<?php echo 'linea'.$idC; ?>';
+
+                                  var accion=ButtonString(elemento,"background:#0099D1; color: #C4D5F3;  font-size:1.2em;");
+                                  $('#ConsultMyList').append(accion);
+                              </script>
+                             
                            
               @endforeach
 </div> 
 </div>
+<!--
+<a href="javascript:CargaConsulta('#Interrogation', '&findit={{$idC}}&identification=&id={{$idC}}', 'flexlist');" class="list-group-item"  id="linea{{$idC}}" style=" background: #0099D1; color: #C4D5F3;">
+                                  <div style="background: #0099D1;">{{$fecha}}</div>  
+                            </a>  -->

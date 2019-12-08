@@ -19,6 +19,13 @@
 </div>
 
 <script type="text/javascript">
+  function clearModal(){ 
+    for (var i = 1; i < 6; i++) {
+      $('#parr'+i).html('');
+    }
+
+  }
+
 /*$( "#qwerty" ).click(function() {
   $("#qwerty").modal("hide");
 });*/

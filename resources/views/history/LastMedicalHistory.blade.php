@@ -23,9 +23,10 @@
 
 
 <style type="text/css">
-	table {	font-size: small;
+	.LMHtable {	font-size: small;
   			 
   			width: 100%;
+
 		  }
 </style>
     
@@ -44,7 +45,7 @@
 
 	
 </script>
-<div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center; background: #AFC4E8; ">
+<div style="padding: 1%;  align: center; background: #AFC4E8; ">
 <form  id="MyLastMedical" action="javascript:SaveDataNoRefreshView('MyLastMedical','store')" method="post">
 	@csrf
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -54,7 +55,7 @@
 	<input type="hidden" name="_method" value="post">
 	 <input type="hidden" name="modelo" id="modelo" value="Lastmedical" />
  
-<table style="width: 100%;">
+<table style="width: 100%;" class="LMHtable">
 	@for ($i = 0; $i < count($preexistentes); $i+=2)
  		<tr>
  			<?php $name0=substr(str_replace(" ", "", $preexistentes[$i]),0,7); ?>

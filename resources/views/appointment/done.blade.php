@@ -1,0 +1,74 @@
+<?php  
+      if(!isset($_SESSION)){ session_start(); }
+      use App\Appointment;
+      $date=date("Y-m-d");
+      
+      $dr_user=$_SESSION['dr_user'];
+      
+      if (!(isset($patient))) {$MYpatient=Appointment::where('dr_code', $dr_user )->orderBy('time')->get();}
+      else {$MYpatient=$patient;}
+         
+?>
+@include('appointment.appFunction')
+
+ @if (isset($MYpatient))
+            <?php
+               
+              $date=(isset($MYpatient[0]))? $MYpatient[0]->date  :  $date;
+              (isset($MYpatient->date))? $MYpatient->date : $date;  
+                            
+           ?>
+@endif
+
+
+<div class="row" style="margin: 0px auto;">
+  @csrf 
+  <div class="navbar-fixed">
+          <form id="appointmentdone" class="navbar-form navbar-left" action="javascript:LoadDataInView('appointment_done', 'appointmentdone','findAppoinment')">
+          @csrf
+                  
+          <input type="hidden" name="url"  value='appointment.done'>
+
+          <input type="hidden" name="modelo" id="modelo" value="Appointment" />
+          <input type="hidden" name="_method" value="get">
+
+          <div class="form-group" style="padding-right: 40px;">
+            <label>Physician:</label>
+            <input type="hidden" name="dr_code" id="mYappDr_code" value="{{$_SESSION['dr_user']}}"> 
+          </div>
+
+          <div class="form-group" style="padding-right: 40px;">
+            <label>Date:</label>
+            <input type="date" name="date" id="mYsetDate" class="form-control" value="{{$date}}" onchange="javascript:submit()()" required>
+          </div>
+
+        <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Spaces</button>
+      </form>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
+                                <div style="width: 100%; height: 30px; margin-top: 10px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px;">
+                                    <div class="form-inline FormInline  blnc" style="width:15%;">Time</div>
+                                    <div class="form-inline FormInline  blnc" style="width:35%;">Patient</div> 
+                                    <div class="form-inline FormInline  blnc" style="width:50%;">Details</div>
+                                </div>  <br>   
+                                 
+      <div id="mYrejilla" style="height: 490px; max-height: 490px; overflow: auto;"></div>
+  </div> 
+</div>
+
+
+@if (isset($MYpatient)) 
+   <script type="text/javascript">AppointArray(1);</script>
+   @if (isset($MYpatient[0]->dr_code))    <?php $dr_code=$MYpatient[0]->dr_code ?>   @endif
+   @if (isset($MYpatient->dr_code))       <?php $dr_code=$MYpatient->dr_code ?>      @endif
+@endif
+  
+@if (isset($MYpatient[0])) 
+   @foreach($MYpatient as $patmt)
+
+    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}',1);</script>                               
+   @endforeach
+@endif               
+
+

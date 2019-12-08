@@ -18,14 +18,14 @@ $identification='';
 @endif
 
 <style type="text/css">
-	table {	font-size: small;
+	.SHtable {	font-size: small;
   			 
   			background: #AFC4E8; 
   			 
   			width: 100%;
 		  }
 
-	table, th, td {	  text-align: center;
+	.SHtable, th, td {	  text-align: center;
 					  padding-bottom: 6px;
 				  }
 	.secc { padding-bottom: 20px; }			  
@@ -62,7 +62,7 @@ $identification='';
 
 	<div class="form-group secc">
 	    <strong>3- Currently working:</strong>
-	    <table  style="width: 100%;"> 
+	    <table  style="width: 100%;" class="SHtable"> 
 	    	<tr style="text-align: center;">
 	    		<th style="width: 50%; text-align: center;"><strong>YES</strong></th>
 	    		<th style="width: 50%; text-align: center;" ><strong>NO</strong></td>
@@ -97,7 +97,7 @@ $identification='';
 	<div class="form-group secc">
 	    <strong>5- Previous hospital admissions:</strong>
 	    
-	    <table  style="border: none; width: 100%;"> 
+	    <table  style="border: none; width: 100%;" class="SHtable"> 
 	    	<tr style="text-align: center;">
 	    		<th style="width: 50%; text-align: center;"><strong>Reason for admission</strong></th>
 	    		<th style="width: 50%; text-align: center;" ><strong>Duration</strong></td>

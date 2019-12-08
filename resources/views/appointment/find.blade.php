@@ -62,7 +62,7 @@
 
 @if (isset($patient)) 
 
-   <script type="text/javascript">AppointArray();</script>
+   <script type="text/javascript">AppointArray(0);</script>
    @if (isset($patient[0]->dr_code))    <?php $dr_code=$patient[0]->dr_code ?>   @endif
    @if (isset($patient->dr_code))       <?php $dr_code=$patient->dr_code ?>      @endif
      
@@ -72,7 +72,7 @@
 
 @if (isset($patient[0])) 
    @foreach($patient as $patmt)
-    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}');</script>                               
+    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}',0);</script>                               
    @endforeach
 @endif
 

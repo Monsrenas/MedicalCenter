@@ -204,7 +204,7 @@ global  $patient1;
 
 <style type="text/css">
 
-	table {	font-size: x-small;
+.PEMYtable {	font-size: x-small;
   			border-collapse: collapse;
   			
   			border: 1px inset #5183E8; 
@@ -212,7 +212,7 @@ global  $patient1;
   			
 		  }
 
-	table, th, td {
+.PEMYtable, th, td {
 					  border: 1px solid #5183E8;
 					  text-align: center;
 					  padding-bottom: 6px;
@@ -228,7 +228,7 @@ global  $patient1;
 
 	<input type="hidden" name="url"  value='consultation.PhysicalExamination'>
 
-	<table class="align-middle" style="margin-bottom: 20px;">
+	<table class="align-middle PEMYtable" style="margin-bottom: 20px;">
 		<tr>
 			<th colspan="2" width="5">INTEGRATED MEDICAL CARE</th>
 			<th colspan="5" width="5">PHYSICAL EXAMINATION</th>
@@ -291,7 +291,7 @@ global  $patient1;
 		<tr> <td colspan="3">DRE</td><?php echo decifra("***");?></tr>
 		<?php echo Arbol($HEMO);?>
 		</table>
-		<table>
+		<table class="PEMYtable">
 		<tr><td colspan="7"><strong>CRANIAL NERVES</strong></td></tr>
 		<tr><td></td><td>I</td><td>II</td><td> III  IV VI</td><td>V</td><td>VII</td></tr>
 		<tr><td>R</td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td><td><?php echo decifra("...");?></td></tr>

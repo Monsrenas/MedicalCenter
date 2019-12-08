@@ -13,16 +13,16 @@
 @include ('speciality')
 
 <style type="text/css">
-        .list-group-item {background: #7190C6; }
-        .form-inline { font-family: arial, helvetica, sans-serif; 
+        .myPHListGroupItem  {background: #7190C6; }
+        .myPHFormInline  { font-family: arial, helvetica, sans-serif; 
                  margin-top: 0px;
                  margin-bottom: 0px;
                  color: #000000;
                 }
 
-        .list-group-item a:hover { color: black; background: blue; }
+        .myPHListGroupItem  a:hover { color: black; background: blue; }
 
-        .form-group { font-family: arial, helvetica, sans-serif; 
+        .myPHFormGroup  { font-family: arial, helvetica, sans-serif; 
                  margin-right: 0px;
                  margin-left: 0px;
                 }
@@ -82,12 +82,12 @@
             
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
                               <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px; position: fixed; z-index: 1;">
-                                  <div class="form-inline blnc" style="width: 15%;">Date</div>
-                                  <div class="form-inline blnc" style="width: 17%;">Subjective</div>
-                                  <div class="form-inline blnc" style="width: 16%;">Evolution</div> 
-                                  <div class="form-inline blnc" style="width: 16%">Assessment</div>
-                                  <div class="form-inline blnc" style="width: 16%;">Treatment</div>
-                                  <div class="form-inline blnc" style="width: 7%">Medication</div>
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 15%;">Date</div>
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 17%;">Subjective</div>
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 16%;">Evolution</div> 
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 16%">Assessment</div>
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 16%;">Treatment</div>
+                                  <div class="form-inline myPHFormInline  blnc" style="width: 7%">Medication</div>
                               </div>  <br><br>  
 
   <?php $i=0;   
@@ -111,19 +111,19 @@
                               $borrable=(($_SESSION['acceslevel']>3)and$Editable);
                               $i=$i+1;?>
                                             
-                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item" style="height: 70px; overflow: hidden;" id="mNota{{$idN}}">
-                                  <div class="form-inline colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
+                             <a href="javascript:ShowNote('userd{{$idN}}',{{$patmt}})" class="list-group-item myPHListGroupItem " style="height: 70px; overflow: hidden;" id="mNota{{$idN}}">
+                                  <div class="form-inline myPHFormInline  colTx" style="width: 15%; color: white; font-size:small;">{{substr($patmt->created_at,0,10)}}  
                                         
                                     <div id='userd{{$idN}}'>
                                       <script type="text/javascript">LoadUserData('userd{{$idN}}','{{$userid}}' )</script>
                                     </div>
                                   </div>
                                   
-                                  <div class="form-inline colTx" style="width:17%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
-                                  <div class="form-inline colTx" style="width:16%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div>
-                                  <div class="form-inline colTx" style="width:16%;"><?php echo (isset($patmt->assessment)?$patmt->assessment:''); ?></div>  
-                                  <div class="form-inline colTx" style="width:16%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
-                                  <div class="form-inline colTx" style="width:7%;">
+                                  <div class="form-inline myPHFormInline  colTx" style="width:17%;"><?php echo (isset($patmt->subjective)?$patmt->subjective:''); ?></div> 
+                                  <div class="form-inline myPHFormInline  colTx" style="width:16%;"><?php echo (isset($patmt->evolution)?$patmt->evolution:''); ?></div>
+                                  <div class="form-inline myPHFormInline  colTx" style="width:16%;"><?php echo (isset($patmt->assessment)?$patmt->assessment:''); ?></div>  
+                                  <div class="form-inline myPHFormInline  colTx" style="width:16%;"><?php echo(isset($patmt->treatment)?$patmt->treatment:''); ?></div>
+                                  <div class="form-inline myPHFormInline  colTx" style="width:7%;">
                                     <?php
 
                                       $ldrug=(isset($patmt->drug))?$patmt->drug:null;
@@ -137,8 +137,8 @@
                                   </div>
   
                                  @if ($borrable)    
-                                  <div class="form-inline" style="float: right;">
-                                    <form class="form-inline" action="javascript:elimina('DNT{{$idN}}','mNota{{$idN}}')" id='DNT{{$idN}}' >
+                                  <div class="form-inline myPHFormInline " style="float: right;">
+                                    <form class="form-inline myPHFormInline " action="javascript:elimina('DNT{{$idN}}','mNota{{$idN}}')" id='DNT{{$idN}}' >
                                       @csrf
                                       <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />
                                       <input type="hidden" name="_method" value="post">
@@ -150,13 +150,13 @@
                                   @endif 
 
                                   @if ($Editable)
-                                  <div class="form-inline" style="float: right; margin-right: 10px;">
+                                  <div class="form-inline myPHFormInline " style="float: right; margin-right: 10px;">
                                     <?php $xdata='&modelo=Physiciansnote&url=history.Edit_note&method=get&findit='.$idN; ?>
-                                    <form class="form-inline" id='edl{{$idN}}' action="javascript:RefreshDataInView('#center_wind','{{$xdata}}','findbyId','history.Edit_note')">
+                                    <form class="form-inline myPHFormInline " id='edl{{$idN}}' action="javascript:RefreshDataInView('#center_wind','{{$xdata}}','findbyId','history.Edit_note')">
                                       <button type="submit" class="btn btn-default glyphicon glyphicon-pencil mio"></button>
                                     </form>
                                     <!--
-                                    <form class="form-inline" id='edl{{$idN}}' action="javascript:RefreshDataInView('history.Edit_note','edl{{$idN}}','findbyId')">
+                                    <form class="form-inline myPHFormInline " id='edl{{$idN}}' action="javascript:RefreshDataInView('history.Edit_note','edl{{$idN}}','findbyId')">
 
                                       @csrf
                                         <input type="hidden" name="modelo" id="modelo" value="Physiciansnote" />

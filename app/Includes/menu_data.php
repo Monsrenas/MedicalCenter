@@ -24,7 +24,7 @@ $patientITEMS = [
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],
   'Exams' => ['exams.load_list',['Performed','xmsrealizados'],['Requested','xmssolicitados']],
   'Reports' => [['Summary of services','report.searche']],
-  'Appointment' => [['Make appointment','appointment.find']],
+  'Appointment' => ['appointment.done',['Make appointment','appointment.find']],
   
 ];
 
@@ -34,7 +34,7 @@ $userITEMS = [
  ?>
 
 
-/*
+<!--
     para que el listado de paciente salga automatico
 
- ,'&modelo=Patient&_method=get&findit=','list','*' */
+ ,'&modelo=Patient&_method=get&findit=','list','*' -->

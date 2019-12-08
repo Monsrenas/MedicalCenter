@@ -31,21 +31,24 @@
     </style>
 
 <script type="text/javascript">
-    function AppointArray(){
+    
 
+    function AppointArray(op){
+        var $prfj=['','mY'];
         var hr=8;
-
+        
         for (var i = 0; i < 12; i++) {
           for (var j = 0; j <= 45; j++) {
             hds=hr+i;
             miFecha = new Date('1','1','1',hds,j,'0');
             hds=miFecha.toString().substring(16,24);
             $hID=('hspc'+hds.replace(':','')).substring(0,8);
+            $hID=$prfj[op]+$hID;
             $cade="<div id='I"+$hID+"' hidden> </div>"
             $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'> </div>" 
             $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'> </div>"
             $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' onclick='showAPPnt(\""+$hID+"\")'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
-            $('#rejilla').append($hora);
+            $('#'+$prfj[op]+'rejilla').append($hora);
             j=j+14;
 
           }
@@ -87,9 +90,11 @@
        
     }
 
-    function LoadAppnt(mtime, identification, details){
+    function LoadAppnt(mtime, identification, details, op){
+      var $prfj=['','mY'];
       var idSpc=mtime.toString();
           idSpc="hspc"+(idSpc.replace(':','')).substring(0,4);
+          idSpc=$prfj[op]+idSpc;
           $('#I'+idSpc).html(identification);
           RegisterRTN('&identification='+identification+'&modelo=Patient',[['#P'+idSpc,'name'],['#P'+idSpc,'surname']]);
           
@@ -101,7 +106,7 @@
       var mtime=$('#appTime').val();
       var identification=$('#appIdentification').val();
       var details=$('#appDetails').val();
-      LoadAppnt(mtime, identification, details); 
+      LoadAppnt(mtime, identification, details,0); 
       $('#citaVTN').hide();
     }
 
@@ -110,7 +115,7 @@
 
       var data=$('#llave').serialize();
       data=data+'&url=appointment.patient&campos='+campos;      
-      
+      clearModal();
       $.post('list', data, function(subpage){
         $("#parr1").html(subpage);
       });
