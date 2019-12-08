@@ -77,7 +77,7 @@
 @endif
 
 <div id="citaVTN" class="Appointment" hidden>
-  <a href="#" onclick="javascript:$('#citaVTN').hide()" style="float: right; color: black;" class="btn btn-default glyphicon">X</a>
+  <a href="#" onclick="javascript:$('#citaVTN').hide()" style="float: right; color: black;" class="btn btn-default glyphicon glyphicon-remove"></a>
   <form id="MyPPNTMNT" action="javascript:SaveAndListUpdate()" method="post">
     @csrf
     <input type="hidden" name="_method" value="post">
