@@ -72,7 +72,7 @@
 
 @if (isset($patient[0])) 
    @foreach($patient as $patmt)
-    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}',0);</script>                               
+    <script type="text/javascript">LoadAppnt('<?php echo $patmt ?>',0);</script>                               
    @endforeach
 @endif
 

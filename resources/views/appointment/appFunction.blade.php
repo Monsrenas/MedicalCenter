@@ -32,11 +32,17 @@
 
 <script type="text/javascript">
     
-
+    /* General los espacios de horarios para cita (Vacia)*/
     function AppointArray(op){
         var $prfj=['','mY'];
+
         var hr=8;
-        
+        var dateToday=<?php echo str_replace("-", "", date("Y-m-d")); ?>;
+        if (op==0)  {
+            var searDate=$('#setDate').val();
+                searDate=(searDate.replace('-','')).replace('-','');
+        }
+              
         for (var i = 0; i < 12; i++) {
           for (var j = 0; j <= 45; j++) {
             hds=hr+i;
@@ -44,10 +50,14 @@
             hds=miFecha.toString().substring(16,24);
             $hID=('hspc'+hds.replace(':','')).substring(0,8);
             $hID=$prfj[op]+$hID;
-            $cade="<div id='I"+$hID+"' hidden> </div>"
-            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'> </div>" 
-            $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'> </div>"
-            $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' onclick='showAPPnt(\""+$hID+"\")'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
+            $cade="<div id='I"+$hID+"' hidden> </div>";
+            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'> </div>" ;
+            $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'> </div>";
+            
+            accion="";
+            if ((op==0)&&(dateToday<=searDate)) {accion="onclick='showAPPnt(\""+$hID+"\")'";} 
+              
+            $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' "+accion+" id='V"+$hID+"'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
             $('#'+$prfj[op]+'rejilla').append($hora);
             j=j+14;
 
@@ -57,6 +67,8 @@
 
     }
 
+
+     /*Carga la informacion en la ventana de edicion de citas y la muestra*/
     function showAPPnt(idLn){
         $horaC=$('#H'+idLn).text();
         
@@ -90,25 +102,57 @@
        
     }
 
-    function LoadAppnt(mtime, identification, details, op){
+    function markLikeDone (idSpc)
+    {
+      /* Colores para citas cumplimentadas*/
+      $('#H'+idSpc).css('color','#B5B7B5');
+      $('#P'+idSpc).css('color','#71BA27');
+      $('#D'+idSpc).css('color','#71BA27');
+                     
+    }  
+
+    /*Carga los datos en los espacios de horarios para cita */
+    function LoadAppnt(regist, op){
+      
+      
+      var regist=JSON.parse(regist);
+      var mdate=regist['date'];
+      var mtime=regist['time'];
+      var identification=regist['identification'];
+      var details=regist['details']; 
       var $prfj=['','mY'];
       var idSpc=mtime.toString();
+      
+      
           idSpc="hspc"+(idSpc.replace(':','')).substring(0,4);
           idSpc=$prfj[op]+idSpc;
           $('#I'+idSpc).html(identification);
           RegisterRTN('&identification='+identification+'&modelo=Patient',[['#P'+idSpc,'name'],['#P'+idSpc,'surname']]);
           
+          if (op==1) {    $('#V'+idSpc).click(     function() { CumplimentarCita(idSpc); }     );     }
+
           $('#D'+idSpc).html(details);
+
+          /* Colores para citas cumplimentadas*/
+          if (regist['status']=='1') { markLikeDone (idSpc);}
+          
     };
 
+    /*Guarda la informacion de la ventana de edicion de citas y actualiza la casilla correspondiente*/
+  
     function SaveAndListUpdate(){
       SaveDataNoRefreshView('MyPPNTMNT','IDstore');
       var mtime=$('#appTime').val();
       var identification=$('#appIdentification').val();
       var details=$('#appDetails').val();
-      LoadAppnt(mtime, identification, details,0); 
+      regist="\{\"time\":\""+mtime+"\",\"identification\":\""+identification+"\",\"details\":\""+details+"\" \}";
+      LoadAppnt(regist,0); 
       $('#citaVTN').hide();
     }
+
+
+    /*Carga la herrramienta de busqueda de pacientes para seleccionar uno, 
+      devuelve el valor seleccionado a la ventana de edicion de citas*/
 
     function FindPatient(campos)
     { $('#qwerty').modal('show');
@@ -121,6 +165,34 @@
       });
     }
 
+    function CumplimentarCita(idLn)
+    {
+      var $horaC=$('#H'+idLn).text();
+      var $doctor=$('#mYappDr_code').val();
+      var $fecha=(($('#mYsetDate').val()).replace('-','')).toString();
+          $fecha=$fecha.replace('-','');
+      $identification=($('#I'+idLn).text()).trim();    
+      <?php $DoneDate=date("Y-m-d");  $DoneTime=substr(date("Y-m-d h:i:s"), 11); ?>
+      $id=$doctor+$fecha+idLn.substring(6,10);
+      $('#doneappID').val($id);
+      $('#DoneAppointment').submit();
+
+      markLikeDone (idLn);
+
+      $('#ACT_Identification').val($identification); 
+      
+    }
+
+
+    function SaveAppointmentDone(forma,vista) {
+        var data=$('#'+forma).serialize();
+        $.post(vista, data, function(subpage){  
+            cambiaPaciente('pasient_act'); 
+
+          })
+    }
+
+    /*Borra cita desde ventana de edicion y la oculta*/
 
     function DelAppointment() {
         $horaC=$('#appTime').val();

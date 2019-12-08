@@ -4,10 +4,6 @@
 			$('#'+espacio).empty().append(dia+' '+monthNames[mes-1]+' '+year);
 		}
 
-	function FechaStr(dia, mes, year){
-			var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
-			return (dia+' '+monthNames[mes-1]+' '+year);
-		}	
 
 	function soloNumeros(e,lmt)
 

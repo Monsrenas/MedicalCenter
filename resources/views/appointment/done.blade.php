@@ -1,11 +1,13 @@
 <?php  
       if(!isset($_SESSION)){ session_start(); }
       use App\Appointment;
-      $date=date("Y-m-d");
-      
+
+      $date=date("Y-m-d");  $stime=substr(date("Y-m-d h:i:s"), 11);
+      $DoneDate=$date;  $DoneTime=$stime;
+
       $dr_user=$_SESSION['dr_user'];
       
-      if (!(isset($patient))) {$MYpatient=Appointment::where('dr_code', $dr_user )->orderBy('time')->get();}
+      if (!(isset($patient))) {$MYpatient=Appointment::where('date', $date )->where('dr_code', $dr_user )->orderBy('time')->get();}
       else {$MYpatient=$patient;}
          
 ?>
@@ -66,9 +68,22 @@
   
 @if (isset($MYpatient[0])) 
    @foreach($MYpatient as $patmt)
-
-    <script type="text/javascript">LoadAppnt('{{$patmt->time}}','{{$patmt->identification}}','{{$patmt->details}}',1);</script>                               
+      <?php  $regist=json_encode($patmt);  ?> 
+    <script type="text/javascript">LoadAppnt('<?php echo $regist?>',1);</script>                               
    @endforeach
-@endif               
+@endif   
+
+<form id="DoneAppointment" action="javascript:SaveAppointmentDone('DoneAppointment','IDstore');" method="post">
+    @csrf
+    <input type="hidden" name="_method" value="post">
+    <input type="hidden" name="url"  value='appointment.done'>
+    <input type="hidden" name="modelo"  value='Appointment'>
+
+    <input type="hidden" name="id" id="doneappID" value="">
+
+    <input type="time" id="DoneappTime" name="time_done" value="{{$DoneTime}}" required readonly hidden>
+    <input type="date" id="DoneappDate" name="date_done" value="{{$DoneDate}}" required readonly hidden>
+    <input type="hidden" id="DoneappStatus" name="status" value="1">
+  </form>            
 
 

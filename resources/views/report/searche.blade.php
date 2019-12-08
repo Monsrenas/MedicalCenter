@@ -16,7 +16,7 @@
 
 
 <style type="text/css">
-        .myRSListGroupItem  {background: #7190C6; }
+        .myRSListGroupItem  {background: #ADC5E8; }
         .myRSFormInline  { font-family: arial, helvetica, sans-serif; 
                  margin-top: 0px;
                  margin-bottom: 0px;

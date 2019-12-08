@@ -2,6 +2,7 @@
        /* $_SESSION['dr_user']='44240514037';
     
         $_SESSION['dr_user']='613675132765';*/
+        $accionID=(isset($_SESSION['identification']))?"javascript:LoadDataInView('{{$_SESSION['identification']}}','find')":"";
 
         function PasientAct(){
 
@@ -21,15 +22,18 @@
         }
 
         ?>
+<form  id='pasient_act' action="{{$accionID}}">
+  @csrf
+  <input type="hidden" name="modelo" id="modelo" value="Patient" />
+  <input type="hidden" name="_method" value="get">
+  <input type="hidden" name="identification" id='ACT_Identification'> 
+</form>
 
 @if (isset($_SESSION['identification']))
-    <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";</script>
-    <form  id='pasient_act' action="javascript:LoadDataInView('{{$_SESSION['identification']}}','find')">
-      @csrf
-      <input type="hidden" name="modelo" id="modelo" value="Patient" />
-      <input type="hidden" name="_method" value="get">
-      <input type="hidden" name="identification" id='ACT_Identification' value="{{$_SESSION['identification']}}"> 
-    </form>
+    <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";
+                                   $('#ACT_Identification').val('{{$_SESSION['identification']}}'); 
+    </script>
+
     @else 
     <script type="text/javascript">var Pacienteactivo="";</script>
  @endif
@@ -296,7 +300,6 @@ function udateStatus(id, status){
     }) 
 }
 
-
 function RegisterRTN(xdata, destino) {
     var data=$('#llave').serialize();
     data=data+xdata+'&noview=yes';      
@@ -344,6 +347,7 @@ function cambiaPaciente(forma)
 {
     var data=$('#'+forma).serialize();
     $('#center_wind').empty();
+
     $.post('patientcng', data, function(subpage){ 
                                   PreLoadDataInView('#right_wind', '&modelo=Patient&url=show_patient', 'find'); 
                                   Pacienteactivo="<?php echo (isset($_SESSION['identification']))? $_SESSION['identification']:''; ?>";
