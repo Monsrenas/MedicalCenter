@@ -305,13 +305,14 @@ global  $patient1;
        	<strong>N=Normal</strong>  |  <strong>AN=Abnormal</strong>  |  <strong>NE=No Examined</strong>
     </div>
 
-	<?php include(app_path().'/Includes/SaveButton.html') ?>
+	@include('funciones')    
+    <?php SaveButton('MiPhyBoton'); ?>
 
 </form>
 </div>
 
-@include('funciones')
 <script type="text/javascript">
+	activaBoton('MiPhyBoton','MyPhysical');
 	function actualizaBMI(){
 		
 		$('#BMISHOW').html('');

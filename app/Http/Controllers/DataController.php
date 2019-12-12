@@ -143,8 +143,10 @@ class DataController extends Controller
         if (isset($request->option)) {$patient->option=$request->option;}
 
         $jsonData = json_encode($patient);                         
-        if (count($patient)>0) { return $viewx->with('patient',$patient);}
+        if (count($patient)>0) {  if (isset( $request->noview )) {return $patient;}
+                                  return $viewx->with('patient',$patient);}
 
+        if (isset( $request->noview )) {return $patient;}                          
         return $viewx->with('patient',$patient); 
     }
 
@@ -303,6 +305,40 @@ class DataController extends Controller
         $services=collect($services)->sortBy('date');
         return $view->with('patient',$services);
     }
+
+
+ public function FindConsultation(Request $request)
+    {   /*Lista combinada de Interrogation, Exams y Physical*/  
+      $lst=[0=>['Interrogation','CSL'],1=>['Physical','FXM'],2=>['Exams','LXM']];
+      $request->noview=true;
+
+      $view=$this->indexView($request);
+
+      $services=[];  
+      $i=0;
+        for ($y=0; $y<count($lst); $y++) { 
+          $request->modelo=$lst[$y][0];
+          $classdata=$this->modelo($lst[$y][0]);
+          $result=$this->fleXmultifind($request, $classdata);
+            
+          foreach ($result as $elm) { 
+            $idx=substr($elm->id,0, 8);
+            $tmp=['identification'=> $elm->identification, 'date'=> substr($elm->created_at,0, 10),'id'=>$elm->id ];
+            $tmp['service'][$y]=true;
+
+            if (!isset($services[$idx])) {
+                 $services[$idx]=$tmp;
+                 $i=$i+1;
+             } else {$services[$idx]['service'][$y]=true;}
+              
+          }
+
+        }
+
+        $services=collect($services)->sortByDesc('date');
+                return $view->with('patient',$services);
+    }
+
 
      public function Comprobar(Request $request)
     {     

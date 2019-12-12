@@ -175,14 +175,15 @@
                     NewPreLoadDataInView($ventana,'&url='+elemento, 'renderView', elemento)   
                   }
   }
-    function ButtonString(elemento, estilo)
+  
+  function ButtonString(elemento, estilo)
     {
       $btnID=(elemento[1])?'btn'+elemento[1].replace('.', '_'):'';  
       $btnID=(elemento[6])?elemento[6]:$btnID;
-      return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
+      return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
     }
 
-    function AddMenuItem(elemento, indice){
+  function AddMenuItem(elemento, indice){
         $btnID='btn'+elemento[1].replace('.', '_');
         if (elemento[2]) {
           
@@ -257,7 +258,6 @@ function LoadDataInModal(frame,forma,vista) {
 function RefreshDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;      
-    
     $.post(vista, data, function(subpage){
         RefreshWindow(elemento,ventana,subpage);
     })

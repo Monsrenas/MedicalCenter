@@ -36,6 +36,10 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
           width: 5%;
          float: left;
          }
+
+.noemty {  float: left;
+           padding-right: 20px; 
+        }         
 </style>
 
 <div class="container-fluid">

@@ -9,4 +9,8 @@ if(!isset($_SESSION)){ session_start(); }
 	if ((!isset($_SESSION['identification']))or(!isset($_SESSION['dr_user']))) { return ;}
  
 ?>
-<script type="text/javascript">PreLoadDataInView('#left_wind', '&modelo=Interrogation&url=consultation.list&_method=get&findit={{$busca}}', 'flexlist');</script>
+<script type="text/javascript">
+
+	PreLoadDataInView('#left_wind', '&modelo=Interrogation&url=consultation.list&_method=get&findit={{$busca}}', 'FindConsultation');
+
+</script>

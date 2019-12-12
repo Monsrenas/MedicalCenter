@@ -125,7 +125,7 @@
                                 </select>
                                  <script type="text/javascript"> var marital="<?php  echo  $patient->maritalStts; ?>"; </script> 
                             </div>
-
+                            <!--
                             <div class="form-group">
                                 <strong>Blood group:</strong>
                                 <select name="blood" id="myblood" required>
@@ -139,7 +139,7 @@
                                     <option value="AB+" >AB+</option>
                                 </select>
                                 <script type="text/javascript"> var bloodtype="<?php  echo  $patient->blood; ?>"; </script>
-                            </div>
+                            </div>  -->
                 </div>
 
                 <div class="form-inline">
@@ -163,12 +163,12 @@
                 <br><br>
                 <div class="form-inline" >
                             <div class="form-group">
-                                <strong>Next of kin:</strong>
-                                <input type="text" name="nxOfKin" value="{{ $patient->nxOfKin }}" class="form-inline" placeholder="Near relative" required>
+                                <strong style="color: #3149D5;">Next of kin:</strong>
+                                <input type="text" name="nxOfKin" value="{{ $patient->nxOfKin }}" class="form-inline" placeholder="Near relative" >
                             </div>
                             <div class="form-group">
-                                <strong>Relationship:</strong>
-                                <select name="relation" id="myrelation" required>
+                                <strong style="color: #3149D5;">Relationship:</strong>
+                                <select name="relation" id="myrelation" >
                                     <option value="SP" >Spouse</option>
                                     <option value="PR" >Parents</option>
                                     <option value="SB" >Siblings</option>
@@ -186,10 +186,10 @@
                                 <script type="text/javascript"> var srelation="<?php  echo  $patient->relation; ?>"; </script>
                             </div>
                 </div>
-                <div class="form-inline">
+                <div class="form-inline" style="color: #3149D5;">
                             <div class="form-group">
                                 <strong>Contact information:</strong>
-                                <input type="text" name="contact" value="{{ $patient->contact }}" class="form-inline" placeholder="Contac Infotmation"  maxlength="70" size="70" required>
+                                <input type="text" name="contact" value="{{ $patient->contact }}" class="form-inline" placeholder="Contac Infotmation"  maxlength="70" size="70" style="color: black;"  >
                             </div>
                 </div>
                 <br>
@@ -207,8 +207,12 @@
     <script>
         
         function GuardarUsuario(){
+            var $id =$('#identification').val();
             SaveDataNoRefreshView('editPatientForm','store');
             $('#frlist_patient').remove();
+            $('#fredit_patient').remove();
+     NewPreLoadDataInView('#center_wind', '&modelo=Patient&url=list_patient&_method=get&findit='+$id, 'list','list_patient');        
+    
         }    
 
         /**

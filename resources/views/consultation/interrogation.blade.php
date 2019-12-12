@@ -1,15 +1,17 @@
 <?php 	
 	if(!isset($_SESSION)){ session_start(); }
 	$user=(isset($_SESSION['dr_user']))?$_SESSION['dr_user'] : "";
-    $cdate=date("Y-m-d");  $hoy=str_replace("-", "", $cdate);
+    $cdate=date("Y-m-d");  $hoy=date("Ymd");
+
 ?>
 
  @if (isset($patient))
            <?php $patient=(isset($patient[0]))? $patient[0]:$patient;
-           	if($patient->identification) {$identification=$patient->identification;} else {
+           	if(isset($patient->identification)) {$identification=$patient->identification;} else {
            	$identification=(isset($_SESSION['identification']))? $_SESSION['identification']:"";}
-           	
+         
            	$id=(isset($patient->id))? $patient->id : str_replace(" ", "",$hoy.$identification.$user);
+
            ?>
  @else         
            <?php  if (!isset($identification)) {$identification="";} ?>  
@@ -54,14 +56,19 @@
 	          <?php  echo (isset($patient->hpi)?$patient->hpi:''); ?> 
 	    </textarea>
 	    </div>
-
-    <?php include(app_path().'/Includes/SaveButton.html') ?>
+	@include('funciones')    
+    
+    <?php SaveButton('MiBoton');
+    	  $created=(isset($patient->created_at)?substr($patient->created_at, 0,11):date('Y-m-d'))
+   	 ?>
 </form>
 
 
 
 </div>
-@include('funciones')
+
 <script type="text/javascript">
+	var $ntgdd=('<?php echo( Antiguedad($created) ); ?>');
+	if ($ntgdd<3) {activaBoton('MiBoton','MyInterrogation');}
 	fijafecha('{{substr($id, 6,2)}}','{{substr($id, 4,2)}}','{{substr($id, 0,4)}}','InDate');
 </script>

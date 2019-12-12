@@ -28,7 +28,16 @@
 	    }
 	}	
 	
-	
+	function activaBoton(bton,forma){
+
+		$("#"+forma).change(function(){      	$('#'+bton).show(500);		});
+		
+		$("#"+forma).submit(function(){    		$('#'+bton).hide('slow');     	});
+
+		$("#"+forma).on("input", function(){    		$('#'+bton).show(500);     	});
+		
+	}
+
 </script>
 
 
@@ -39,5 +48,26 @@
 			$dia=substr($fecha,8, 2);
 			$mes=substr($fecha,5, 2);
 			return $year.' ('.$dia.' '.$monthNames[$mes-1].')';	
+}
+
+function SaveButton($btnId){
+
+	        $cadbtn="<div id=\"".$btnId."\" style=\"position: fixed; height: 10; bottom:5px; right:2; width: 115%;\" hidden>";
+	$cadbtn=$cadbtn."<button type=\"submit\" class=\"MySvbtn btn btn-primary glyphicon glyphicon-floppy-save\" ";
+	$cadbtn=$cadbtn."> Save</button></div>";
+
+	echo $cadbtn;
+	return;	
+}
+
+function Antiguedad($fecha) {
+  $cdate=date("Y-m-d");
+  $carbon = new \Carbon\Carbon();
+  
+  $dateFi = $carbon->createFromDate($cdate);
+  $dateIn = $carbon->createFromDate($fecha);
+  return date_diff($dateIn,$dateFi)->days;
+  
+
 }
 ?>
