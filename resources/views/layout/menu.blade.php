@@ -20,7 +20,7 @@
           
           return false;
         }
-
+     
         ?>
 <form  id='pasient_act' action="{{$accionID}}">
   @csrf
@@ -28,7 +28,6 @@
   <input type="hidden" name="_method" value="get">
   <input type="hidden" name="identification" id='ACT_Identification'> 
 </form>
-
 @if (isset($_SESSION['identification']))
     <script type="text/javascript">var Pacienteactivo="{{$_SESSION['identification']}}";
                                    $('#ACT_Identification').val('{{$_SESSION['identification']}}'); 
@@ -79,7 +78,7 @@
               }
 
       .disabled { opacity: 30%; }
-
+  a {outline: none;}
 </style>
 
 <?php include(app_path().'/Includes/menu_data.php');?>
@@ -142,7 +141,7 @@
 
   var $antr='';
   var $antr='';
-
+  var arbolStyle=1;
 
   function ShowOp($arreglo,$op){  
           if ($('#'+$op).attr('Class')=='dependen disabled') {return ;} /*Si no hay paciente activo */
@@ -180,7 +179,7 @@
     {
       $btnID=(elemento[1])?'btn'+elemento[1].replace('.', '_'):'';  
       $btnID=(elemento[6])?elemento[6]:$btnID;
-      return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden;'>"+elemento[0]+"</div></a>";
+      return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden; outline: none;'>"+elemento[0]+"</div></a>";
     }
 
   function AddMenuItem(elemento, indice){
@@ -257,16 +256,20 @@ function LoadDataInModal(frame,forma,vista) {
 
 function RefreshDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
-    data=data+xdata;      
+    data=data+xdata;     
+     
     $.post(vista, data, function(subpage){
         RefreshWindow(elemento,ventana,subpage);
+        
     })
 }
 
 function SaveDataNoRefreshView(forma,vista) {
     var data=$('#'+forma).serialize();
+    
     $.post(vista, data, function(subpage){  
         alert('Successful operation'); 
+
     })
 }
 
@@ -321,7 +324,7 @@ function RegisterRTN(xdata, destino) {
 function ConfirmaYelimina(forma,data,linea) {
   a=confirm('You want to erase this information: '+forma); 
   if (a) {
-            $.post('delete', data, function(subpage){ 
+            $.post('delete', data, function(subpage){  
                 $('#'+linea).remove(); 
             }); 
          }
@@ -329,6 +332,7 @@ function ConfirmaYelimina(forma,data,linea) {
 
 function elimina(forma, linea) {
   var data=$('#'+forma).serialize();
+
   if (data.match('=Patient')) {  
                                   CPdata=data.replace('=post','=GET'); 
                                   $.post('Comprueba', CPdata, function(subpage){ 

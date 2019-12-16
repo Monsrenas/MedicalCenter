@@ -205,13 +205,13 @@
     </div> <!-- Fin del <div class="row ">  -->
           
     <script>
-        
+            
         function GuardarUsuario(){
             var $id =$('#identification').val();
             SaveDataNoRefreshView('editPatientForm','store');
             $('#frlist_patient').remove();
             $('#fredit_patient').remove();
-     NewPreLoadDataInView('#center_wind', '&modelo=Patient&url=list_patient&_method=get&findit='+$id, 'list','list_patient');        
+            NewPreLoadDataInView('#center_wind', '&modelo=Patient&url=list_patient&_method=get&findit='+$id, 'list','list_patient');        
     
         }    
 

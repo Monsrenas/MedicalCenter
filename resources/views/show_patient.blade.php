@@ -114,6 +114,7 @@
                     </div>
         </div>
         <br><br>
+        @if (isset($patient->nxOfKin))
         <div class="form-inline" >
 
                     <div class="form-group">
@@ -129,7 +130,7 @@
                         <label>Contact information:</label><a><big> {{ $patient->contact }}</big></a>
                     </div>
         </div>
-            
+        @endif    
  
         
     </div> <!-- Fin del <div class="row ">  -->

@@ -76,7 +76,6 @@
         <textarea rows = "5" cols = "100%" name = "assessment" id="assessment">
                {{$patient->assessment}} 
         </textarea>
-        condition
     </div>
 
     <a href="javascript:showElement('treatment')" class="btn btn-default btn-block"><span  aria-hidden="true"></span><strong>P: Plan</strong></a>

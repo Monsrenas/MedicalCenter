@@ -336,7 +336,7 @@ class DataController extends Controller
         }
 
         $services=collect($services)->sortByDesc('date');
-                return $view->with('patient',$services);
+        return $view->with('patient',$services);
     }
 
 
@@ -356,6 +356,7 @@ class DataController extends Controller
     {   
     	$classdata=$this->modelo($request->modelo);
       $result=$this->destroy($request, $classdata);
+      dump($result);
       return $result; 
     }
 

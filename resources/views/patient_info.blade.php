@@ -97,6 +97,7 @@
                         <label>Email:</label><a><big>  {{ $patient->email }}</big></a>
                     </div>
         </div>
+        @if (isset($patient->nxOfKin))
         <br><br>
         <div class="form-inline" >
 
@@ -113,7 +114,7 @@
                         <label>Contact information:</label><a><big> {{ $patient->contact }}</big></a>
                     </div>
         </div>
-            
+        @endif
  
         
     </div> <!-- Fin del <div class="row ">  -->

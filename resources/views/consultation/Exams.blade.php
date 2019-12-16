@@ -46,7 +46,7 @@ use App\Exams;
 </style>
 
 <div style="padding: 1%; border-width:1px; border-style:solid; border-color:#000000; align: center;  background: #AFC4E8; ">
-<form  action="javascript:SaveExams();" method="post" id="MyExams" oninput="javascript:$('#EXAMSaveBTN').show()">
+<form  action="javascript:SaveExams();" method="post" id="MyExams">
 	@csrf
     <input type="hidden" name="_method" value="post">
 	<input type="hidden" name="identification"  placeholder="Identification number" value='{{ $identification }}'>
@@ -64,9 +64,11 @@ use App\Exams;
         <div id="<?php echo $examlst ?>"></div>
     </div>
     <a href="javascript:addExams('','')" class="btn btn-success"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span> Exams</a>
-    <div hidden="true" id="EXAMSaveBTN">
-    <?php include(app_path().'/Includes/SaveButton.html') ?>
-    </div>
+
+    @include('funciones')
+    <?php SaveButton('MiExamsBoton');
+          $created=(isset($patient->created_at)?substr($patient->created_at, 0,11):date('Y-m-d'))
+     ?>
 </form>	
 
 <script type="text/javascript">
@@ -74,6 +76,9 @@ use App\Exams;
 		var $xmed=0;
         $accLvl=<?php echo $_SESSION['acceslevel']; ?>;
         
+        var $ntgdd=('<?php echo( Antiguedad($created) ); ?>');
+        if ($ntgdd<3) {activaBoton('MiExamsBoton','MyExams');}
+
         function SaveExams()
         {
             $('#EXAMSaveBTN').hide();   

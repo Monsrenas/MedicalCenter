@@ -169,6 +169,8 @@
 
     function CumplimentarCita(idLn)
     {
+      a=confirm('You want to execute appointment ?');
+      if (!a) return;
       var $horaC=$('#H'+idLn).text();
       var $doctor=$('#mYappDr_code').val();
       var $fecha=(($('#mYsetDate').val()).replace('-','')).toString();

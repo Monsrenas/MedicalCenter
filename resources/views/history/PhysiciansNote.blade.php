@@ -107,7 +107,7 @@
                               $idN=$patmt->id;
                               $userid=strval(substr($idN, $tmi+8));
                               
-                              $Editable=(($userid==$_SESSION['dr_user'])and($antiguedad==0))?true:false;
+                              $Editable=(($userid==$_SESSION['dr_user'])and(($antiguedad==0)or($antiguedad>360)))?true:false;
                               $borrable=(($_SESSION['acceslevel']>3)and$Editable);
                               $i=$i+1;?>
                                             

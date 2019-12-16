@@ -1,4 +1,4 @@
-<?php $identification=''; ?>
+<?php $identification='';?>
 
 <style type="text/css">
         .patientList-item  {background: #7190C6; }

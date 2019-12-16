@@ -1,11 +1,14 @@
 <?php  
       if(!isset($_SESSION)){ session_start(); }
       use App\Login;
+      use App\Appointment;
       $date=date("Y-m-d");
 ?>
 @include('appointment.appFunction')
 
- @if (isset($patient))
+
+
+@if (isset($patient))
            <?php 
 
                 $date=(isset($patient[0]))?$patient[0]->date:$patient->date;  
@@ -46,6 +49,8 @@
         <button type="submit" class="btn btn-default glyphicon glyphicon-search"> Spaces</button>
       </form>
   </div>
+
+@include('appointment.list')
 
   <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin: 0px auto;" >
                                 <div style="width: 100%; height: 30px; margin-top: 10px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px;">
@@ -133,3 +138,8 @@
 </div>                
 
 
+<script type="text/javascript">
+  $('#appointmentfind').on('submit', function(){ $('#notelayout').hide();  })
+  $('#setDr_code').on('change', function(){ $('#notelayout').hide();  })
+ 
+</script>
