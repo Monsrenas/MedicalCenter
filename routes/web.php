@@ -13,6 +13,10 @@
 
 if(!isset($_SESSION)){		session_start();		}
 
+Route::get('/image', function () { return view('consultation.Imagen');});
+
+Route::post('/subir','DataController@saveImage')->name('subir');
+Route::post('saveFiles','DataController@saveFiles');
 
 Route::get('/login', function () { return view('LoginPage');});
 

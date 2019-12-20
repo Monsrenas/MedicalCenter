@@ -176,7 +176,7 @@
   }
   
   function ButtonString(elemento, estilo)
-    {
+    {  
       $btnID=(elemento[1])?'btn'+elemento[1].replace('.', '_'):'';  
       $btnID=(elemento[6])?elemento[6]:$btnID;
       return "<a id='"+$btnID+"' onmousedown='Select(this.id,this.style.background)' onclick= '"+elemento[5]+"' class='btn btn-default btn-lg btn-block' href='#' style='"+estilo+"'><div style=' overflow:hidden; outline: none;'>"+elemento[0]+"</div></a>";
@@ -325,7 +325,7 @@ function ConfirmaYelimina(forma,data,linea) {
   a=confirm('You want to erase this information: '+forma); 
   if (a) {
             $.post('delete', data, function(subpage){  
-                $('#'+linea).remove(); 
+                $('#'+linea).remove();
             }); 
          }
 }

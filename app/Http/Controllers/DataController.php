@@ -229,6 +229,13 @@ class DataController extends Controller
 
      $patient=($classdata)::where($campo,'=', $ert)->first();
 
+     if (isset($patient->images)) { $nuevo=[];
+                                      foreach ($patient->images as $key => $value) {
+                                                                                      array_push($nuevo, $value[1]) ;
+                                                                                   } 
+                                      $this->delFiles($nuevo);
+                                  }
+
      $patient->delete();
      return $patient;  
 	}
@@ -356,7 +363,6 @@ class DataController extends Controller
     {   
     	$classdata=$this->modelo($request->modelo);
       $result=$this->destroy($request, $classdata);
-      dump($result);
       return $result; 
     }
 
@@ -374,4 +380,75 @@ class DataController extends Controller
 
       return $request;
     }
-}                     
+
+public function saveFiles(Request $request)
+{      if (isset($request->borrar)) {$this->delFiles($request->borrar);}
+       //for ($y=0; $y<count($request->file('ImgsTL')); $y++) 
+        foreach ($request->ImgsTL as $y => $value)
+        {     
+            if (isset($request->file('ImgsTL')[$y]))
+            {
+                 //obtenemos el campo file definido en el formulario
+             $file = $request->file('ImgsTL')[$y];
+            
+             //obtenemos el nombre del archivo
+             //$nombre = $file->getClientOriginalName();
+
+             $nombre = $request->images[$y][1];
+             
+             //indicamos que queremos guardar un nuevo archivo en el disco local
+             \Storage::disk('public')->put($nombre,  \File::get($file));
+            }
+            
+       }
+
+           
+       return;
+}
+
+public function delFiles($filesToDel) 
+{      
+      foreach ($filesToDel as $key => $value) {
+        \Storage::disk('public')->delete($value);
+      }
+
+    return;    
+}
+
+
+
+
+//ZONA DE PRUEBAS
+
+
+     public function subirArchivo(Request $request)
+ {
+        //Recibimos el archivo y lo guardamos en la carpeta storage/app/public
+        $request->file('archivo')->store('public/exams');
+        dd($request);
+ }
+
+public function saveImage(Request $request)
+{      $this->delFiles(['PRUEBA']);
+
+         foreach ($request->archivo as $key => $value) {
+                                                        dump($key.'   '.$value);
+                                                      }
+         return;                                             
+         //obtenemos el campo file definido en el formulario
+       $file = $request->file('archivo');
+ 
+       //obtenemos el nombre del archivo
+
+       $nombre = $file->getClientOriginalName();
+ 
+       //indicamos que queremos guardar un nuevo archivo en el disco local
+       \Storage::disk('local')->put('/exams/'.$nombre,  \File::get($file));
+
+       dd('guardado');
+
+}
+// fin de ZONA DE PRUEBAS
+
+
+}   //Cierre de CLASS DataController                  

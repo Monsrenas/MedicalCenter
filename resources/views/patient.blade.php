@@ -7,7 +7,7 @@ if (isset($_SESSION['identification'])) { ?>
  
  <?php 
  return; 
-} 
+}  
 ?>
 
 <script type="text/javascript">

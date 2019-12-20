@@ -111,8 +111,8 @@ $(function () {
   $('[data-toggle="popover"]').popover()
 })
 
-  $('.panel-body').css("height", screen.height-570);
-  $('.panel-body').css("max-height", screen.height-570);                          
+  $('.panel-body').css("height", screen.height-510);
+  $('.panel-body').css("max-height", screen.height-510);                          
 
   /*PreLoadDataInView('#Interrogation', '&modelo=Interrogation&url=consultation.interrogation', 'flexlist');
    echo VIEW::make("consultation.PhysicalExamination")*/

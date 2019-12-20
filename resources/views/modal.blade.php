@@ -6,12 +6,12 @@
       <div class="modal-header">
         <h4 class="modal-title" id="cabecera"></h4>
       </div>
-     <div style="padding: 2em;">
-        <p id="parr1" style="text-align: justify;"> </p>
-        <p id="parr2" style="text-align: justify;"> </p>
-        <p id="parr3" style="text-align: justify;"> </p>
-        <p id="parr4" style="text-align: justify;"> </p>
-        <p id="parr5" style="text-align: justify;"> </p>
+     <div style="padding: 2em; max-height: 700px; overflow: hidden;">
+        <p id="parr1" style="text-align: justify; max-height: 600px; overflow: auto scroll;"> </p>
+        <p id="parr2" style="text-align: justify; overflow: auto scroll;"> </p>
+        <p id="parr3" style="text-align: justify; overflow: auto scroll;"> </p>
+        <p id="parr4" style="text-align: justify; overflow: auto scroll;"> </p>
+        <p id="parr5" style="text-align: justify; overflow: auto scroll;"> </p>
 
      </div>
     </div>
