@@ -92,8 +92,9 @@
 <div class="col-xs-12 col-sm-12 col-md-12 list-group list-group-flush" style="margin:0px auto; max-height:100%; overflow:auto;" >
                               <div style="width: 81%; height: 30px; margin-top: 5px; background: #7190C6; margin-bottom: -15px; border-style:solid; border-color:white; border-width:2px; position: fixed; z-index: 1;">
                                   <div class="form-inline EXMYFormInline blnc" style="width: 20%;">Date</div>
-                                  <div class="form-inline EXMYFormInline blnc" style="width: 40%;">Exam </div>
-                                  <div class="form-inline EXMYFormInline blnc" style="width: 40%;">Result</div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 28%;">Exam </div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 30%;">Result</div>
+                                  <div class="form-inline EXMYFormInline blnc" style="width: 7%;">Images</div>
                               </div>  <br><br>  
 
   <?php $i=0;   
@@ -114,12 +115,17 @@
                               $i=$i+1;
                               $contenido=false;
 
+                              $txExam='_';
+                              $txResu='_';
+                              $imagenes=(isset($patmt->images))?count($patmt->images):0;
+                              $contenido=($imagenes>0)?true:false;
                               ?>
 
                              <?php 
                               $Cadena="<a href='javascript:ShowNote(\"userd$idN\",$patmt)' class='list-group-item EXMYListGroupItem ' style='max-height: 100px; height: 75px; overflow: hidden;' id='ExamLinea$idt'>";
                                $Cadena=$Cadena."<div class='form-inline EXMYFormInline colTx' style='width: 20%; color: white; font-size:small;'>".substr($patmt->created_at,0,10)."<div id='userd$idN'> </div></div>";
-                            
+                                
+                               $imageCant=($imagenes>0)?"<div class='form-inline EXMYFormInline' style='max-width:5%; width:5%; float: left; align: center; overflow: hidden;'>".$imagenes."</div>":'';
                           
                               $lexams=(isset($patmt->exams))?$patmt->exams:null;
                               if ($lexams) {
@@ -143,7 +149,8 @@
 
                                 }
 
-                             $Cadena=$Cadena."<div style='max-width:60%; width: 70%; max-height: 70px; overflow: hidden;float: left;'><div class='form-inline EXMYFormInline' style='max-width:40%; width:40%; float: left; text-align: left; padding-ri: 20px; overflow: hidden;'>".$txExam."</div><div class='form-inline EXMYFormInline' style='max-width:34%; width:35%; float: left; text-align: left;  margin-left: 20px;'>".$txResu."</div></div>";
+                             $Cadena=$Cadena."<div style='max-width:65%; width: 80%; max-height: 70px; overflow: hidden;float: left;'><div class='form-inline EXMYFormInline' style='max-width:40%; width:40%; float: left; text-align: left; padding-ri: 20px; overflow: hidden;'>".$txExam."</div><div class='form-inline EXMYFormInline' style='max-width:51%; width:51%; float: left; text-align: left;  margin-left: 20px;'>".$txResu."</div>".$imageCant."</div>";
+
 
   ?>
                             @if ($borrable) 

@@ -322,7 +322,7 @@ function RegisterRTN(xdata, destino) {
 
 
 function ConfirmaYelimina(forma,data,linea) {
-  a=confirm('You want to erase this information: '+forma); 
+  a=confirm('You want to erase this information:'); 
   if (a) {
             $.post('delete', data, function(subpage){  
                 $('#'+linea).remove();

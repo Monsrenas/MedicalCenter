@@ -27,6 +27,9 @@
                             background: #748DC3; 
                             padding: 20px; 
                             margin-left: 100px;
+                            -webkit-box-shadow: 2px 28px 75px 19px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 28px 75px 19px rgba(0,0,0,0.75);
+box-shadow: 2px 28px 75px 19px rgba(0,0,0,0.75);
                           }
     </style>
 
@@ -35,6 +38,7 @@
     /* General los espacios de horarios para cita (Vacia)*/
     function AppointArray(op){
         var $prfj=['','mY'];
+        var bClo=(op==1)?'background: white;':'';
 
         var hr=8;
         var dateToday=<?php echo str_replace("-", "", date("Y-m-d")); ?>;
@@ -51,13 +55,13 @@
             $hID=('hspc'+hds.replace(':','')).substring(0,8);
             $hID=$prfj[op]+$hID;
             $cade="<div id='I"+$hID+"' hidden> </div>";
-            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;'> </div>" ;
-            $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;'> </div>";
+            $cade=$cade+"<div id='P"+$hID+"' style='width:35%; float: left;text-align: left; overflow:hidden;"+bClo+"'> </div>" ;
+            $cade=$cade+"<div id='D"+$hID+"' style='width:50% float: left; text-align: left;"+bClo+"'> </div>";
             
             accion="";
             if ((op==0)&&(dateToday<=searDate)) {accion="onclick='showAPPnt(\""+$hID+"\")'";} 
               
-            $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden;' "+accion+" id='V"+$hID+"'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
+            $hora="<a href='#' class='list-group-item ListGroupItem ' style='height:22px; margin-top:1px; padding-top: 1px;overflow:hidden; "+bClo+"' "+accion+" id='V"+$hID+"'> <div style='width: 15%; text-align: left; padding-left: 4px; float: left;"+bClo+"' id='H"+$hID+"'>"+hds+"</div>"+$cade+"</a>";
             $('#'+$prfj[op]+'rejilla').append($hora);
             j=j+14;
 
@@ -105,9 +109,9 @@
     function markLikeDone (idSpc)
     {
       /* Colores para citas cumplimentadas*/
-      $('#H'+idSpc).css('color','#B5B7B5');
-      $('#P'+idSpc).css('color','#71BA27');
-      $('#D'+idSpc).css('color','#71BA27');
+      $('#H'+idSpc).css('color','#D1D1D1');
+      $('#P'+idSpc).css('color','#D1D1D1');
+      $('#D'+idSpc).css('color','#D1D1D1');
       $('#V'+idSpc).prop("onclick", null).off("click");
                      
     }  
