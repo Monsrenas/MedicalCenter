@@ -44,6 +44,10 @@
                 text-align: justify;  
                 
               }
+        .VWimgCube { float: left; padding-left: 5px; padding-bottom: 10px; } 
+        .VWCubeText {max-width:90px; height:18px; font-size:xx-small; text-align:justify; padding: 2px;
+                    line-height: 8px; max-height: 18px; overflow: hidden;
+                    }    
     </style>
 
 <script type="text/javascript">
@@ -109,7 +113,7 @@
                               $idN=$patmt->id;
                               $userid=strval(substr($idN, $tmi+8));
                               
-                              $Editable=($userid==$_SESSION['dr_user'])?true:false;
+                              $Editable=($_SESSION['speciality']==15)?true:false;
                               $borrable=($userid==$_SESSION['dr_user'])?true:false;
                               
                               $i=$i+1;
@@ -188,6 +192,12 @@ $Cadena=$Cadena."<div class='form-inline EXMYFormInline' style='float: right;'> 
       $who=$('#'+medico).html(); 
       $('#cabecera').html($fecha+'     <br>'+$who);
       $('#parr1').html(''); $('#parr2').html(''); $('#parr3').html(''); $('#parr4').html(''); $('#parr5').html('');
+      if (reg.exams) {listExam(reg);}
+      if (reg.images) {listImagen(reg);}
+    }
+
+    function listExam(reg)
+    {
       $mdcn="<br><table><tr><th scope='row' WIDTH='300'>Exam</th><th WIDTH='400'>Results</th></tr>";
       for (var i =0 ; i <= reg.exams.length - 1; i++) {
         $mdcn=$mdcn+ '<tr>';
@@ -201,8 +211,40 @@ $Cadena=$Cadena."<div class='form-inline EXMYFormInline' style='float: right;'> 
     function editExamen(xdata) {
       
       $('#qwerty').modal('show');
+       $('#parr1').html(''); $('#parr2').html(''); $('#parr3').html(''); $('#parr4').html(''); $('#parr5').html('');
       PreLoadDataInView('#parr1', '&modelo=Exams&url=consultation.Exams'+xdata, 'findbyId');
     }    
 
     
+
+    function addCubeSHW(ind, imgName, title)
+    {   
+        
+        $imagen="<img src=\"/storage/"+imgName+"\" style=\"margin-top: 2px;\" width='90' height='60'>";
+        $text="<br><div class='VWCubeText'>"+title+"</div>";
+        $InteriorCubeLNK="<div class='VWimgCube'>"+$imagen+$text+"</div>";
+        $cubelink="<a href='javascript: ImageZoom(\""+imgName+"\",\""+title+"\");'>"+$InteriorCubeLNK+"</a>";
+        $cubelink="<div class='VWimgCube'>"+$cubelink+"</div>"
+
+        var txt = document.getElementById('inageVista');
+        txt.insertAdjacentHTML('beforeend', $cubelink);
+    }
+
+    function  listImagen(reg)
+    {   
+       $('#parr2').html("<br><br><strong>IMAGES</strong><div id='inageVista'></div>");
+       for (var i =0 ; i <= reg.images.length-1; i++) {
+        addCubeSHW(i, reg.images[i][1], reg.images[i][0]);
+      }
+
+    }
+
+   function ImageZoom(imagen, text)
+   { 
+      $('#thingshow').modal('show');  
+      $img="<img src=\"/storage/"+imagen+"\">";
+      $('#pa1').html($img);  
+      $('#pa2').html(text);
+
+   }
 </script>

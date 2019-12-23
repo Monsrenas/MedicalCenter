@@ -272,6 +272,7 @@ class DataController extends Controller
     public function Facturacion(Request $request)
     {     
       $lst=[0=>['Interrogation','CSL'],1=>['Discharge','HPT'],2=>['Exams','LXM'],3=>['Physical','FXM']];
+      
       $carbon = new \Carbon\Carbon();
       $view=$this->indexView($request);
       $services=[];  
@@ -289,11 +290,12 @@ class DataController extends Controller
            switch ($y) {
               case 0: $tmp['details']= substr($elm->cc, 0,100); break;
               case 1: $tmpd=(isset($elm->admission_date))?$elm->admission_date:$tmp['date'];
+
                       $dateIn = $carbon->createFromDate($elm->date);
                       $dateFi = $carbon->createFromDate($tmpd);
 
                       $tmp['details']=date_diff($dateFi, $dateIn)->days.' Day(s)'.', From: '.$tmpd.' to: '.$elm->date.'. '.substr($elm->discharge_reason, 0,100);  
-                      $tmp['date']=$tmpd;  
+
               break;
               case 2: $tmp['details']=count($elm->exams).' laboratory exam(s): ';
                       for ($z=0; $z<count($elm->exams); $z++) { 
@@ -303,9 +305,12 @@ class DataController extends Controller
                break;
               case 3: $tmp['details']= 'A physical examination done'; break;
            }
+
            if (!($tmp['details'])) {$tmp['details']='.';}      
               $services[$i]=$tmp;
-              $i=$i+1;  
+              
+              $i=$i+1; 
+
           }
 
         }

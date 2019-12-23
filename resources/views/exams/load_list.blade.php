@@ -8,15 +8,25 @@ if(!isset($_SESSION)){ session_start(); }
 	
 	if ((!isset($_SESSION['identification']))or(!isset($_SESSION['dr_user']))) { return ;}
  
+ $busca=($_SESSION['speciality']==15)?$_SESSION['identification']:$busca; //15 es LABORATORIO
+
 ?>
 <script type="text/javascript">
+if ({{$_SESSION['speciality']}}==15) {
+		 var data='&modelo=Exams&url=exams.list&_method=get&option=0&findit={{$busca}}';	
+		 RefreshDataInView('#center_wind',data,'flexlist','exams.list');
+		 $("#btnxmsrealizados").remove();
+		 $("#btnxmssolicitados").remove();
+} 	else {
+		
+		var data='&modelo=Exams&url=exams.list&_method=get&findit={{$busca}}';
+ 		RefreshDataInView('#center_wind', data, 'flexlist','exams.list');
 
- RefreshDataInView('#center_wind', '&modelo=Exams&url=exams.list&_method=get&findit={{$busca}}', 'flexlist','exams.list');
-
- $("#btnxmsrealizados").attr("onclick","RefreshDataInView('#center_wind', '&modelo=Exams&url=exams.list&_method=get&option=1&findit=.&identification={{$_SESSION['identification']}}', 'flexlist','exams.list')");
-
- $("#btnxmssolicitados").attr("onclick","RefreshDataInView('#center_wind', '&modelo=Exams&url=exams.list&_method=get&option=0&findit={{$busca}}', 'flexlist','exams.list')");
-
+ 		data="&modelo=Exams&url=exams.list&_method=get&option=1&findit=.&identification={{$_SESSION['identification']}}";
+ 		$("#btnxmsrealizados").attr("onclick","RefreshDataInView('#center_wind','"+data+"', 'flexlist','exams.list')");
+		data="'&modelo=Exams&url=exams.list&_method=get&option=0&findit={{$busca}}'";
+		$("#btnxmssolicitados").attr("onclick","RefreshDataInView('#center_wind',"+data+", 'flexlist','exams.list')");
+}
 
 </script>
 

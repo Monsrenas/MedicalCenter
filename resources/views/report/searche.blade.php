@@ -79,14 +79,14 @@
                               $idt=$patmt['identification'];
                               
                               $svc=$Service_Description[$patmt['code']];
-                              
+                            
                               $dat=dateString($patmt['date']);
                               $dct=$patmt['id'];
 
                               $dtl=$patmt['details'];
 
                               $i=$i+1; 
-                              ;
+                              
                               ?>
                               
                              <a href="#" class="list-group-item myRSListGroupItem " style="height: 28px; margin-top: 1px; padding-top: 1px;" id="linea{{$idt}}">

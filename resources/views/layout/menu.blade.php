@@ -2,7 +2,8 @@
        /* $_SESSION['dr_user']='44240514037';
     
         $_SESSION['dr_user']='613675132765';*/
-        $accionID=(isset($_SESSION['identification']))?"javascript:LoadDataInView('{{$_SESSION['identification']}}','find')":"";
+        $accionID=(isset($_SESSION['identification']))?"javascript:LoadDataInView('{{$_SESSION['identification']}}','find')":"";  
+
 
         function PasientAct(){
 
@@ -14,6 +15,7 @@
           $speci=$_SESSION['speciality'];
 
           if (($op==0)or($acces==4)) {return true;}
+          if (($op==5)and($speci==15)) {return true;}
           if ((($op>2))and(($speci=="N")and($acces==1))) {return true;}
           if ((($op>4))and(($speci=="N")or($acces==1))) {return true;}
           if ((($op>0)and($op<4))and($acces>2)) {return true;}
@@ -86,14 +88,13 @@
 
 <div class="row navbar-fixed-top" id="work" style=" background-color: #ADC5E8; ">
 
-  <div class="col-2 col-md-2" id="" style="text-align: center;"> 
+  <div class="col-2 col-md-2 col-xs-1" id="" style="text-align: center;"> 
     <img src="../images/menu/medicalCenterLogo2.png" alt="" width="70%" margin="1" style="margin-top: 6px;">
   </div>
-  <div class="col-8 col-md-8" id="" style=" min-height: 116px; max-height: 116px; background-color: #ADC5E8; ">
+  <div class="col-8 col-md-8 col-xs-4" id="" style=" min-height: 116px; max-height: 116px; background-color: #ADC5E8; ">
       <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
         <div class="container-fluid" style=" text-align: center; align-items: center;">    
           <ul class="nav navbar-nav navbar-center" style="width: 690px; ">
-        
             <?php
               $i=0; 
               $pAc=PasientAct();
@@ -102,14 +103,12 @@
                     if (OptionByLevel($i)){  
                             $info=json_encode($menuItem[$clave]);
                             $oPStatus=((($i>0)and($i<7))and(!$pAc))?'disabled':'';
-                            echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
-                              
+                            echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img class=' hidden-xs' src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
                     }
                     $i++;
               }
             ?>  
           </ul>
-          
         </div>
          <ul class="nav navbar-nav navbar-center" style="margin-left: 2px; margin-top: 80px; width: 102%;">
              <div class="" id="right_wind" style=" width: 100%; float: left;"></div> 
@@ -118,7 +117,7 @@
       </nav>
   </div>
   
-  <div class="col-2 col-md-2" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9; margin-left: 0px; overflow: hidden;" >
+  <div class="col-2 col-md-2 col-xs-1" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9; margin-left: 0px; overflow: hidden;" >
     <ul class="nav navbar-nav"  style="margin-top: 41px; text-align: left; width: 100%;">
       <li style="float: none;"><span >USER: {{ $_SESSION['dr_user' ]}}</span></li>
       <li style="float: none;"><span >{{ $_SESSION['username' ]}}</span></li>
