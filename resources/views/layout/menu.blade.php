@@ -40,7 +40,7 @@
  @endif
 
 <style type="text/css">
-      nav.navbar {  background-color: #ADC5E8;  }
+      nav.navbar {  background-color: #ADC5E8;    }
 
       .navbar-nav .nav li a{  color: yellow  !important;  }
 
@@ -50,7 +50,7 @@
                               text-align: center; 
                               border-radius: 0.6em;
                               height: 80px;
-                              
+
                             }
 
        nav.navbar ul.nav li a:hover{
@@ -84,6 +84,7 @@
                 -moz-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
                 box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
                 opacity: 100%;
+
               }
 
       .disabled { opacity: 30%; }
@@ -97,7 +98,7 @@
   <div id="" class=" hidden-xs" style="text-align: center; padding: 4px; background: white; height: 120px; width: 17.1%; float: left; " > 
     <img src="../images/menu/medicalCenterLogo2.png" alt="" width="128em" margin="1" style="margin-top: 6px;">
   </div>
-<div style="width: 82%; float: left; ">
+<div style="width: 82.5%; float: left; ">
   <div class="" id="" style=" min-height: 90px; max-height: 90px; background-color: #ADC5E8; width: 100%; float: left; overflow: auto scroll;">
    <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
         <div class="container-fluid" style=" text-align: center; " >
@@ -454,9 +455,12 @@ function AltaMedica(identification){
                           $btnClas=clr;
                         }
 
-    $('#'+elm).css('background','white' );
+    $('#'+elm).css('background','#CBDEB7' );
     $('#'+elm).css('color','black' );
-    $('#'+elm).css('margin-left','19px' ); 
+    $('#'+elm).css('margin-left','14px' );
+    $('#'+elm).css('border-color','#9BAB8A' );
+    
+    
  }
 </script>
 
