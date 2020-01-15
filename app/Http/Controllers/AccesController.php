@@ -20,8 +20,12 @@ class AccesController extends Controller
                             }
         $usr=strval($request->user);
         $psw=strval($request->password);
+        $incriptPsw=bcrypt($psw);
         $matchThese = ['user' => $usr, 'password' => $psw];
-    	$user = Login::where($matchThese)->first();
+        $matchTheseOld = ['user' => $usr, 'password' => $incriptPsw];
+
+    	$user = Login::where($matchThese)->
+                       orWhere($matchTheseOld)->first();
         
     	if (!is_null($user)) {     
                                 $_SESSION['dr_user'] = $user->user;
@@ -57,6 +61,9 @@ class AccesController extends Controller
     {   /*se esta actualizando*/
         if ($request->password<>$request->rnew) {return view('AdminPanel.Changepassword')->with('error','New password and repeat password are diferent');}                     
         $usr=strval($request->user);
+
+          $request->password = bcrypt($request->password);
+
         $matchThese = ['user' => $usr];
         $user = Login::where($matchThese)->first();
 

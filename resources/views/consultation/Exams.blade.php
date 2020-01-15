@@ -203,7 +203,7 @@ use App\Exams;
         $edtResu=($title)?'':'Disabled';
         
         $nameToSave="<input type='hidden' name='images["+$ximg+"][1]'  value='"+$image+"' id=\"ImgesSN"+$ximg+"\" required>";
-        $titlet="<input type='text' class='form-inline imgT' name='images["+$ximg+"][0]'  value='"+$title+"' id=\"ImgsX"+$ximg+"\" required>";
+        $titlet="<input type='text' class='form-inline imgT' name='images["+$ximg+"][0]'  value='"+$title+"' id=\"ImgsX"+$ximg+"\"  placeholder='Image title' required>";
         $image="<input type=\"file\" class='form-inline imgI' id='ImgsTL"+$ximg+"' name='ImgsTL["+$ximg+"]' onchange=\"javascript:muestraImg( this.value ,"+$ximg+")\">";
         $bottDel=(($accLvl>3)||(!$title))? "<a href='javascript:delelm(\"image"+$ximg+"\" ,"+$ximg+")' id=\"bDlt"+$ximg+"\" class='btn btn-success glyphicon-minus'><span aria-hidden='true'></span></a>":"<a href='#' class='btn btn-success'><span class='glyphicon glyphicon' aria-hidden='true'></span></a>";
         $others="<div id=\"image"+$ximg+"\">"+$nameToSave+$titlet+$image+$bottDel+"</div>";

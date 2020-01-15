@@ -10,15 +10,15 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
-<body>  
+<body style="background: #E3F8CD;">  
 @include('layout.menu')
 
 
     
     <div class="row" id="work" style="margin-top: 120px;">
       @include('modal')
-      <div class="col-2 col-md-2" id="left_wind" style="margin-left: 5px;"></div>
-      <div class="col-10 col-md-10" id="center_wind" style="background: #E2E2E2; min-height: 385px; max-height: 385px; margin-right: -16px; text-align: center;  overflow: auto scroll;"> 
+      <div class="col-2 col-md-2" id="left_wind" style="margin-left: 5px; background: #E3F8CD; padding: 10px"></div>
+      <div class="col-10 col-md-10" id="center_wind" style="background: white; min-height: 385px; max-height: 385px; margin-right: -16px; text-align: center;  overflow: auto scroll;"> 
         <div class="contenidoCentro" style="text-align: justify; margin: 50px;">
           <p>Welcome to the <strong>MEDICAL CENTER</strong> clinical information management application</p> <br>
           <p> All operations to be performed are registered associated with a patient.</p>

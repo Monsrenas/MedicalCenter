@@ -22,7 +22,7 @@
           
           return false;
         }
-
+     
         ?>
 <form  id='pasient_act' action="{{$accionID}}">
   @csrf
@@ -48,23 +48,16 @@
                               color:#3953A7;
                               opacity: 100%;
                               text-align: center; 
-                              border-radius: 0.6em;
-                              height: 80px;
-                              
                             }
 
        nav.navbar ul.nav li a:hover{
                                      color:white;
-                                     -webkit-box-shadow: inset 2px 2px 6px 2px rgba(3,51,128,1);
-                                     -moz-box-shadow: inset 2px 2px 6px 2px rgba(3,51,128,1);
-                                     box-shadow: inset 2px 2px 6px 2px rgba(3,51,128,1);
-                                     background: #7190C4;
-                                   }
-       .userNav  ul li a:hover  { color:white; 
                                      -webkit-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
                                      -moz-box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
                                      box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
-                                     background: #7190C4; }
+                                     background: #7190C4;
+                                   }
+
        .navbar-nav.navbar-center {
                                   position: absolute;
                                   left: 50%;
@@ -78,7 +71,7 @@
               box-shadow: inset 5px 5px 11px 6px rgba(3,51,128,1);
             }
 
-      .active { border-radius: 0.6em;
+      .active { 
                 background: #7190C4;
                 -webkit-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
                 -moz-box-shadow: inset 3px 3px 7px 3px rgba(3,51,128,1);
@@ -94,45 +87,36 @@
 
 <div class="row navbar-fixed-top" id="work" style=" background-color: #ADC5E8; ">
 
-  <div id="" class=" hidden-xs" style="text-align: center; padding: 4px; background: white; height: 120px; width: 17.1%; float: left; " > 
-    <img src="../images/menu/medicalCenterLogo2.png" alt="" width="128em" margin="1" style="margin-top: 6px;">
+  <div class="col-2 col-md-2 col-xs-1" id="" style="text-align: center; padding: 4px;"> 
+    <img src="../images/menu/medicalCenterLogo2.png" alt="" width="58%" margin="1" style="margin-top: 6px;">
   </div>
-<div style="width: 82%; float: left; ">
-  <div class="" id="" style=" min-height: 90px; max-height: 90px; background-color: #ADC5E8; width: 100%; float: left; overflow: auto scroll;">
+
+  <div class="col-8 col-md-8 col-xs-4" id="" style=" min-height: 116px; max-height: 116px; background-color: #ADC5E8; ">
    <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
-        <div class="container-fluid" style=" text-align: center; " >
-          <?php $MenuWith=($_SESSION['acceslevel']>=4)?"690px":"auto"; ?>    
-          <ul class="nav navbar-nav navbar-center" style="width: {{$MenuWith}}; max-width: 690px; max-height: 20;">
+        <div class="container-fluid" style=" text-align: center; align-items: center;">    
+          <ul class="nav navbar-nav navbar-center" style="width: 690px; ">
             <?php
              $i=0; 
-              $pAc=PasientAct(); 
+              $pAc=PasientAct();
               if ($_SESSION['acceslevel']>=5)  {$menuItem=$userITEMS;} else {$menuItem=$patientITEMS;}
               foreach ($menuItem as $clave => $valor) {
                     if (OptionByLevel($i)){  
                             $info=json_encode($menuItem[$clave]);
                             $oPStatus=((($i>0)and($i<7))and(!$pAc))?'disabled':'';
-                            $color="c";
-                          
-                            echo "<li class='dependen $oPStatus' id='$clave' ><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img class='' src='../images/menu/$color$clave.png' alt='Icon  $clave' width='40em' margin='1'><br>$clave</a></li>";
+                            echo "<li class='dependen $oPStatus' id='$clave'><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img class=' hidden-xs' src='../images/menu/$clave.png' alt='Icon  $clave' width='40px' margin='1'><br>$clave</a></li>";
                     }
                     $i++;
               }
-
             ?>  
           </ul>
         </div>
-
+         <ul class="nav navbar-nav navbar-center" style="margin-left: 2px; margin-top: 80px; width: 102%;">
+             <div class="" id="right_wind" style=" width: 100%; float: left;"></div> 
+          </ul>
+        <div id="parrafo"></div>
       </nav>
-
   </div>
-</div>
-
-  <ul class="nav navbar-nav navbar-center" style="margin-left: 2px; margin-top: 80px; width: 102%;">
-      <div class="" id="parrafo" style=" width: 100%; float: left;"></div> 
-  </ul>
-  <div id="right_wind" style="width: 66%; max-width: 66%; float: left; display: block; background: #3149D5; height: 29px;">. </div>
-<!-- 
-
+  
   <div class="col-2 col-md-2 col-xs-1" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9; margin-left: 0px; overflow: hidden;" >
     <ul class="nav navbar-nav"  style="margin-top: 41px; text-align: left; width: 100%;">
       <li style="float: none;"><span >USER: {{ $_SESSION['dr_user' ]}}</span></li>
@@ -140,25 +124,58 @@
       <li style="width: 100%;"><a href="{{ url('userlogout') }}" style="height: 33px; width: 120%; margin-top: 1px; margin-left: -14px; text-align: center; padding-top: 6px; background: #ADC5E8; color: white;" class="btn-block"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </ul>
 
-  </div>   -->
-      <div class="col-2 col-md-2 col-xs-1" style="background: #3149D5; float: left; height: 29px;">
-        <div class="collapse navbar-collapse navbar-center userNav" id="bs-example-navbar-collapse-1" style="align: center;">
-          <ul class="nav navbar-nav ">
+  </div>   
+<!-- 
+  <nav class="navbar navbar-ct-blue navbar-fixed-top navbar-transparent" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand navbar-brand-logo" href="https://www.creative-tim.com">
+                <div class="logo">
+                    <img src="https://s3.amazonaws.com/creativetim_bucket/new_logo.png">
+                </div>
+                <div class="brand"> Creative Tim </div>
+              </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="javascript:void(0)" data-toggle="search">
+                            <i class="pe-7s-search"></i>
+                            <p>Search</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="pe-7s-mail">
+                                <span class="label"> 23 </span>
+                            </i>
+                            <p>Messages</p>
+                        </a>
+                    </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" style="float: left; height: 29px; margin: 0px; padding: 4px; color: #ADC5E8;">
-                        {{ $_SESSION['dr_user' ]}}
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="pe-7s-user"></i>
+                        <p>Account</p>
               </a>
               <ul class="dropdown-menu">
-                <li><a>{{ $_SESSION['username' ]}}</a></li>
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
                 <li class="divider"></li>
-                <li><a href="{{ url('userlogout') }}">Logout</a></li>
+                <li><a href="#">Separated link</a></li>
               </ul>
             </li>
           </ul>
-        </div> <!--/.navbar-collapse -->
-      </div> <!--/.container-fluid -->
-
-  
+        </div> /.navbar-collapse 
+      </div> /.container-fluid 
+    </nav>
+ end navbar -->
 
 </div>
 
@@ -454,9 +471,9 @@ function AltaMedica(identification){
                           $btnClas=clr;
                         }
 
-    $('#'+elm).css('background','white' );
+    $('#'+elm).css('background','#E2E2E2' );
     $('#'+elm).css('color','black' );
-    $('#'+elm).css('margin-left','19px' ); 
+    $('#'+elm).css('margin-left','18px' ); 
  }
 </script>
 
