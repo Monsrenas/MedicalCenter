@@ -43,7 +43,7 @@
     </style>
 
 <div class="dropdown" style="">
-  <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #3149D5; color: #AFC4E8; height: 28px; border-radius: 0em; border-style: none;">
+  <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background: #7386A1; color: blue; height: 28px; border-radius: 0em; border-style: none;">
     <strong>Patient Information</strong>
     {{$patient->name}}  {{$patient->surname}} <span style="color: yellow;"> {{$patientSTATUS}} </span>
   </button>

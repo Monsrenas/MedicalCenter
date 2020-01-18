@@ -20,6 +20,9 @@ Route::post('saveFiles','DataController@saveFiles');
 
 Route::get('/login', function () { return view('LoginPage');});
 
+Route::post('changepassword', function () {
+    													return view('AdminPanel.Changepassword');});
+Route::post('saveuser','AccesController@user_store');
 
 Route::group(['middleware' => 'IsAuten'], function(){
 
@@ -27,9 +30,8 @@ Route::group(['middleware' => 'IsAuten'], function(){
 			Route::get('/', function () {    return view('AdminPanel.layout');   });
 
 			Route::get('edituser','AccesController@edit_user');
-			Route::post('changepassword', function () {
-    													return view('AdminPanel.Changepassword');});
-			Route::post('saveuser','AccesController@user_store');
+			
+			
 			Route::get('deleteuser','AccesController@destroy');
 			Route::post('USERmultifind','AccesController@xmultifind');
 			
@@ -53,6 +55,8 @@ Route::group(['middleware' => 'IsAuten'], function(){
 								Route::get('Comprueba', 'DataController@Comprobar');
 								Route::get('findAppoinment', 'DataController@findAppoinment');
 								Route::get('FindConsultation', 'DataController@FindConsultation');
+								Route::get('editByUser', 'AccesController@edit_user');
+								
 							}		
 		}
 

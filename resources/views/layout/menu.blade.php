@@ -40,7 +40,7 @@
  @endif
 
 <style type="text/css">
-      nav.navbar {  background-color: #ADC5E8;    }
+      nav.navbar {  background-color: #9DACC2;    }
 
       .navbar-nav .nav li a{  color: yellow  !important;  }
 
@@ -50,6 +50,7 @@
                               text-align: center; 
                               border-radius: 0.6em;
                               height: 80px;
+                              font-size: 0.88em;
 
                             }
 
@@ -70,6 +71,27 @@
                                   left: 50%;
                                   transform: translatex(-50%);
                                  }
+      .MenuIcon { background: #7190C6; 
+                  background:  -webkit-linear-gradient(#FFFFFF,#9DACC2,#6C87AF,#9DACC2);
+                   background: linear-gradient(-130deg,#FFFFFF,#9DACC2,#6C87AF,#9DACC2);
+                  padding: 4px;
+                  border-radius: 0.5em;
+                  border-width: 1px;
+                  border-color:  #6C87AF;
+                  border-style: solid;
+                  
+                }
+
+      .MenuIcon:hover { background: #7190C6; 
+                   
+                     background:  -webkit-linear-gradient(#6C87AF,#9DACC2,#FFFFFF,#6C87AF);
+                   background: linear-gradient(-120deg, #6C87AF, #9DACC2,#FFFFFF, #6C87AF);
+                  padding: 4px;
+                  border-radius: 0.5em;
+                  border-width: 3px;
+                  border-color:  #6C87AF;
+                  border-style: solid;
+                }
 
       .locos {  
               background: #7190C4;
@@ -99,7 +121,7 @@
     <img src="../images/menu/medicalCenterLogo2.png" alt="" width="128em" margin="1" style="margin-top: 6px;">
   </div>
 <div style="width: 82.5%; float: left; ">
-  <div class="" id="" style=" min-height: 90px; max-height: 90px; background-color: #ADC5E8; width: 100%; float: left; overflow: auto scroll;">
+  <div class="" id="" style=" min-height: 90px; max-height: 90px; background-color: #9DACC2; width: 100%; float: left; overflow: auto scroll;">
    <nav class="navbar" style="margin-bottom: 0px;" role="navigation">
         <div class="container-fluid" style=" text-align: center; " >
           <?php $MenuWith=($_SESSION['acceslevel']>=4)?"690px":"auto"; ?>    
@@ -114,7 +136,7 @@
                             $oPStatus=((($i>0)and($i<7))and(!$pAc))?'disabled':'';
                             $color="c";
                           
-                            echo "<li class='dependen $oPStatus' id='$clave' ><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img class='' src='../images/menu/$color$clave.png' alt='Icon  $clave' width='40em' margin='1'><br>$clave</a></li>";
+                            echo "<li class='dependen $oPStatus' id='$clave' ><a class='disabled' onclick='ShowOp($info, \"$clave\")' href='#'><img class='MenuIcon' src='../images/menu/$color$clave.png' alt='Icon  $clave' width='45em' margin='1'><br>$clave</a></li>";
                     }
                     $i++;
               }
@@ -131,7 +153,7 @@
   <ul class="nav navbar-nav navbar-center" style="margin-left: 2px; margin-top: 80px; width: 102%;">
       <div class="" id="parrafo" style=" width: 100%; float: left;"></div> 
   </ul>
-  <div id="right_wind" style="width: 66%; max-width: 66%; float: left; display: block; background: #3149D5; height: 29px;">. </div>
+  <div id="right_wind" style="width: 66%; max-width: 66%; float: left; display: block; background: #7386A1; height: 29px;">. </div>
 <!-- 
 
   <div class="col-2 col-md-2 col-xs-1" id="" style="background: #7190C6; min-height: 116px; max-height: 116px; color: #3864D9; margin-left: 0px; overflow: hidden;" >
@@ -142,15 +164,16 @@
     </ul>
 
   </div>   -->
-      <div class="col-2 col-md-2 col-xs-1" style="background: #3149D5; float: left; height: 29px;">
+      <div class="col-2 col-md-2 col-xs-1" style="background: #8BA2C3; float: left; height: 29px;">
         <div class="collapse navbar-collapse navbar-center userNav" id="bs-example-navbar-collapse-1" style="align: center;">
           <ul class="nav navbar-nav ">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" style="float: left; height: 29px; margin: 0px; padding: 4px; color: #ADC5E8;">
+              <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" style="float: left; height: 29px; margin: 0px; padding: 4px; color: #3953A7;">
                         {{ $_SESSION['dr_user' ]}}
               </a>
               <ul class="dropdown-menu">
-                <li><a>{{ $_SESSION['username' ]}}</a></li>
+                <li><a onclick="dropdown">
+              <a href="javascript:NewPreLoadDataInView('#center_wind', '&url=AdminPanel.UserEditData&edition=true&user={{$_SESSION['dr_user' ]}}', 'editByUser','UserEdit')">{{ $_SESSION['username' ]}}</a></li>
                 <li class="divider"></li>
                 <li><a href="{{ url('userlogout') }}">Logout</a></li>
               </ul>
@@ -318,7 +341,7 @@ function PreLoadDataInView(ventana, xdata, vista) {
     $(ventana).empty().append("Error al cargar datos");
   })
 }
-
+/*ventana: Centro o Izquierda, Vista: Funcion del Controller, Elemento: Nombre de la ventana  */
 function NewPreLoadDataInView(ventana, xdata, vista,elemento) {
     var data=$('#llave').serialize();
     data=data+xdata;    

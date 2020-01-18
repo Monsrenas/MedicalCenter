@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Login;
+use View;
 
 use Illuminate\Http\Request;
 
@@ -96,6 +97,8 @@ class AccesController extends Controller
 
     public function edit_user(Request $request)
     {   /*se esta actualizando*/               
+        
+
         $usr=strval($request->user);
         $psw=strval($request->password);
         $matchThese = ['user' => $usr];
@@ -103,8 +106,20 @@ class AccesController extends Controller
         $user = Login::where($matchThese)->first();
         if (is_null($user)) { $user=$request; }
 
+
+        if($request->ajax()){
+            $view = View::make("AdminPanel.UserEditData");
+                return $view->with('userdata',$user); 
+        }
+
         return view('AdminPanel.editUser')->with('userdata',$user);    
     }
+
+
+    public function edit_user_Ajax()
+     {
+
+     }
 
     public function user_store(Request $request)
     {   
