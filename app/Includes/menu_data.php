@@ -13,7 +13,7 @@
     
 $patientITEMS = [
   'Patient' => ['patient',['List','list_patient'],['New','edit_patient']],
-  'History' => [['Physicians Note','history.Load_ALL_note'],['Physical Examination','history.Load_PhysicalExamination_list'],['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
+  'History' => [['Physical Examination','history.Load_PhysicalExamination_list'],['Medical History','history.LastMedicalHistory','&modelo=Lastmedical&_method=get&findit=','find'],
   				['Current Medication','history.CurrentMedication','&modelo=Currentmedication&_method=get&findit=','find'],
   				['Social History','history.SocialHistory','&modelo=Socialhistory&_method=get&findit=','find'],
           ['Substance Use','history.SustanceUse','&modelo=Sustanceuse&_method=get&findit=','find'],
@@ -23,7 +23,7 @@ $patientITEMS = [
   'Consultation' => ['consultation.Load','consultation'],
   'Notes' => ['history.Load_list_note',['Add Note','history.Edit_note'],['List','history.PhysiciansNote','&modelo=Physiciansnote&_method=get&findit=','flexlist','*']],
   'Admission' => ['Admission.load',['Admission','Admission.admission'],['Medical release','Admission.discharge']],
-  'Labs' => ['exams.load_list',['Performed','xmsrealizados'],['Requested','xmssolicitados']],
+  
   'Reports' => [['Summary of services','report.searche']],
   'Appointment' => ['appointment.done',['Make appointment','appointment.find']],
   
@@ -35,7 +35,11 @@ $userITEMS = [
  ?>
 
 
-<!--
+<!-- ['Physicians Note','history.Load_ALL_note'],
+
+
+    'Labs' => ['exams.load_list',['Performed','xmsrealizados'],['Requested','xmssolicitados']],
+    
     para que el listado de paciente salga automatico
 
  ,'&modelo=Patient&_method=get&findit=','list','*' -->

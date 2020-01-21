@@ -80,7 +80,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
 </div>
 </div>
 </div>
-
+<!--
 <div class="panel panel-default">
 <div class="panel-heading" role="tab" id="questionTwo" style="background:#3149D5; color: white;">
 <h5 class="panel-title">
@@ -94,7 +94,7 @@ box-shadow: inset 0px 0px 14px 0px rgba(32,73,144,1);}
   
 </div>
 </div>
-</div>
+</div> -->
 
 </div>
 </div>

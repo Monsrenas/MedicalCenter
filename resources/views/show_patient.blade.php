@@ -82,7 +82,7 @@
                     <div class="form-group">
                         <strong> Nationality: </strong>
                         <?php include(app_path().'/Includes/ArraysForSelect.php') ?>
-                        <a><big> <?php  echo($pais[$patient->nationality]); ?></big></a>
+                        <a><big> <?php  echo($contry[$patient->nationality]); ?></big></a>
                     </div>
         </div> <br><br>
 
