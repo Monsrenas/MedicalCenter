@@ -54,20 +54,21 @@
                               $stringpat=$patmt->surname.', '.$patmt->name.' '.$patmt->age;
                               $StrURL='PatienCng/'.$patmt->identification;
                               $idt=$patmt->identification;
+                              $idtE=str_replace("#", "_", $idt);
                               $status=(isset($patmt->status))?$patmt->status:'0';
                               $status=($status=='1')?'Hospitalized':'';
                               $i=$i+1; 
                               $borrable=($_SESSION['acceslevel']>3);
                               $editable=($_SESSION['acceslevel']>0);
                               ?>
-                             <a href="javascript:cambiaPaciente('edl{{$idt}}')" class="list-group-item patientList-item " style="height: 50px;" id="linea{{$idt}}">
+                             <a href="javascript:cambiaPaciente('edl{{$idtE}}')" class="list-group-item patientList-item " style="height: 50px;" id="linea{{$idt}}">
                               
                                   <div class="form-inline formPatient " style="float:left; width:140px; text-align: right; padding-right: 20px;">{{$patmt->identification}}</div> 
                                   <div class="form-inline formPatient " style="float: left; width:440px; text-align: left;">{{$stringpat  }}</div>
                                   <div class="form-inline formPatient " style="float: left; color: yellow;">{{$status}}</div>
                                  @if ($borrable)    
                                   <div class="form-inline formPatient " style="float: right;">
-                                    <form class="form-inline formPatient " action="javascript:elimina('D{{$idt}}','linea{{$idt}}')" id='D{{$idt}}' >
+                                    <form class="form-inline formPatient " action="javascript:elimina('D{{$idtE}}','linea{{$idt}}')" id='D{{$idt}}' >
                                       @csrf
                                       <input type="hidden" name="modelo" id="modelo" value="Patient" />
                                       <input type="hidden" name="_method" value="post">
@@ -80,7 +81,7 @@
 
                                   
                                   <div class="form-inline formPatient " style="float: right; margin-right: 10px;">
-                                    <form class="form-inline formPatient " id='edl{{$idt}}' action="javascript:LoadDataInView('edit_patient','edl{{$idt}}','find')">
+                                    <form class="form-inline formPatient " id='edl{{$idtE}}' action="javascript:LoadDataInView('edit_patient','edl{{$idtE}}','find')">
                                       @csrf
                                         <input type="hidden" name="modelo" id="modelo" value="Patient" />
                                         <input type="hidden" name="url" id="url" value="edit_patient" />
