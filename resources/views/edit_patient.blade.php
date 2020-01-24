@@ -156,7 +156,7 @@
                             </div>
                             <div class="form-group">
                                 <strong>Email:</strong>
-                                <input type="email" name="email" value="{{ $patient->email }}" class="form-inline" placeholder="email" required>
+                                <input type="email" name="email" value="{{ $patient->email }}" class="form-inline" placeholder="email">
                             </div>
 
                 </div>
